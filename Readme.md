@@ -52,7 +52,7 @@ hence two main session each week.
 ## Score
 
 100% will be on your final exam.
-- around 70% will be on session 1 to session 7 (main sessions, linear regression up to model selections; questions will be more in depth)
+- around 70% will be on session 1 to session 7 (main sessions, from linear regression up to model selections; questions will be more in depth)
 - around 30% will be easy questions for extra sessions. 
 
 ### Distribution of notes
