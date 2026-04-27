@@ -108,7 +108,7 @@ $$
 Gradients are computed with respect to each parameter:
 
 $$
-\frac{\partial \mathcal{L}}{\partial w_j} = \frac{2}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)}) x^{(i)j}
+\frac{\partial \mathcal{L}}{\partial w_j} = \frac{2}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)}) x^{(i)}_j
 $$
 
 Training is the same as multiple linear regression.
