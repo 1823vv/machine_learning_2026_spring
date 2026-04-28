@@ -11,13 +11,13 @@ In this tutorial, we will explore the mathematical foundations of simple linear 
 At the core of linear regression is the linear model using the **row-vector convention**:
 
 $$
-y = \mathbf{x} W + b
+y = x W + b
 $$
 
 - $y$: Predicted value (scalar)
-- $\mathbf{x} \in \mathbb{R}^{1 \times d}$: Input feature row vector
+- $x \in \mathbb{R}^{1 \times d}$: Input feature row vector
 - $W \in \mathbb{R}^{d \times 1}$: Weight matrix
-- $b$: Bias term (scalar)
+- $b \in \mathbb{R}^{1 \times 1}$: Bias (scalar as row vector)
 
 The objective is to find the optimal weights $W$ and bias $b$ that minimize the difference between the predicted values and the actual target values.
 
@@ -43,13 +43,13 @@ For truly complex patterns, non-linear models (decision trees, neural networks) 
 To quantify the difference between predicted and actual values, we use the Mean Squared Error (MSE) as the cost function:
 
 $$
-\mathcal{L}(W, b) = \frac{1}{N} \sum_{i=1}^{N} (y^{(i)} - (\mathbf{x}^{(i)} W + b))^2
+\mathcal{L}(W, b) = \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - (x^{(i)} W + b))^2
 $$
 
 Where:
-- $N$: Number of samples
+- $n$: Number of samples
 - $y^{(i)}$: Actual target value for the $i$-th sample
-- $\mathbf{x}^{(i)} \in \mathbb{R}^{1 \times d}$: Input feature row vector for the $i$-th sample
+- $x^{(i)} \in \mathbb{R}^{1 \times d}$: Input feature row vector for the $i$-th sample
 
 ### Gradient Descent
 
@@ -70,11 +70,11 @@ Gradient descent works like walking downhill to reach the valley:
 The gradients of the cost function with respect to the weights and bias are:
 
 $$
-\frac{\partial \mathcal{L}}{\partial W} = -\frac{2}{N} \sum_{i=1}^{N} \mathbf{x}^{(i)T} (y^{(i)} - \mathbf{x}^{(i)} W - b)
+\frac{\partial \mathcal{L}}{\partial W} = -\frac{2}{n} \sum_{i=1}^{n} x^{(i)\mathsf{T}} (y^{(i)} - x^{(i)} W - b)
 $$
 
 $$
-\frac{\partial \mathcal{L}}{\partial b} = -\frac{2}{N} \sum_{i=1}^{N} (y^{(i)} - \mathbf{x}^{(i)} W - b)
+\frac{\partial \mathcal{L}}{\partial b} = -\frac{2}{n} \sum_{i=1}^{n} (y^{(i)} - x^{(i)} W - b)
 $$
 
 ## How are these gradient equations derived from the cost function?
@@ -83,9 +83,9 @@ Deriving the gradient equations from the MSE cost function involves applying cal
 
 Starting with the MSE loss function:
 
-$$\mathcal{L}(W, b) = \frac{1}{N} \sum_{i=1}^{N} (y^{(i)} - (\mathbf{x}^{(i)} W + b))^2$$
+$$\mathcal{L}(W, b) = \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - (x^{(i)} W + b))^2$$
 
-Let's use the shorthand $\hat{y}^{(i)} = \mathbf{x}^{(i)} W + b$ for the prediction.
+Let's use the shorthand $\hat{y}^{(i)} = x^{(i)} W + b$ for the prediction.
 
 **1. Derivation of $\frac{\partial \mathcal{L}}{\partial W}$:**
 
@@ -94,21 +94,21 @@ Applying the chain rule:
 $$\frac{\partial \mathcal{L}}{\partial W} = \frac{\partial \mathcal{L}}{\partial \hat{y}^{(i)}} \cdot \frac{\partial \hat{y}^{(i)}}{\partial W}$$
 
 First part:
-$$\frac{\partial \mathcal{L}}{\partial \hat{y}^{(i)}} = \frac{\partial}{\partial \hat{y}^{(i)}} \frac{1}{N} \sum_{i=1}^{N} (y^{(i)} - \hat{y}^{(i)})^2$$
+$$\frac{\partial \mathcal{L}}{\partial \hat{y}^{(i)}} = \frac{\partial}{\partial \hat{y}^{(i)}} \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - \hat{y}^{(i)})^2$$
 
-$$= \frac{1}{N} \sum_{i=1}^{N} \frac{\partial}{\partial \hat{y}^{(i)}} (y^{(i)} - \hat{y}^{(i)})^2$$
+$$= \frac{1}{n} \sum_{i=1}^{n} \frac{\partial}{\partial \hat{y}^{(i)}} (y^{(i)} - \hat{y}^{(i)})^2$$
 
-$$= \frac{1}{N} \sum_{i=1}^{N} 2(y^{(i)} - \hat{y}^{(i)})(-1)$$
+$$= \frac{1}{n} \sum_{i=1}^{n} 2(y^{(i)} - \hat{y}^{(i)})(-1)$$
 
-$$= -\frac{2}{N} \sum_{i=1}^{N} (y^{(i)} - \hat{y}^{(i)})$$
+$$= -\frac{2}{n} \sum_{i=1}^{n} (y^{(i)} - \hat{y}^{(i)})$$
 
 Second part:
-$$\frac{\partial \hat{y}^{(i)}}{\partial W} = \frac{\partial}{\partial W} (\mathbf{x}^{(i)} W + b) = \mathbf{x}^{(i)T}$$
+$$\frac{\partial \hat{y}^{(i)}}{\partial W} = \frac{\partial}{\partial W} (x^{(i)} W + b) = x^{(i)\mathsf{T}}$$
 
 Combining:
-$$\frac{\partial \mathcal{L}}{\partial W} = -\frac{2}{N} \sum_{i=1}^{N} (y^{(i)} - \hat{y}^{(i)}) \cdot \mathbf{x}^{(i)T}$$
+$$\frac{\partial \mathcal{L}}{\partial W} = -\frac{2}{n} \sum_{i=1}^{n} (y^{(i)} - \hat{y}^{(i)}) \cdot x^{(i)\mathsf{T}}$$
 
-$$= -\frac{2}{N} \sum_{i=1}^{N} \mathbf{x}^{(i)T} (y^{(i)} - \mathbf{x}^{(i)} W - b)$$
+$$= -\frac{2}{n} \sum_{i=1}^{n} x^{(i)\mathsf{T}} (y^{(i)} - x^{(i)} W - b)$$
 
 **2. Derivation of $\frac{\partial \mathcal{L}}{\partial b}$:**
 
@@ -116,12 +116,12 @@ Similarly:
 $$\frac{\partial \mathcal{L}}{\partial b} = \frac{\partial \mathcal{L}}{\partial \hat{y}^{(i)}} \cdot \frac{\partial \hat{y}^{(i)}}{\partial b}$$
 
 We already calculated the first part. For the second part:
-$$\frac{\partial \hat{y}^{(i)}}{\partial b} = \frac{\partial}{\partial b} (\mathbf{x}^{(i)} W + b) = 1$$
+$$\frac{\partial \hat{y}^{(i)}}{\partial b} = \frac{\partial}{\partial b} (x^{(i)} W + b) = 1$$
 
 Combining:
-$$\frac{\partial \mathcal{L}}{\partial b} = -\frac{2}{N} \sum_{i=1}^{N} (y^{(i)} - \hat{y}^{(i)}) \cdot 1$$
+$$\frac{\partial \mathcal{L}}{\partial b} = -\frac{2}{n} \sum_{i=1}^{n} (y^{(i)} - \hat{y}^{(i)}) \cdot 1$$
 
-$$= -\frac{2}{N} \sum_{i=1}^{N} (y^{(i)} - \mathbf{x}^{(i)} W - b)$$
+$$= -\frac{2}{n} \sum_{i=1}^{n} (y^{(i)} - x^{(i)} W - b)$$
 
 
 Using these gradients, the update rules for weights and bias are:
@@ -204,33 +204,3 @@ plt.xlabel('Years of Experience')
 plt.ylabel('Salary')
 plt.show()
 ```
-
-### Code Explanation 
-
-#### Initialization 
-
-The `__init__` method initializes the learning rate, number of iterations, and placeholders for weights and bias.
-
-#### Fit Method (`fit`)
-
-The `fit` method trains the model using gradient descent:
-
-1. **Parameter Initialization:**
-   - Weights are initialized to zeros.
-   - Bias is initialized to zero.
-
-2. **Gradient Descent Loop:**
-   - For a specified number of iterations:
-     - **Prediction:** Calculate the predicted values using the current weights and bias.
-     - **Gradient Calculation:** Compute the gradients of the cost function with respect to weights and bias.
-     - **Parameter Update:** Update the weights and bias by moving them in the opposite direction of the gradients.
-
-
-#### Predict Method (`predict`)
-
-The `predict` method generates predictions using the trained weights and bias:
-
-$$
-\hat{y} = \mathbf{x} W + b
-$$
-

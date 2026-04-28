@@ -15,7 +15,7 @@ $$
 \hat{y} = \sigma(x W + b)
 $$
 
-where $x \in \mathbb{R}^{1 \times d}$ is a row vector and $W \in \mathbb{R}^{d \times 1}$ is a weight matrix.
+where $x \in \mathbb{R}^{1 \times d}$ is a row vector, $W \in \mathbb{R}^{d \times 1}$ is a weight matrix, and $b \in \mathbb{R}^{1 \times 1}$ is the bias (scalar as row vector).
 
 This is a probability.
 

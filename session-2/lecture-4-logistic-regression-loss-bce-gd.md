@@ -14,7 +14,7 @@ $$
 \hat{y} = \sigma(z) = \sigma(x W + b)
 $$
 
-where $x \in \mathbb{R}^{1 \times d}$ is the feature row vector, $W \in \mathbb{R}^{d \times 1}$ is the weight matrix, $b$ is the bias, and $\sigma$ is the sigmoid function:
+where $x \in \mathbb{R}^{1 \times d}$ is the feature row vector, $W \in \mathbb{R}^{d \times 1}$ is the weight matrix, $b \in \mathbb{R}^{1 \times 1}$ is the bias (scalar as row vector), and $\sigma$ is the sigmoid function:
 
 $$
 \sigma(z) = \frac{1}{1 + e^{-z}}
@@ -40,7 +40,7 @@ This raises two key questions:
 A naive idea is to use the same loss as in linear regression:
 
 $$
-\mathcal{L}_\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
+\mathcal{L}_\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)})^2
 $$
 
 At first glance, this seems reasonable: $\hat{y}$ is a number, $y$ is a number, just take the squared difference.
@@ -97,13 +97,13 @@ MSE treats $\hat{y}$ as a raw number. But $\hat{y}$ is a **probability**. We wan
 The natural choice is **Binary Cross Entropy (BCE)**:
 
 $$
-\boxed{\mathcal{L}_\text{BCE} = - \frac{1}{n} \sum_{i=1}^{n} \big( y_i \log \hat{y}_i + (1-y_i) \log (1 - \hat{y}_i) \big)}
+\boxed{\mathcal{L}_\text{BCE} = - \frac{1}{n} \sum_{i=1}^{n} \big( y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)}) \log (1 - \hat{y}^{(i)}) \big)}
 $$
 
 **Intuition:**
 
-* If $y_i = 1$, the first term $- \log \hat{y}_i$ dominates
-* If $y_i = 0$, the second term $- \log (1 - \hat{y}_i)$ dominates
+* If $y^{(i)} = 1$, the first term $- \log \hat{y}^{(i)}$ dominates
+* If $y^{(i)} = 0$, the second term $- \log (1 - \hat{y}^{(i)})$ dominates
 * Predictions close to the true label → small loss
 * Confident mistakes → very large loss
 
@@ -159,13 +159,36 @@ $$
 \frac{\partial \mathcal{L}_i}{\partial W} = x^{\mathsf{T}} (\hat{y} - y)
 $$
 
+For the batch:
+
+$$
+\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} \sum_{i=1}^{n} x^{(i)\mathsf{T}} (\hat{y}^{(i)} - y^{(i)})
+$$
+
+In matrix form:
+
+$$
+\boxed{\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} X^{\mathsf{T}} (\hat{Y} - Y)}
+$$
+
 * Gradient w.r.t bias:
 
 $$
 \frac{\partial \mathcal{L}_i}{\partial b} = \hat{y} - y
 $$
 
-Note: With the row-vector convention ($x \in \mathbb{R}^{1 \times d}$), the gradient $\frac{\partial \mathcal{L}_i}{\partial W} \in \mathbb{R}^{d \times 1}$ has the same shape as $W$.
+For the batch:
+
+$$
+\frac{\partial \mathcal{L}}{\partial b} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)})
+$$
+
+In matrix form:
+
+$$
+\boxed{\frac{\partial \mathcal{L}}{\partial b} = \frac{1}{n} \mathbf{1}^{\mathsf{T}} (\hat{Y} - Y)}
+$$
+
 
 ---
 
@@ -186,25 +209,21 @@ Note: With the row-vector convention ($x \in \mathbb{R}^{1 \times d}$), the grad
 For a learning rate $\eta$, batch gradient descent:
 
 $$
-W \leftarrow W - \eta \frac{1}{n} \sum_{i=1}^{n} x_i^{\mathsf{T}} (\hat{y}_i - y_i)
+\boxed{W \leftarrow W - \eta \frac{\partial \mathcal{L}}{\partial W} = W - \eta \frac{1}{n} X^{\mathsf{T}} (\hat{Y} - Y)}
 $$
 
 $$
-b \leftarrow b - \eta \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)
+\boxed{b \leftarrow b - \eta \frac{\partial \mathcal{L}}{\partial b} = b - \eta \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)})}
 $$
 
-Or, in matrix form (full batch; and be used for non-full batch as well):
+In batch matrix form (the same structure applies to mini-batch or SGD):
 
 $$
-\boxed{W \leftarrow W - \eta
-\frac{1}{n}
-X^{\mathsf T}
-(\hat{Y}-Y)}
+\boxed{W \leftarrow W - \eta \frac{1}{n} X^{\mathsf{T}} (\hat{Y} - Y)}
 $$
 
 $$
-\boxed{b \leftarrow b - \eta \frac{1}{n} \sum_{i=1}^{n}
-(\hat{y}_i-y_i)}
+\boxed{b \leftarrow b - \eta \frac{1}{n} \mathbf{1}^{\mathsf{T}} (\hat{Y} - Y)}
 $$
 
 

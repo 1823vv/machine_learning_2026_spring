@@ -201,7 +201,7 @@ $$
 Averaging across all samples:
 
 $$
-\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} X^{\mathsf{T}}(\hat{y} - y)
+\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} X^{\mathsf{T}}(\hat{Y} - Y)
 $$
 
 For the bias term, since:
@@ -251,7 +251,7 @@ This elegant simplification is why Sigmoid + Binary Cross-Entropy is such a powe
 You'll notice that for the derivatives $dW$ and $db$ we have:
 
 $$
-dW = \frac{1}{n} X^{\mathsf{T}} \cdot (\hat{y} - y)
+dW = \frac{1}{n} X^{\mathsf{T}} \cdot (\hat{Y} - Y)
 $$
 
 $$

@@ -45,7 +45,7 @@ where:
 
 * $x \in \mathbb{R}^{1 \times d}$ (input row vector)
 * $W \in \mathbb{R}^{d \times 1}$ (weight matrix)
-* $b \in \mathbb{R}^{1 \times 1}$ (bias)
+* $b \in \mathbb{R}^{1 \times 1}$ (bias, scalar as row vector)
 
 #### Interpretation
 
@@ -101,10 +101,10 @@ $$
 \frac{\partial \mathcal{L}}{\partial w_j} = \frac{2}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)}) x_j^{(i)}
 $$
 
-In vector form:
+In matrix form:
 
 $$
-\boxed{\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n} \sum_{i=1}^n x^{(i)\mathsf{T}} (\hat{y}^{(i)} - y^{(i)})}
+\boxed{\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n} X^{\mathsf{T}} (\hat{Y} - Y)}
 $$
 
 For the bias:
@@ -113,27 +113,32 @@ $$
 \boxed{\frac{\partial \mathcal{L}}{\partial b} = \frac{2}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})}
 $$
 
-We update all parameters using gradient descent.
-
-
-Or, in matrix form (full batch; and be used for non-full batch as well):
+or equivalently in matrix form:
 
 $$
-\boxed{W \leftarrow W - \eta
-\frac{2}{n}
-X^{\mathsf T}
-(\hat{Y}-Y)}
+\boxed{\frac{\partial \mathcal{L}}{\partial b} = \frac{2}{n} \mathbf{1}^{\mathsf{T}} (\hat{Y} - Y)}
+$$
+
+---
+
+# 6. Gradient Descent Updates
+
+Using learning rate $\eta$:
+
+$$
+\boxed{W \leftarrow W - \eta \frac{\partial \mathcal{L}}{\partial W} = W - \eta \frac{2}{n} X^{\mathsf{T}} (\hat{Y} - Y)}
 $$
 
 $$
-\boxed{b \leftarrow b - \eta \frac{2}{n} \sum_{i=1}^{n}
-(\hat{y}_i-y_i)}
+\boxed{b \leftarrow b - \eta \frac{\partial \mathcal{L}}{\partial b} = b - \eta \frac{2}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})}
 $$
+
+The same update structure applies to full batch, mini-batch, or stochastic gradient descent (only the batch size changes).
 
 
 ---
 
-# 6. Batch Matrix Form (Optional)
+# 7. Batch Matrix Form (Optional)
 
 We can write everything in a compact matrix form for efficient computation.
 
@@ -161,10 +166,10 @@ w_d
 \end{bmatrix}
 $$
 
-And the target vector $y \in \mathbb{R}^{n \times 1}$:
+And the target matrix $Y \in \mathbb{R}^{n \times 1}$ (each row is a sample's target):
 
 $$
-y = 
+Y = 
 \begin{bmatrix}
 y^{(1)} \\
 y^{(2)} \\
@@ -176,21 +181,21 @@ $$
 Now, all predictions can be written as:
 
 $$
-\hat{y} = XW + \mathbf{1}b
+\hat{Y} = XW + \mathbf{1}b
 $$
 
-where $\hat{y} \in \mathbb{R}^{n \times 1}$ is the vector of predictions for all samples, and $\mathbf{1} \in \mathbb{R}^{n \times 1}$ is a column vector of ones.
+where $\hat{Y} \in \mathbb{R}^{n \times 1}$ is the matrix of predictions for all samples (each row is a sample's prediction), $b \in \mathbb{R}^{1 \times 1}$ is the bias (scalar as row vector), and $\mathbf{1} \in \mathbb{R}^{n \times 1}$ is a column vector of ones.
 
 The Mean Squared Error (MSE) loss function in matrix form is:
 
 $$
-\mathcal{L}(W, b) = \frac{1}{n}(XW + \mathbf{1}b - y)^{\mathsf{T}}(XW + \mathbf{1}b - y)
+\mathcal{L}(W, b) = \frac{1}{n}(XW + \mathbf{1}b - Y)^{\mathsf{T}}(XW + \mathbf{1}b - Y)
 $$
 
 This is equivalent to:
 
 $$
-\mathcal{L}(W, b) = \frac{1}{n}\|XW + \mathbf{1}b - y\|_2^2
+\mathcal{L}(W, b) = \frac{1}{n}\|XW + \mathbf{1}b - Y\|_2^2
 $$
 
 where $\|\cdot\|_2$ denotes the Euclidean norm.
@@ -198,10 +203,10 @@ where $\|\cdot\|_2$ denotes the Euclidean norm.
 The gradients of the loss are:
 
 $$
-\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n}X^{\mathsf{T}}(XW + \mathbf{1}b - y)
+\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n}X^{\mathsf{T}}(XW + \mathbf{1}b - Y)
 $$
 
 $$
-\frac{\partial \mathcal{L}}{\partial b} = \frac{2}{n}\mathbf{1}^{\mathsf{T}}(XW + \mathbf{1}b - y)
+\frac{\partial \mathcal{L}}{\partial b} = \frac{2}{n}\mathbf{1}^{\mathsf{T}}(XW + \mathbf{1}b - Y)
 $$
 

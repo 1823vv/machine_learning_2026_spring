@@ -66,6 +66,16 @@ where:
 | $Z^{(l)}$ | $ \mathbb{R}^{m \times n_{l}}$ | Batch pre-activation |
 | $\mathbf{1}$ | $ \mathbb{R}^{m \times 1}$ | Column vector of ones |
 
+### Regression and Classification Batch Form
+
+For regression and binary classification with batch size $n$:
+
+| Symbol | Dimension | Meaning |
+|--------|-----------|---------|
+| $X$ | $ \mathbb{R}^{n \times d}$ | Batch input matrix (rows are samples) |
+| $Y$ | $ \mathbb{R}^{n \times 1}$ | Batch target matrix (rows are sample targets) |
+| $\hat{Y}$ | $ \mathbb{R}^{n \times 1}$ | Batch prediction matrix (rows are sample predictions) |
+
 ---
 
 ## 2. Key Notation Summary

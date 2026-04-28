@@ -27,13 +27,13 @@ $$
 W \leftarrow W - \eta \frac{\partial \mathcal{L}}{\partial W}
 $$
 
-For logistic regression:
+For logistic regression (single sample):
 
 $$
-\frac{\partial \mathcal{L}}{\partial W} = x^{\mathsf{T}} (\hat{y} - y)
+\frac{\partial \mathcal{L}}{\partial W} = x^{(i)\mathsf{T}} (\hat{y}^{(i)} - y^{(i)})
 $$
 
-So the update depends directly on $x$.
+So the update depends directly on $x^{(i)}$.
 
 ---
 
