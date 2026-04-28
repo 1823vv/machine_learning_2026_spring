@@ -86,115 +86,180 @@ class MyOwnLogisticRegressionGD:
 ```
 
 
-### The Mathematics of Gradient Descent for Logistic Regression
-
-Adopting a row-vector convention, a single training sample is represented as:
-
-\[
-\mathbf{x}^{(i)} \in \mathbb{R}^{1 \times d}.
-\]
-
-The Logistic Regression model first computes a linear score:
-
-\[
-z^{(i)} = \mathbf{x}^{(i)} \mathbf{W} + b,
-\]
-where
-\[
-\mathbf{x}^{(i)} \in \mathbb{R}^{1 \times d},\quad \mathbf{W} \in \mathbb{R}^{d \times 1},\quad b \in \mathbb{R}.
-\]
-Consequently, \( z^{(i)} \in \mathbb{R} \) is a scalar.
-
-This score is passed through the sigmoid function to obtain a predicted probability for class 1:
-\[
-\sigma(z) = \frac{1}{1 + e^{-z}}, \quad \text{so} \quad \hat{y}^{(i)} = \sigma(z^{(i)}).
-\]
-
-The model's performance is measured using the **Binary Cross-Entropy Loss** averaged over all \( m \) samples:
-\[
-\mathcal{L}(\mathbf{W}, b) = -\frac{1}{m} \sum_{i=1}^{m} \Big[ y^{(i)} \log \hat{y}^{(i)} + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \Big].
-\]
-
-To perform gradient descent, we require the gradients:
-\[
-d\mathbf{W} = \frac{\partial \mathcal{L}}{\partial \mathbf{W}} \quad \text{and} \quad db = \frac{\partial \mathcal{L}}{\partial b}.
-\]
-
-#### Gradient Derivation for a Single Sample
-For an individual sample \( i \), the loss is:
-\[
-\ell^{(i)} = -\Big[ y^{(i)} \log \hat{y}^{(i)} + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \Big].
-\]
-
-Applying the chain rule through the computational graph \( \mathbf{W} \to z^{(i)} \to \hat{y}^{(i)} \to \ell^{(i)} \):
-\[
-\frac{\partial \ell^{(i)}}{\partial \mathbf{W}} = \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} \cdot \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} \cdot \frac{\partial z^{(i)}}{\partial \mathbf{W}}.
-\]
-
-1.  **Gradient of the loss w.r.t. the prediction:**
-    \[
-    \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} = -\Bigg( \frac{y^{(i)}}{\hat{y}^{(i)}} - \frac{1 - y^{(i)}}{1 - \hat{y}^{(i)}} \Bigg).
-    \]
-
-2.  **Gradient of the sigmoid activation:**
-    \[
-    \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} = \hat{y}^{(i)}(1 - \hat{y}^{(i)}).
-    \]
-
-3.  **Gradient of the linear score w.r.t. the weights:**
-    \[
-    \frac{\partial z^{(i)}}{\partial \mathbf{W}} = \mathbf{x}^{(i)\top}.
-    \]
-
-Substituting these terms:
-\[
-\frac{\partial \ell^{(i)}}{\partial \mathbf{W}} = -\Bigg( \frac{y^{(i)}}{\hat{y}^{(i)}} - \frac{1 - y^{(i)}}{1 - \hat{y}^{(i)}} \Bigg) \cdot \hat{y}^{(i)}(1 - \hat{y}^{(i)}) \cdot \mathbf{x}^{(i)\top}.
-\]
-
-A remarkable simplification occurs:
-\[
-\frac{\partial \ell^{(i)}}{\partial \mathbf{W}} = (\hat{y}^{(i)} - y^{(i)}) \cdot \mathbf{x}^{(i)\top}.
-\]
-
-#### Averaging Over the Entire Dataset
-Let \( \mathbf{X} \in \mathbb{R}^{m \times d} \) be the data matrix (stacked row vectors \( \mathbf{x}^{(i)} \)), and \( \mathbf{y}, \hat{\mathbf{y}} \in \mathbb{R}^{m \times 1} \) be the stacked labels and predictions. Averaging the gradient for the weights gives:
-\[
-\frac{\partial \mathcal{L}}{\partial \mathbf{W}} = \frac{1}{m} \mathbf{X}^{\top} (\hat{\mathbf{y}} - \mathbf{y}).
-\]
-
-For the bias term, since \( \frac{\partial z^{(i)}}{\partial b} = 1 \), the derivation yields:
-\[
-\frac{\partial \ell^{(i)}}{\partial b} = \hat{y}^{(i)} - y^{(i)}.
-\]
-Averaging over the dataset:
-\[
-\frac{\partial \mathcal{L}}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)}).
-\]
-
-#### The Gradient Descent Update Rule
-The parameters are then updated with a learning rate \( \eta \):
-\[
-\mathbf{W} := \mathbf{W} - \eta \cdot d\mathbf{W}, \quad b := b - \eta \cdot db.
-\]
-
-**Key Insight:** Despite the nonlinear sigmoid transformation, the final gradient for logistic regression with cross-entropy loss simplifies elegantly to \( (\hat{\mathbf{y}} - \mathbf{y}) \), analogous to linear regression. This makes the gradient computation both clean and efficient.
 
 
-### Why Use Cross-Entropy Loss Instead of Mean Squared Error (MSE)?
 
-Notice the final gradient formulas:
-\[
-d\mathbf{W} = \frac{1}{m} \mathbf{X}^{\top} (\hat{\mathbf{y}} - \mathbf{y}), \quad db = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)}).
-\]
-These bear a striking, **beautiful** resemblance to the gradients in linear regression. This simplicity is a direct consequence of pairing the cross-entropy loss with the sigmoid activation.
 
-**Primary advantages of cross-entropy over MSE for logistic regression:**
+### The Math Behind Gradient Descent for Logistic Regression
 
-1.  **Convexity:** The loss function is convex, guaranteeing a single global minimum and more reliable optimization.
-2.  **Gradient Scaling:** It penalizes confident but wrong predictions much more heavily, providing stronger, more informative gradients to drive learning, especially when predictions are very incorrect.
-3.  **Mitigates Vanishing Gradients:** For extreme predictions (e.g., \( \hat{y} \approx 0 \) or \( 1 \)), the gradient of the cross-entropy loss with respect to the inputs remains significant. In contrast, MSE gradients can become extremely small in these "flat" saturation regions of the sigmoid, drastically slowing down learning.
+Under our row-vector convention, each training sample is written as:
 
-This combination—sigmoid activation for probability interpretation and cross-entropy loss for effective gradient propagation—forms the mathematically coherent and computationally efficient foundation for binary classification.
+$$
+x^{(i)} \in \mathbb{R}^{1 \times d}
+$$
+
+The Logistic Regression model first computes a linear projection:
+
+$$
+z^{(i)} = x^{(i)} W + b
+$$
+
+where:
+
+- $x^{(i)} \in \mathbb{R}^{1 \times d}$
+- $W \in \mathbb{R}^{d \times 1}$
+- $b \in \mathbb{R}^{1 \times 1}$
+
+Thus:
+
+$$
+z^{(i)} \in \mathbb{R}^{1 \times 1}
+$$
+
+This scalar output is then transformed into a probability using the sigmoid function:
+
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
+
+So:
+
+$$
+\hat{y}^{(i)} = \sigma(z^{(i)})
+$$
+
+where $\hat{y}^{(i)}$ is the predicted probability that sample $i$ belongs to class 1.
+
+To measure how well predictions match true labels, we use Binary Cross-Entropy Loss over all $m$ samples:
+
+$$
+\mathcal{L}(W, b) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log \hat{y}^{(i)} + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \right]
+$$
+
+To perform Gradient Descent, we need:
+
+$$
+dW = \frac{\partial \mathcal{L}}{\partial W}
+\quad \text{and} \quad
+db = \frac{\partial \mathcal{L}}{\partial b}
+$$
+
+For one sample, define:
+
+$$
+\ell^{(i)} = -\left[ y^{(i)} \log \hat{y}^{(i)} + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \right]
+$$
+
+Because the loss depends on $W$ through:
+
+$$
+W \rightarrow z^{(i)} \rightarrow \hat{y}^{(i)} \rightarrow \ell^{(i)}
+$$
+
+we apply the chain rule:
+
+$$
+\frac{\partial \ell^{(i)}}{\partial W} = \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} \cdot \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} \cdot \frac{\partial z^{(i)}}{\partial W}
+$$
+
+**First:**
+
+$$
+\frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} = -\left( \frac{y^{(i)}}{\hat{y}^{(i)}} - \frac{1 - y^{(i)}}{1 - \hat{y}^{(i)}} \right)
+$$
+
+**Second**, since the sigmoid derivative is:
+
+$$
+\frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} = \hat{y}^{(i)}(1 - \hat{y}^{(i)})
+$$
+
+**Third**, because:
+
+$$
+z^{(i)} = x^{(i)}W + b
+$$
+
+we get:
+
+$$
+\frac{\partial z^{(i)}}{\partial W} = x^{(i)\mathsf{T}}
+$$
+
+**Substituting:**
+
+$$
+\frac{\partial \ell^{(i)}}{\partial W} = -\left( \frac{y^{(i)}}{\hat{y}^{(i)}} - \frac{1 - y^{(i)}}{1 - \hat{y}^{(i)}} \right) \cdot \hat{y}^{(i)}(1 - \hat{y}^{(i)}) \cdot x^{(i)\mathsf{T}}
+$$
+
+After simplification, the complex terms collapse beautifully into:
+
+$$
+\frac{\partial \ell^{(i)}}{\partial W} = x^{(i)\mathsf{T}}(\hat{y}^{(i)} - y^{(i)})
+$$
+
+Averaging across all samples:
+
+$$
+\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} X^{\mathsf{T}}(\hat{y} - y)
+$$
+
+For the bias term, since:
+
+$$
+\frac{\partial z^{(i)}}{\partial b} = 1
+$$
+
+we similarly obtain:
+
+$$
+\frac{\partial \ell^{(i)}}{\partial b} = \hat{y}^{(i)} - y^{(i)}
+$$
+
+and over the full dataset:
+
+$$
+\frac{\partial \mathcal{L}}{\partial b} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)})
+$$
+
+This gives the final Gradient Descent updates:
+
+$$
+W \leftarrow W - \eta \, dW
+$$
+
+$$
+b \leftarrow b - \eta \, db
+$$
+
+The key insight is that although Logistic Regression combines:
+
+- linear projection
+- sigmoid nonlinearity
+- logarithmic loss
+
+the final gradient simplifies to:
+
+$$
+\hat{y} - y
+$$
+
+This elegant simplification is why Sigmoid + Binary Cross-Entropy is such a powerful pairing: mathematically clean, computationally efficient, and ideal for binary classification.
+
+
+
+You'll notice that for the derivatives $dW$ and $db$ we have:
+
+$$
+dW = \frac{1}{n} X^{\mathsf{T}} \cdot (\hat{y} - y)
+$$
+
+$$
+db = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)})
+$$
+
+These formulas look remarkably similar to the ones used for Linear Regression, which is a **beautiful** result of using cross-entropy loss with the sigmoid activation function.
+
 
 
 ## Testing the Gradient Descent Implementation
