@@ -1,13 +1,10 @@
 # Decision Boundary
 
+![](./img/decisionboundary2.jpg)
+
 ---
 
 ## 1. From probability to decision
-
-
-![](./img/lg1.jpg)
-
-
 
 The model outputs:
 
@@ -76,10 +73,6 @@ $$
 ---
 
 ## 4. The decision boundary
-
-
-
-![](./img/decisionboundary2.jpg)
 
 
 The boundary occurs when the model is uncertain:

@@ -121,7 +121,7 @@ $$
 \frac{\partial \mathcal{L}}{\partial z} = 2(\hat{y} - y) \hat{y}(1 - \hat{y}) = 2(-0.99)(0.01 \times 0.99) \approx -0.0196
 $$
 
-Notice how **the correction signal is tiny** ($\approx -0.02$) despite being a huge mistake (loss $\approx 0.98$). This is because the sigmoid derivative $\hat{y}(1 - \hat{y})$ becomes very small when $\hat{y}$ is near 0 or 1, causing the gradient to vanish and slowing down learning drastically.
+Notice how **the correction signal is tiny** ($\approx -0.02$) despite being a huge mistake (loss $\approx 0.98$; true label 1 while prediction is 0.01). This is because the sigmoid derivative $\hat{y}(1 - \hat{y})$ becomes very small when $\hat{y}$ is near 0 or 1, causing the gradient to vanish and slowing down learning drastically.
 
 ### 2.3 Ignores probability semantics (optional)
 
