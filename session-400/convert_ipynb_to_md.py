@@ -4,7 +4,17 @@ import sys
 import os
 
 
+def get_ignore_list():
+    """Read convert_ignore.txt and return set of filenames to ignore."""
+    ignore_file = Path.cwd() / "convert_ignore.txt"
+    if ignore_file.exists():
+        with ignore_file.open("r", encoding="utf-8") as f:
+            return {line.strip() for line in f if line.strip()}
+    return set()
+
+
 def convert_ipynb_to_md():
+    ignore_list = get_ignore_list()
     cwd = Path.cwd()
     notebooks = list(cwd.glob("*.ipynb"))
 
@@ -13,6 +23,11 @@ def convert_ipynb_to_md():
         return
 
     for ipynb_file in notebooks:
+        # Skip if file is in ignore list
+        if ipynb_file.name in ignore_list:
+            print(f"Skipping: {ipynb_file.name} (in convert_ignore.txt)")
+            continue
+
         md_file = ipynb_file.with_suffix(".md")
 
         # Skip existing markdown
