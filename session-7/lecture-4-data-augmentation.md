@@ -1,5 +1,9 @@
 # Data Augmentation
 
+
+![](./img/da.jpg)
+
+
 ---
 
 ## 1. Motivation: Data is Limited
@@ -117,9 +121,30 @@ It reduces overfitting by forcing the model to learn:
 * structure, not memorization
 * invariant features, not surface patterns
 
+
 ---
 
-## 6. Summary
+
+## 6. Example (PyTorch)
+
+```python
+from torchvision import transforms
+
+transform = transforms.Compose([
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomRotation(10),
+    transforms.RandomCrop(28),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2),
+    transforms.GaussianBlur(kernel_size=3)
+])
+```
+
+This pipeline randomly applies transformations to each image during training.
+
+
+---
+
+## 7. Summary
 
 Data augmentation is a general principle across domains:
 

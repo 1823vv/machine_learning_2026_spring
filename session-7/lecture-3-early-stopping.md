@@ -1,5 +1,8 @@
 # Early Stopping
 
+![](img/traintestoverfitting.png)
+
+
 ---
 
 ## 1. Motivation: Overfitting During Training

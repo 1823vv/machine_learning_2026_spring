@@ -1,5 +1,8 @@
 # Bias–Variance Tradeoff
 
+![](img/graphicalillustration.png)
+
+
 ---
 
 ## 1. Goal
@@ -21,11 +24,14 @@ Model error comes from two main sources:
 
 ## 3. High Bias (Underfitting)
 
+![](img/classification.png)
+
+
+
 A model with high bias is too simple.
 
 It cannot capture the structure of the data.
 
----
 
 ## Symptoms
 
@@ -33,7 +39,6 @@ It cannot capture the structure of the data.
 * high validation error
 * both are similar
 
----
 
 ## Interpretation
 
@@ -41,7 +46,6 @@ The model is **systematically wrong**.
 
 It misses key patterns.
 
----
 
 ## Example
 
@@ -52,11 +56,17 @@ It misses key patterns.
 
 ## 4. High Variance (Overfitting)
 
+![](img/under_over_justalright.png)
+
+![](img/bias-variance-overfitting.jpg)
+
+https://visualize-it.github.io/polynomial_regression/simulation.html
+
+
 A model with high variance is too sensitive to data.
 
 It learns noise in the training set.
 
----
 
 ## Symptoms
 
@@ -64,7 +74,6 @@ It learns noise in the training set.
 * high validation error
 * large gap between them
 
----
 
 ## Interpretation
 
@@ -72,7 +81,6 @@ The model is **unstable across datasets**.
 
 Small changes in data lead to large changes in predictions.
 
----
 
 ## Example
 
@@ -82,6 +90,8 @@ Small changes in data lead to large changes in predictions.
 ---
 
 ## 5. Bias–Variance Tradeoff
+
+![](./img/mc.jpg)
 
 Increasing model complexity:
 
@@ -93,15 +103,15 @@ Decreasing model complexity:
 * increases bias
 * reduces variance
 
----
 
-## Key Idea
-
-There is a **sweet spot** between underfitting and overfitting.
+> There is a **sweet spot** between underfitting and overfitting.
 
 ---
 
 ## 6. Learning Curves
+
+![](img/ZahidHasan.png)
+
 
 Learning curves plot:
 
@@ -109,16 +119,13 @@ Learning curves plot:
 * validation error
 * vs dataset size
 
----
 
-## Patterns
 
 ### High Bias
 
 * both errors high
 * curves close together
 
----
 
 ### High Variance
 
@@ -128,9 +135,10 @@ Learning curves plot:
 
 ---
 
-## 7. Model Selection Insight
+## 7. How to choose a good model
 
-Good models achieve:
+![](img/steps.png)
 
-* low bias
-* controlled variance
+
+![](img/Bias-vs.webp)
+

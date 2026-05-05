@@ -28,6 +28,9 @@ where:
 
 ## 3. L2 Regularization
 
+![](img/lagrange-animation.gif)
+
+
 Also called **weight decay**.
 
 
@@ -70,6 +73,9 @@ $$
 ---
 
 ## 6. Interpretation
+
+![](img/p-norm_balls.webp)
+
 
 Regularization changes the learning objective:
 

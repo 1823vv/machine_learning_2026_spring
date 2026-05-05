@@ -1,5 +1,9 @@
 # Hyperparameter Optimization
 
+
+![](./img/w6.jpg)
+
+
 ---
 
 ## 1. Parameters vs Hyperparameters
@@ -139,7 +143,7 @@ Random search allocates more trials to exploring important dimensions effectivel
 
 ---
 
-## 6. Why Random Search Works Better
+## 6. Why Random Search Works Better (Optional)
 
 Consider two hyperparameters:
 
@@ -175,7 +179,7 @@ Thus optimization methods include:
 
 * grid search
 * random search
-* Bayesian optimization (later topic)
+* Bayesian optimization (optional; beyond the scope of this course)
 
 ---
 

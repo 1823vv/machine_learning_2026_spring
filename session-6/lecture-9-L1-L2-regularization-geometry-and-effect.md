@@ -1,5 +1,8 @@
 # L1/L2 Regularization — Geometry and Effect
 
+![](img/circlesquare.png)
+
+
 ---
 
 ## 1. Goal
@@ -36,6 +39,9 @@ This defines a **diamond-shaped polytope**.
 
 ## 3. Geometric View of Learning
 
+![](img/ridgelassoItayEvron.gif)
+
+
 We minimize loss subject to a constraint.
 
 Solution occurs where:
@@ -60,6 +66,10 @@ L2 constraint:
 ---
 
 ## 5. L1 Geometry
+
+
+![](img/L1L2contour.png)
+
 
 L1 constraint:
 

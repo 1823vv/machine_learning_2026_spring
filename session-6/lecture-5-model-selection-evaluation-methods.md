@@ -1,5 +1,9 @@
 # Evaluation Methods
 
+
+![](./img/kf.jpg)
+
+
 ---
 
 ## 1. Goal
