@@ -103,27 +103,7 @@ $$
 
 ---
 
-## 4. Vectorized Computation
-
-Instead of computing neuron-by-neuron:
-
-**Single neuron**
-
-$$
-z = x W + b
-$$
-
-**Entire layer**
-
-$$
-z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}
-$$
-
-Vectorization allows computing all neurons in a layer simultaneously, which is efficient on modern hardware.
-
----
-
-## 5. Depth vs Width
+## 4. Depth vs Width
 
 **Width**: number of neurons in a layer $n_l$
 *More neurons → more capacity per layer*
@@ -134,7 +114,7 @@ Vectorization allows computing all neurons in a layer simultaneously, which is e
 
 ---
 
-## 6. Putting Everything Together
+## 5. Putting Everything Together
 
 
 ![](./img/numofcoefficients.jpg)
