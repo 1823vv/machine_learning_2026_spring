@@ -554,7 +554,14 @@ Softmax converts 10 logits into 10 probabilities.
 
 ## 13. Softmax in LLMs and Transformers (Optional)
 
+https://poloclub.github.io/transformer-explainer/
+
 Softmax is also central in large language models.
+
+
+
+![](./img/softmax_temperature.png)
+
 
 ---
 
