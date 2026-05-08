@@ -1,5 +1,8 @@
 # Setting Up CI/CD with GitHub Actions and Release Functionality
 
+Final delivery should look like:
+- https://github.com/reveurmichael/session2-practice-ci-cd
+
 In this session, we will guide you through setting up a Continuous Integration and Continuous Deployment (CI/CD) pipeline using GitHub Actions. Additionally, we will add release functionality to your GitHub repository. This setup ensures that every time there's a push or pull request to the `main` branch, your training data is updated, a new linear model is generated, and a release is created automatically. This hands-on approach will help you understand practical CI/CD workflows and release management.
 
 ## 1. Creating the GitHub Actions Workflow
