@@ -1,5 +1,7 @@
 # Task 4: Logistic Regression for Sentiment Classification
 
+- [tensorflow playground](https://playground.tensorflow.org/#activation=sigmoid&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=&seed=0.16202&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
+
 ## Objective
 
 We build a simple sentiment classifier.
