@@ -68,7 +68,7 @@ $$
 >
 > They are linked by chain rule. Once we have $\delta^{(l)}$, we can compute the parameter gradients:
 > $$
-> \frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \cdot \delta^{(l)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}.
+> \frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \cdot \delta^{(l)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}
 > $$
 
 Weight and bias gradients are:
