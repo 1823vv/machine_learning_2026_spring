@@ -168,7 +168,7 @@ def backward(self, grad_output):
 
 ## 4. Training Loop: Full Backpropagation Algorithm
 
-### 4.1 Mathematical Algorithm (Lecture 6)
+### 4.1 Mathematical Algorithm (Lecture 7)
 
 **Complete backpropagation steps:**
 1. Forward pass: compute $z^{(l)}$ and $a^{(l)}$ for all layers
@@ -234,7 +234,7 @@ def __init__(self, input_units, output_units, learning_rate=0.1):
 
 ## 6. Vectorization and Batch Processing
 
-### 6.1 Mathematical Foundation (Lecture 6)
+### 6.1 Mathematical Foundation (Lecture 7)
 
 **Vectorized operations for batch size $m$:**
 $$\frac{\partial \mathcal{L}}{\partial W^{(l)}} = \frac{1}{m} (A^{(l-1)})^T \Delta^{(l)}$$
