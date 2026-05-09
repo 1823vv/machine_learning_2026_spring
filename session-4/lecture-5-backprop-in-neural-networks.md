@@ -49,6 +49,27 @@ $$
 \delta^{(l)} = \frac{\partial \mathcal{L}}{\partial z^{(l)}} \in \mathbb{R}^{1 \times n_l}
 $$
 
+> [!INFO]
+> **$\delta$ vs. $g$ (both are gradients, but w.r.t. different variables)**
+>
+> In these notes:
+>
+> - **$\delta^{(l)}$** is the *backprop error signal* at layer $l$:
+>   $$
+>   \delta^{(l)} = \frac{\partial \mathcal{L}}{\partial z^{(l)}}
+>   $$
+>   It is a gradient w.r.t. an **intermediate quantity** (the pre-activation $z^{(l)}$), used to propagate information backward efficiently.
+>
+> - **$g$** is usually reserved for the *parameter gradient* used by the optimizer update, e.g.
+>   $$
+>   g^{(l)} = \frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad W^{(l)} \leftarrow W^{(l)} - \eta\, g^{(l)}
+>   $$
+>
+> They are linked by chain rule. Once we have $\delta^{(l)}$, we can compute the parameter gradients:
+> $$
+> \frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \cdot \delta^{(l)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}.
+> $$
+
 Weight and bias gradients are:
 
 $$
