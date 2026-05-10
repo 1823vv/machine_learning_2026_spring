@@ -189,16 +189,3 @@ $$
 * Gradients combine **input transpose × error**
 * Backpropagation is **just an efficient way to apply the chain rule through all layers**
 * Vectorization ensures **fast computation for batches**
-
----
-
-## 9. Conclusion
-
-The formulas in this lecture represent the **final, complete derivation of gradients** for a fully connected feedforward network. Once implemented, they allow any network to be **trained efficiently using gradient descent** or its variants (SGD, Adam, Momentum).
-
-This lecture **closes the loop** of the backpropagation series:
-
-1. Forward pass → compute activations
-2. Loss calculation → measure error
-3. Backward pass → compute $\delta^{(l)}$ layer by layer
-4. Weight & bias gradients → update parameters
