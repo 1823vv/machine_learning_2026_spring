@@ -2,6 +2,15 @@
 
 ![](./img/0.gif)
 
+> [!INFO]
+> **Parameter Notation Convention**
+>
+> From this session on, you'll notice a consistent choice in parameter notation:
+>
+> - **Combined parameters** (Weights and Biases, usually denoted as $\theta = [W; b]$ or $\Theta = [W; b]$ ) are denoted as $W$, rather than $\theta$ or $\Theta$, for the sake of clarity
+>
+> When you see $W$ in formulas, think "all trainable parameters" including biases where applicable.
+
 ---
 
 ## 1. Review — What We Already Have
