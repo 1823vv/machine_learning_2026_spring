@@ -186,6 +186,8 @@ for X, y in dataloader:
 
 ## 10. Summary
 
+![](./img/hillvs.jpg)
+
 Adam is the natural culmination of **mini-batch SGD + momentum + adaptive learning rates**:
 
 1. Tracks **first moment** → smooths gradients (direction)
