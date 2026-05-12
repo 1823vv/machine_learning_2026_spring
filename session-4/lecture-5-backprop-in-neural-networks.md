@@ -71,13 +71,7 @@ $$
 > \frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \cdot \delta^{(l)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}
 > $$
 
-Weight and bias gradients are:
-
-$$
-\boxed{\underbrace{\frac{\partial \mathcal{L}}{\partial W^{(l)}}}_{\text{weight gradient}} = \underbrace{(a^{(l-1)})^T}_{\text{input transpose}} \cdot \underbrace{\delta^{(l)}}_{\text{error signal}}, \quad \underbrace{\frac{\partial \mathcal{L}}{\partial b^{(l)}}}_{\text{bias gradient}} = \underbrace{\delta^{(l)}}_{\text{error signal}}}
-$$
-
-The **main task** is to compute $\delta^{(l)}$ recursively from the output layer backward.
+The **main task** is to compute $\delta^{(l)}$ recursively from the output layer backward. Once $\delta^{(l)}$ is known, the parameter gradients follow directly (see Section 6).
 
 ---
 

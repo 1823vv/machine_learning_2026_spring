@@ -2,188 +2,98 @@
 
 In this lecture, we consolidate everything from the previous lectures and present **all gradients in their final, general form**. This is the culmination of understanding **forward pass → chain rule → backpropagation → parameter updates**.
 
-
 ![](./img/backpropagation_main2.gif)
 
 ---
 
-## 1. Neural Network Setup
+## 1. Network Setup
 
 Consider a feedforward neural network with $L$ layers:
 
 * Input: $a^{(0)} = x \in \mathbb{R}^{1 \times d_0}$
-* Hidden layers: $a^{(l)} = f_l(z^{(l)})$, $l=1,...,L-1$
-* Output: $a^{(L)} = f_L(z^{(L)})$
-* Layer pre-activation: $z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}$
-* Loss function: $\mathcal{L}(a^{(L)}, y)$
+* Pre-activation: $z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}$
+* Activation: $a^{(l)} = f_l(z^{(l)})$
+* Loss: $\mathcal{L}(a^{(L)}, y)$
 
-Parameters:
-
-$$
-\Theta = \{ W^{(1)}, b^{(1)}, ..., W^{(L)}, b^{(L)} \}
-$$
-
-Goal:
-
-$$
-\text{Compute } \frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}}, \quad \forall l
-$$
+After the forward pass, all $z^{(l)}$ and $a^{(l)}$ are stored for backpropagation.
 
 ---
 
-## 2. Forward Pass Recap
+## 2. Error Signals
 
-Forward pass computes and stores:
-
-$$
-z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}, \quad a^{(l)} = f_l(z^{(l)}), \quad l=1,...,L
-$$
-
-These stored $z^{(l)}$ and $a^{(l)}$ are **required for backpropagation**.
-
----
-
-## 3. Backpropagation: Layer-wise Error Signals
-
-Define **error signal** for each layer:
+Define the error signal at layer $l$:
 
 $$
 \underbrace{\delta^{(l)}}_{\text{error signal}} = \underbrace{\frac{\partial \mathcal{L}}{\partial z^{(l)}}}_{\text{gradient w.r.t. pre-activation}} \in \mathbb{R}^{1 \times n_l}
 $$
 
-Where $n_l$ is the number of neurons in layer $l$.
-
-### Output Layer:
+**Output layer:**
 
 $$
-\underbrace{\delta^{(L)}}_{\text{output error}} = \underbrace{\frac{\partial \mathcal{L}}{\partial a^{(L)}}}_{\text{loss gradient}} \odot \underbrace{f_L'(z^{(L)})}_{\text{activation derivative}}
+\boxed{\delta^{(L)} = \frac{\partial \mathcal{L}}{\partial a^{(L)}} \odot f_L'(z^{(L)})}
 $$
 
-* $f_L'(z^{(L)})$ is the derivative of the output activation function
-* $\odot$ is element-wise multiplication
-
-Examples:
-
-* MSE + linear output:
+**Hidden layers (recursive, $l = L-1, \dots, 1$):**
 
 $$
-\delta^{(L)} = a^{(L)} - y
-$$
-
-* BCE + sigmoid output:
-
-$$
-\delta^{(L)} = a^{(L)} - y
+\boxed{\delta^{(l)} = \delta^{(l+1)} (W^{(l+1)})^T \odot f_l'(z^{(l)})}
 $$
 
 ---
 
-### Hidden Layers:
+## 3. Parameter Gradients
 
-Propagate backward recursively:
+Once all $\delta^{(l)}$ are computed:
 
 $$
-\boxed{\underbrace{\delta^{(l)}}_{\text{hidden layer error}} = \underbrace{\delta^{(l+1)}}_{\text{error from next layer}} \underbrace{(W^{(l+1)})^T}_{\text{weight transpose}} \odot \underbrace{f_l'(z^{(l)})}_{\text{activation derivative}}, \quad \underbrace{l=L-1,...,1}_{\text{backward propagation}}}
+\boxed{\frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \cdot \delta^{(l)}}
 $$
 
-Interpretation:
-
-* $\delta^{(l+1)} (W^{(l+1)})^T$ transfers the error from the next layer
-* $f_l'(z^{(l)})$ adjusts the error based on the local activation function
-
-This is the **chain rule applied through the network**.
+$$
+\boxed{\frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}}
+$$
 
 ---
 
-## 4. Weight and Bias Gradients
-
-Once $\delta^{(l)}$ is known:
-
-$$
-\underbrace{\frac{\partial \mathcal{L}}{\partial W^{(l)}}}_{\text{weight gradient}} = \underbrace{(a^{(l-1)})^T}_{\text{input transpose}} \cdot \underbrace{\delta^{(l)}}_{\text{error signal}}
-$$
-
-$$
-\underbrace{\frac{\partial \mathcal{L}}{\partial b^{(l)}}}_{\text{bias gradient}} = \underbrace{\delta^{(l)}}_{\text{error signal}}
-$$
-
-These formulas are **general** for all fully connected layers.
-
-**Intuition:**
-
-* Each weight gradient scales with **input transpose × error signal**
-* Each bias gradient scales with **error signal alone**
-
----
-
-## 5. Vectorized Form (Batch Input)
-
-For a batch of $m$ samples stacked as rows:
+## 4. Vectorized Form (Batch of $m$ samples)
 
 * Input matrix: $X \in \mathbb{R}^{m \times d_0}$
-* Activation matrix for layer $l$: $A^{(l)} \in \mathbb{R}^{m \times n_l}$
 * Pre-activation: $Z^{(l)} = A^{(l-1)} W^{(l)} + \mathbf{1} b^{(l)}$
 
-Error signals:
+**Batch error signals:**
 
 $$
-\underbrace{\Delta^{(L)}}_{\text{batch output error}} = \underbrace{\frac{\partial \mathcal{L}}{\partial A^{(L)}}}_{\text{loss gradient}} \odot \underbrace{f_L'(Z^{(L)})}_{\text{activation derivative}}
-$$
-
-Recursive:
-
-$$
-\underbrace{\Delta^{(l)}}_{\text{batch hidden error}} = \underbrace{\Delta^{(l+1)}}_{\text{error from next layer}} \underbrace{(W^{(l+1)})^T}_{\text{weight transpose}} \odot \underbrace{f_l'(Z^{(l)})}_{\text{activation derivative}}, \quad \underbrace{l=L-1,...,1}_{\text{backward propagation}}
-$$
-
-Weight and bias gradients (averaged over batch):
-
-$$
-\boxed{\underbrace{\frac{\partial \mathcal{L}}{\partial W^{(l)}}}_{\text{weight gradient}} = \underbrace{\frac{1}{m}}_{\text{batch averaging}} \underbrace{(A^{(l-1)})^T}_{\text{input transpose}} \underbrace{\Delta^{(l)}}_{\text{error signals}}}
+\boxed{\Delta^{(L)} = \frac{\partial \mathcal{L}}{\partial A^{(L)}} \odot f_L'(Z^{(L)})}
 $$
 
 $$
-\boxed{\underbrace{\frac{\partial \mathcal{L}}{\partial b^{(l)}}}_{\text{bias gradient}} = \underbrace{\frac{1}{m}}_{\text{batch averaging}} \sum_{i=1}^{m} \underbrace{\Delta^{(l)}_{i,:}}_{\text{error for sample } i}}
+\boxed{\Delta^{(l)} = \Delta^{(l+1)} (W^{(l+1)})^T \odot f_l'(Z^{(l)}), \quad l = L-1, \dots, 1}
 $$
 
-This is the **final vectorized form** used in practical neural network libraries.
+**Averaged gradients:**
 
----
+$$
+\boxed{\frac{\partial \mathcal{L}}{\partial W^{(l)}} = \frac{1}{m} (A^{(l-1)})^T \Delta^{(l)}}
+$$
 
-## 6. Special Cases for Common Activations
-
-| Activation | Derivative $f'(z)$       |
-| ---------- | ------------------------ |
-| Sigmoid    | $\sigma(z)(1-\sigma(z))$ |
-| ReLU       | $1$ if $z>0$, else $0$   |
-| Tanh       | $1 - \tanh^2(z)$         |
-| Linear     | $1$                      |
+$$
+\boxed{\frac{\partial \mathcal{L}}{\partial b^{(l)}} = \frac{1}{m} \sum_{i=1}^{m} \Delta^{(l)}_{i,:}}
+$$
 
 
 ---
 
-## 7. Summary of Full Backprop Steps
+## 5. Full Algorithm
 
-For any neural network:
-
-1. **Forward Pass**: compute $z^{(l)}$ and $a^{(l)}$ for all layers
-2. **Compute Output Error**: $\delta^{(L)} = \frac{\partial \mathcal{L}}{\partial a^{(L)}} \odot f_L'(z^{(L)})$
-3. **Backpropagate Error**: $\delta^{(l)} = \delta^{(l+1)} (W^{(l+1)})^T \odot f_l'(z^{(l)})$
-4. **Compute Gradients**:
-
-$$
-\frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \delta^{(l)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}
-$$
-
-5. **Update Parameters** (Gradient Descent):
-
-$$
-W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial b^{(l)}}
-$$
+1. **Forward pass**: compute and store $z^{(l)}, a^{(l)}$ for all layers
+2. **Output error**: $\delta^{(L)} = \frac{\partial \mathcal{L}}{\partial a^{(L)}} \odot f_L'(z^{(L)})$
+3. **Backpropagate**: $\delta^{(l)} = \delta^{(l+1)} (W^{(l+1)})^T \odot f_l'(z^{(l)})$
+4. **Gradients**: $\frac{\partial \mathcal{L}}{\partial W^{(l)}} = (a^{(l-1)})^T \delta^{(l)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \delta^{(l)}$
+5. **Update**: $W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial b^{(l)}}$
 
 ---
 
-## 8. Intuition
+## 6. Intuition
 
 * Each layer receives **an error signal proportional to its contribution to the final loss**
 * Gradients combine **input transpose × error**

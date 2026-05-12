@@ -7,27 +7,9 @@
 
 ---
 
-## 1. Motivation: Why the Chain Rule?
+## 1. Motivation
 
-After the forward pass, we have a loss:
-
-$$
-\mathcal{L} = \mathcal{L}(\hat{y}, y)
-$$
-
-Suppose the network is composed of multiple layers:
-
-$$
-\hat{y} = f^{(L)}(f^{(L-1)}(\dots f^{(1)}(x) \dots ))
-$$
-
-We want gradients with respect to **all parameters**:
-
-$$
-\frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad \frac{\partial \mathcal{L}}{\partial b^{(l)}}
-$$
-
-Direct differentiation is cumbersome. The **chain rule** allows us to break complex derivatives into **simpler, local derivatives**.
+In a deep network, the loss depends on each parameter through a long chain of composed functions. Computing gradients directly is impractical. The **chain rule** lets us decompose these derivatives into **manageable, local pieces**.
 
 ---
 
@@ -122,43 +104,7 @@ By combining local derivatives using the chain rule, we get the **full gradient*
 
 ---
 
-## 6. Simple Example: Two-Layer Chain
-
-Suppose:
-
-$$
-\mathcal{L} = (a \cdot b + c)^2
-$$
-
-Forward pass:
-
-$$
-u = a \cdot b + c
-$$
-
-$$
-\mathcal{L} = u^2
-$$
-
-Backward pass (chain rule):
-
-$$
-\underbrace{\frac{\partial \mathcal{L}}{\partial a}}_{\text{gradient w.r.t. } a} = \underbrace{\frac{\partial \mathcal{L}}{\partial u}}_{\text{gradient w.r.t. } u} \cdot \underbrace{\frac{\partial u}{\partial a}}_{\text{local derivative}} = 2u \cdot b
-$$
-
-$$
-\frac{\partial \mathcal{L}}{\partial b} = 2u \cdot a
-$$
-
-$$
-\frac{\partial \mathcal{L}}{\partial c} = 2u \cdot 1 = 2u
-$$
-
-**Observation:** Each derivative is computed **locally** and combined **systematically**.
-
----
-
-## 7. Key Takeaways
+## 6. Key Takeaways
 
 1. **Backpropagation = repeated application of the chain rule**
 2. **Gradients flow backward** through layers

@@ -37,20 +37,9 @@ Each node **computes a value in the forward pass**.
 
 ---
 
-## 2. Forward Pass
+## 2. Forward Pass on a Graph
 
-
-
-
-![](./img/backpropagation_main2.gif)
-
-
-The **forward pass** evaluates the graph from **inputs to outputs**:
-
-1. Compute $u = a \cdot b + c$
-2. Compute $\mathcal{L} = u^2$
-
-During this pass, **store all intermediate values** for later use in backpropagation.
+During the forward pass, each node computes its value and **stores intermediate results** for later use in backpropagation.
 
 ---
 
