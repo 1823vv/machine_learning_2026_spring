@@ -75,7 +75,7 @@ $$
 **Activation functions introduce nonlinearity**:
 
 $$
-a^{(l)} = g^{(l)}(a^{(l-1)} W^{(l)} + b^{(l)})
+a^{(l)} = f^{(l)}(a^{(l-1)} W^{(l)} + b^{(l)})
 $$
 
 Without $g$, the network cannot learn complex functions. Nonlinearity is what allows neural networks to approximate arbitrary mappings from input to output.

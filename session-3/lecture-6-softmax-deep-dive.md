@@ -159,7 +159,7 @@ $$
 ### Proof
 
 $$
-\frac{e^{z_i+c}}{\sum_j e^{z_j+c}} = \frac{e^c e^{z_i}}{e^c \sum_j e^{z_j}} = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\boxed{\frac{e^{z_i+c}}{\sum_j e^{z_j+c}} = \frac{e^c e^{z_i}}{e^c \sum_j e^{z_j}} = \frac{e^{z_i}}{\sum_j e^{z_j}}}
 $$
 
 The constant cancels out.
@@ -279,7 +279,7 @@ Temperature is a hyperparameter that controls the "sharpness" of the softmax dis
 ### Softmax with Temperature
 
 $$
-\hat{y}_i = \frac{e^{z_i / T}}{\sum_{j=1}^{K} e^{z_j / T}}
+\boxed{\hat{y}_i = \frac{e^{z_i / T}}{\sum_{j=1}^{K} e^{z_j / T}}}
 $$
 
 where $T > 0$ is the temperature.
@@ -338,7 +338,7 @@ Softmax converts these into token probabilities, optionally with temperature sca
 Inside self-attention:
 
 $$
-\text{Attention}(Q,K,V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\boxed{\text{Attention}(Q,K,V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V}
 $$
 
 Softmax turns similarity scores into attention weights, determining how much each token attends to others.

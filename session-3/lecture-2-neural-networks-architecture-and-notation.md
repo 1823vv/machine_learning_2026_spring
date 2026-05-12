@@ -54,13 +54,13 @@ $$
 **Activation Function**
 
 $$
-a^{(l)} = g^{(l)}(z^{(l)})
+a^{(l)} = f^{(l)}(z^{(l)})
 $$
 
 **Full Layer Computation**
 
 $$
-a^{(l)} = g^{(l)}(a^{(l-1)} W^{(l)} + b^{(l)})
+a^{(l)} = f^{(l)}(a^{(l-1)} W^{(l)} + b^{(l)})
 $$
 
 ---
@@ -130,7 +130,7 @@ $$
 **Forward Computation**
 
 $$
-a^{(l)} = g^{(l)}(a^{(l-1)} W^{(l)} + b^{(l)}), \quad l = 1, 2, \dots, L
+a^{(l)} = f^{(l)}(a^{(l-1)} W^{(l)} + b^{(l)}), \quad l = 1, 2, \dots, L
 $$
 
 **Final Output**

@@ -92,7 +92,7 @@ Multiclass tasks involve **more than two mutually exclusive classes**, e.g., dig
 Softmax converts raw scores (logits) into a valid probability distribution:
 
 $$
-\hat{y}_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}, \quad i=1,\dots,K
+\boxed{\hat{y}_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}, \quad i=1,\dots,K}
 $$
 
 Properties:
@@ -104,7 +104,7 @@ Properties:
 ### Loss Function: Categorical Cross-Entropy
 
 $$
-\mathcal{L} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{K} y_{i,k} \log \hat{y}_{i,k}
+\boxed{\mathcal{L} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{K} y_{i,k} \log \hat{y}_{i,k}}
 $$
 
 Where:
@@ -128,5 +128,5 @@ Where:
 4. **Numerical stability**: Softmax can produce very large exponentials; in practice, we subtract the max logit before exponentiating to avoid overflow:
 
 $$
-\hat{y}_i = \frac{e^{z_i - \max_j z_j}}{\sum_{j=1}^{K} e^{z_j - \max_j z_j}}
+\boxed{\hat{y}_i = \frac{e^{z_i - \max_j z_j}}{\sum_{j=1}^{K} e^{z_j - \max_j z_j}}}
 $$

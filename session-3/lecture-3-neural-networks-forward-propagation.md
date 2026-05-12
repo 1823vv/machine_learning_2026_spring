@@ -10,13 +10,13 @@
 For a single layer:
 
 $$
-a = g(xW + b)
+a = f(xW + b)
 $$
 
 * $x \in \mathbb{R}^{1 \times d}$ — input row vector
 * $W \in \mathbb{R}^{d \times n}$ — weight matrix
 * $b \in \mathbb{R}^{1 \times n}$ — bias row vector
-* $g$ — activation function
+* $f$ — activation function
 * $a \in \mathbb{R}^{1 \times n}$ — output activation
 
 This is the fundamental building block for deeper networks.
@@ -35,7 +35,7 @@ z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}
 $$
 
 $$
-a^{(l)} = g^{(l)}(z^{(l)})
+a^{(l)} = f^{(l)}(z^{(l)})
 $$
 
 * $a^{(0)} = x$
