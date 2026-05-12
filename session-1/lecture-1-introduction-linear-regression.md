@@ -14,7 +14,7 @@ Linear regression is a method to **predict a target variable using input feature
 It assumes a **linear relationship** between input $x$ and output $y$:
 
 $$
-y \approx \hat{y} = w x + b
+\boxed{y \approx \hat{y} = w x + b}
 $$
 
 where:
@@ -59,7 +59,7 @@ We use a **loss function** to measure prediction error.
 One common choice is **Mean Squared Error (MSE)**:
 
 $$
-\mathcal{L}(w, b) = \frac{1}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})^2
+\boxed{\mathcal{L}(w, b) = \frac{1}{n} \sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})^2}
 $$
 
 Minimizing this loss gives the **best-fitting line**.

@@ -155,30 +155,3 @@ Backward:
 $$
 
 **Observation:** Gradient contributions **accumulate** along all paths.
-
----
-
-## 6. Algorithmic Summary
-
-**Backpropagation Algorithm on a Graph:**
-
-1. **Forward pass:** compute values for all nodes, store intermediate results
-2. **Initialize gradient at output:** $\frac{\partial \mathcal{L}}{\partial \mathcal{L}} = 1$
-3. **Backward pass:**
-
-   * For each node, compute **local derivative**
-   * Multiply by **incoming gradient**
-   * Sum if multiple paths
-4. **Obtain gradients** w.r.t all parameters
-
-This is the **general recipe** for any computation graph, including deep neural networks.
-
----
-
-## 7. Key Takeaways
-
-1. A computation graph breaks complex functions into **nodes and operations**
-2. Forward pass **computes values**, backward pass **propagates gradients**
-3. Each node uses **local derivatives only**
-4. Gradients from multiple paths **sum together**
-5. This method **scales efficiently** to very deep networks

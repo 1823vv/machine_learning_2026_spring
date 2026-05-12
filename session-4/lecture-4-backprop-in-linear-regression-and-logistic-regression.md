@@ -45,7 +45,7 @@ For one sample, the forward pass is a chain of operations:
 
 
 $$
-x \longrightarrow \boxed{\times W}  \longrightarrow \boxed{+b} \longrightarrow z\longrightarrow \hat{y} \longrightarrow \boxed{(\cdot - y)^2} \longrightarrow \ell
+x \longrightarrow \boxed{\times W}  \longrightarrow \boxed{+b} \longrightarrow z\longrightarrow \hat{y} \longrightarrow \boxed{- y}  \longrightarrow  \boxed{(\cdot)^2} \longrightarrow \ell
 $$
 
 
@@ -56,7 +56,7 @@ Where $z^{(i)} = x^{(i)} W$ is the linear projection and $\ell^{(i)} = (\hat{y}^
 We need $\frac{\partial \mathcal{L}}{\partial W}$ and $\frac{\partial \mathcal{L}}{\partial b}$. By the chain rule:
 
 $$
-\frac{\partial \ell^{(i)}}{\partial W} = \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} \cdot \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} \cdot \frac{\partial z^{(i)}}{\partial W}
+\frac{\partial \ell^{(i)}}{\partial W} = \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} \, \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} \, \frac{\partial z^{(i)}}{\partial W}
 $$
 
 **Step 1: Gradient of loss w.r.t. prediction**
@@ -172,7 +172,7 @@ $$
 **Step 3: Combine the first two terms**
 
 $$
-\frac{\partial \ell^{(i)}}{\partial z^{(i)}} = \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} \cdot \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} = -\left( \frac{y^{(i)}}{\hat{y}^{(i)}} - \frac{1 - y^{(i)}}{1 - \hat{y}^{(i)}} \right) \cdot \hat{y}^{(i)}(1 - \hat{y}^{(i)}) = \hat{y}^{(i)} - y^{(i)}
+\frac{\partial \ell^{(i)}}{\partial z^{(i)}} = \frac{\partial \ell^{(i)}}{\partial \hat{y}^{(i)}} \, \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} = -\left( \frac{y^{(i)}}{\hat{y}^{(i)}} - \frac{1 - y^{(i)}}{1 - \hat{y}^{(i)}} \right) \hat{y}^{(i)}(1 - \hat{y}^{(i)}) = \hat{y}^{(i)} - y^{(i)}
 $$
 
 **Remark:** The complex fractional terms **collapse beautifully** into the simple error signal $(\hat{y}^{(i)} - y^{(i)})$. This is why Sigmoid + BCE is such an effective pairing.

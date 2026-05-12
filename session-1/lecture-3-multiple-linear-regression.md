@@ -75,7 +75,7 @@ $$
 The prediction is:
 
 $$
-\hat{y}^{(i)} = x^{(i)} W + b
+\boxed{\hat{y}^{(i)} = x^{(i)} W + b}
 $$
 
 ---

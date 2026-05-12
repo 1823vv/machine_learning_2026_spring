@@ -127,7 +127,7 @@ $$
 The output now has a clear meaning:
 
 $$
-\hat{y} = \text{probability that } y = 1
+\boxed{\hat{y} = \text{probability that } y = 1}
 $$
 
 This gives:
@@ -218,5 +218,5 @@ $$
 **Step 5:** Recognize the sigmoid
 
 $$
-\frac{\partial \sigma}{\partial z} = \sigma(z) \cdot \left(1 - \frac{1}{1 + e^{-z}}\right) = \sigma(z)(1 - \sigma(z))
+\boxed{\frac{\partial \sigma}{\partial z} = \sigma(z) \cdot \left(1 - \frac{1}{1 + e^{-z}}\right) = \sigma(z)(1 - \sigma(z))}
 $$

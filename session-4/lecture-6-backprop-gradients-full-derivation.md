@@ -37,9 +37,9 @@ For the three common output configurations this collapses to:
 
 | Task | Output $a^{(L)}$ | Loss | Simplified $\delta^{(L)}$ |
 | :--- | :--- | :--- | :--- |
-| Regression | $z^{(L)}$ | $(a^{(L)}-y)^2$ | $2(a^{(L)} - y)$ |
-| Binary classification | $\sigma(z^{(L)})$ | $-\big(y\log a^{(L)} + (1-y)\log(1-a^{(L)})\big)$ | $a^{(L)} - y$ |
-| Multiclass classification | $\text{softmax}(z^{(L)})$ | $-\sum_k y_k \log a^{(L)}_k$ | $a^{(L)} - y$ |
+| Regression | $z^{(L)}$ | $(\hat{y}-y)^2$ | $2(\hat{y} - y)$ |
+| Binary classification | $\sigma(z^{(L)})$ | $-\big(y\log \hat{y} + (1-y)\log(1-\hat{y})\big)$ | $\hat{y} - y$ |
+| Multiclass classification | $\text{softmax}(z^{(L)})$ | $-\sum_k y_k \log \hat{y}_k$ | $\hat{y} - y$ |
 
 **Hidden layers (recursive, $l = L-1, \dots, 1$):**
 
@@ -100,7 +100,7 @@ A 2-layer network for digit recognition (input $x \in \mathbb{R}^{1 \times 784}$
 $$
 \begin{gathered}
 z^{(1)} = x W^{(1)} + b^{(1)}, \quad a^{(1)} = \text{ReLU}(z^{(1)}) \\
-z^{(2)} = a^{(1)} W^{(2)} + b^{(2)}, \quad \hat{y} = \text{softmax}(z^{(2)})
+z^{(2)} = a^{(1)} W^{(2)} + b^{(2)}, \quad \hat{y} = a^{(2)} = \text{softmax}(z^{(2)})
 \end{gathered}
 $$
 

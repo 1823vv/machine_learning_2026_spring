@@ -93,11 +93,11 @@ Where:
 
 | Task | Output activation | Loss | Output error $\delta^{(L)}$ |
 | :--- | :--- | :--- | :--- |
-| Regression | Linear (none) | MSE: $\mathcal{L} = (a^{(L)} - y)^2$ | $2(a^{(L)} - y)$ |
-| Binary classification | Sigmoid | BCE: $\mathcal{L} = -\big(y \log a^{(L)} + (1-y)\log(1-a^{(L)})\big)$ | $a^{(L)} - y$ |
-| Multiclass classification | Softmax | CE: $\mathcal{L} = -\sum_{k=1}^{K} y_k \log a^{(L)}_k$ | $a^{(L)} - y$ |
+| Regression | Linear (none) | MSE: $\mathcal{L} = (\hat{y} - y)^2$ | $2(\hat{y} - y)$ |
+| Binary classification | Sigmoid | BCE: $\mathcal{L} = -\big(y \log \hat{y} + (1-y)\log(1-\hat{y})\big)$ | $\hat{y} - y$ |
+| Multiclass classification | Softmax | CE: $\mathcal{L} = -\sum_{k=1}^{K} y_k \log \hat{y}_k$ | $\hat{y} - y$ |
 
-**Remark:** For both classification tasks the output error simplifies exactly to **prediction minus target**. The standard MSE regression error is $2(a^{(L)} - y)$ — the factor $2$ comes from differentiating $(a^{(L)} - y)^2$. The Softmax + Cross-Entropy case is particularly elegant: the Jacobian of softmax and the gradient of CE algebraically cancel so that $\delta^{(L)} = a^{(L)} - y$ element-wise.
+**Remark:** For both classification tasks the output error simplifies exactly to **prediction minus target**. The standard MSE regression error is $2(\hat{y} - y)$ — the factor $2$ comes from differentiating $(\hat{y} - y)^2$. The Softmax + Cross-Entropy case is particularly elegant: the Jacobian of softmax and the gradient of CE algebraically cancel so that $\delta^{(L)} = \hat{y} - y$ element-wise.
 
 ---
 
@@ -161,11 +161,11 @@ A concrete illustration: input $x \in \mathbb{R}^{1 \times 784}$ (flattened 28×
 $$
 \begin{gathered}
 z^{(1)} = x W^{(1)} + b^{(1)}, \quad a^{(1)} = \text{ReLU}(z^{(1)}) \\
-z^{(2)} = a^{(1)} W^{(2)} + b^{(2)}, \quad \hat{y} = \text{softmax}(z^{(2)})
+z^{(2)} = a^{(1)} W^{(2)} + b^{(2)}, \quad \hat{y} = a^{(2)} = \text{softmax}(z^{(2)})
 \end{gathered}
 $$
 
-Here $W^{(2)} \in \mathbb{R}^{n_1 \times 10}$ and $\hat{y} \in \mathbb{R}^{1 \times 10}$ is the probability vector over digits.
+Here $W^{(2)} \in \mathbb{R}^{n_1 \times 10}$ and $\hat{y} = a^{(2)} \in \mathbb{R}^{1 \times 10}$ is the probability vector over digits.
 
 ### 8.2 Loss
 
