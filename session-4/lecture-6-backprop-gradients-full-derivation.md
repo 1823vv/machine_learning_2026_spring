@@ -35,11 +35,11 @@ $$
 
 For the three common output configurations this collapses to:
 
-| Task | Output $a^{(L)}$ (which is $\hat{y}$) | Loss | Simplified $\delta^{(L)}$ |
+| Task | Output $a^{(L)}$ (which is the prediction $\hat{y}$) | Per-Sample Loss | Simplified $\delta^{(L)}$ |
 | :--- | :--- | :--- | :--- |
 | Regression | $z^{(L)}$ | $(\hat{y}-y)^2$ | $2(\hat{y} - y)$ |
 | Binary classification | $\sigma(z^{(L)})$ | $-\big(y\log \hat{y} + (1-y)\log(1-\hat{y})\big)$ | $\hat{y} - y$ |
-| Multiclass classification | $\text{softmax}(z^{(L)})$ | $-\sum_k y_k \log \hat{y}_k$ | $\hat{y} - y$ |
+| Multiclass classification | $\text{softmax}(z^{(L)})$ |  $-\sum_{k=1}^{K} y_k \log \hat y_k$ | $\hat{y} - y$ |
 
 **Hidden layers (recursive, $l = L-1, \dots, 1$):**
 
