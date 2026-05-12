@@ -35,7 +35,7 @@ $$
 
 For the three common output configurations this collapses to:
 
-| Task | Output $a^{(L)}$ | Loss | Simplified $\delta^{(L)}$ |
+| Task | Output $a^{(L)}$ (which is $\hat{y}$) | Loss | Simplified $\delta^{(L)}$ |
 | :--- | :--- | :--- | :--- |
 | Regression | $z^{(L)}$ | $(\hat{y}-y)^2$ | $2(\hat{y} - y)$ |
 | Binary classification | $\sigma(z^{(L)})$ | $-\big(y\log \hat{y} + (1-y)\log(1-\hat{y})\big)$ | $\hat{y} - y$ |
@@ -88,32 +88,9 @@ $$
 \boxed{\frac{\partial \mathcal{L}}{\partial b^{(l)}} = \frac{1}{m} \sum_{i=1}^{m} \Delta^{(l)}_{i,:}}
 $$
 
-
 ---
 
-## 5. Example: MNIST Network
-
-A 2-layer network for digit recognition (input $x \in \mathbb{R}^{1 \times 784}$, hidden ReLU, 10 outputs):
-
-**Forward:**
-
-$$
-\begin{gathered}
-z^{(1)} = x W^{(1)} + b^{(1)}, \quad a^{(1)} = \text{ReLU}(z^{(1)}) \\
-z^{(2)} = a^{(1)} W^{(2)} + b^{(2)}, \quad \hat{y} = a^{(2)} = \text{softmax}(z^{(2)})
-\end{gathered}
-$$
-
-**Backward:**
-
-1. $\delta^{(2)} = \hat{y} - y$
-2. $\displaystyle \frac{\partial \mathcal{L}}{\partial W^{(2)}} = (a^{(1)})^T \delta^{(2)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(2)}} = \delta^{(2)}$
-3. $\delta^{(1)} = \delta^{(2)} (W^{(2)})^T \odot \mathbb{1}_{z^{(1)} > 0}$
-4. $\displaystyle \frac{\partial \mathcal{L}}{\partial W^{(1)}} = x^T \delta^{(1)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(1)}} = \delta^{(1)}$
-
----
-
-## 6. Full Algorithm
+## 5. Full Algorithm
 
 1. **Forward pass**: compute and store $z^{(l)}, a^{(l)}$ for all layers
 2. **Output error**: $\delta^{(L)} = \frac{\partial \mathcal{L}}{\partial a^{(L)}} \odot (f^{(L)})'(z^{(L)})$
@@ -123,9 +100,8 @@ $$
 
 ---
 
-## 7. Intuition
+## 6. Intuition
 
 * Each layer receives **an error signal proportional to its contribution to the final loss**
 * Gradients combine **input transpose × error**
 * Backpropagation is **just an efficient way to apply the chain rule through all layers**
-* Vectorization ensures **fast computation for batches**

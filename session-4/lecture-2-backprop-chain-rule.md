@@ -91,23 +91,13 @@ Each node in the computation graph only needs **local derivatives**:
 * Linear layer: $z = a W + b$
 
 $$
-\frac{\partial z}{\partial W} = a^T, \quad \frac{\partial z}{\partial a} = W^T
+\frac{\partial z}{\partial W} = a^T, \quad \frac{\partial z}{\partial a} = W^T, \quad \frac{\partial z}{\partial b} = 1
 $$
 
-* Activation layer: $a = g(z)$
+* Activation layer: $a = f(z)$
 
 $$
-\frac{\partial a}{\partial z} = g'(z)
+\frac{\partial a}{\partial z} = f'(z)
 $$
 
 By combining local derivatives using the chain rule, we get the **full gradient**.
-
----
-
-## 6. Key Takeaways
-
-1. **Backpropagation = repeated application of the chain rule**
-2. **Gradients flow backward** through layers
-3. **Each node computes local derivatives**, contributing to upstream gradients
-4. For nodes with multiple outgoing paths, **sum the contributions**
-5. This decomposition allows **efficient computation** in deep networks

@@ -81,10 +81,10 @@ $$
 \frac{\partial z}{\partial x} = n x^{n-1}
 $$
 
-* Activation: $a = g(z)$
+* Activation: $a = f(z)$
 
 $$
-\frac{\partial a}{\partial z} = g'(z)
+\frac{\partial a}{\partial z} = f'(z)
 $$
 
 **Key idea:** each node only needs **its local derivative** to propagate gradients.
