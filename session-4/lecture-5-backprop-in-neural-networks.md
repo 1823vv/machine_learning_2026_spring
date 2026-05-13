@@ -152,7 +152,7 @@ These derivatives are applied element-wise to compute $\delta^{(l)}$.
 
 ---
 
-## 8. Example: Neural Network for MNIST Digit Recognition
+## 8. Example: Neural Network for MNIST Digit Recognition (Per Sample)
 
 A concrete illustration: input $x \in \mathbb{R}^{1 \times 784}$ (flattened 28×28 image), hidden layer with ReLU, and 10 output neurons for digits 0–9.
 
@@ -209,21 +209,116 @@ $$
 
 ---
 
-## 9. Vectorized Backpropagation
+## 9. Vectorized Backpropagation (Full Batch)
 
-For a batch of $m$ samples with inputs $X \in \mathbb{R}^{m \times d}$ (stacked as rows):
+
+For the full dataset with inputs $X \in \mathbb{R}^{n \times d}$ (stacked as rows):
 
 $$
 \underbrace{\Delta^{(l)}}_{\text{batch error signals}} = \underbrace{\frac{\partial \mathcal{L}}{\partial Z^{(l)}}}_{\text{gradient w.r.t. pre-activations}} \quad \text{(matrix of errors for all samples)}
 $$
 
+The loss is defined as the mean over all $n$ samples, so the factor $\frac{1}{n}$ is introduced during output-layer gradient computation:
+
 $$
-\underbrace{\frac{\partial \mathcal{L}}{\partial W^{(l)}}}_{\text{weight gradient}} = \underbrace{\frac{1}{m}}_{\text{batch averaging}} \underbrace{(A^{(l-1)})^T}_{\text{input transpose}} \underbrace{\Delta^{(l)}}_{\text{error signals}}
+\underbrace{\frac{\partial \mathcal{L}}{\partial W^{(l)}}}_{\text{weight gradient}} = \underbrace{(A^{(l-1)})^T}_{\text{input transpose}} \underbrace{\Delta^{(l)}}_{\text{error signals}}
 $$
 
 $$
-\underbrace{\frac{\partial \mathcal{L}}{\partial b^{(l)}}}_{\text{bias gradient}} = \underbrace{\frac{1}{m}}_{\text{batch averaging}} \sum_{i=1}^{m} \underbrace{\Delta^{(l)}_{i,:}}_{\text{error for sample } i}
+\underbrace{\frac{\partial \mathcal{L}}{\partial b^{(l)}}}_{\text{bias gradient}} = \sum_{i=1}^{n} \underbrace{\Delta^{(l)}_{i,:}}_{\text{error for sample } i}
 $$
 
-Vectorization ensures **efficient computation** on GPUs for deep networks.
+**Remark:** Because the loss is defined as the mean over all $n$ samples, the factor $\frac{1}{n}$ is already absorbed in $\Delta^{(l)}$. Therefore, subsequent weight and bias gradients should not divide by $n$ again.
+
+### 9.1 Output Error Signals (Full Batch)
+
+| Task | Output activation | Loss | Mean error signal $\Delta^{(L)}$ |
+| :--- | :--- | :--- | :--- |
+| Regression | Linear (none) | MSE: $\mathcal{L} = \frac{1}{n}\sum_{i=1}^{n}(\hat{y}_i - y_i)^2$ | $\frac{2}{n}(\hat{Y} - Y)$ |
+| Binary classification | Sigmoid | BCE: $\mathcal{L} = -\frac{1}{n}\sum_{i=1}^{n}\big(y_i\log \hat{y}_i + (1-y_i)\log(1-\hat{y}_i)\big)$ | $\frac{1}{n}(\hat{Y} - Y)$ |
+| Multiclass classification | Softmax | CE: $\mathcal{L} = -\frac{1}{n}\sum_{i=1}^{n}\sum_{k=1}^{K} y_{i,k} \log \hat{y}_{i,k}$ | $\frac{1}{n}(\hat{Y} - Y)$ |
+
+**Remark:** In code, this $\frac{1}{n}$ factor is applied at the very beginning (loss gradient computation), ensuring all subsequent gradients are automatically averaged.
+
+---
+
+## 10. Example: Neural Network for MNIST Digit Recognition (Full Batch Gradient Descent)
+
+A concrete illustration:
+
+* Input: $X \in \mathbb{R}^{n \times 784}$
+* Hidden Layer 1: 64 neurons + ReLU
+* Hidden Layer 2: 32 neurons + ReLU
+* Output Layer: 10 neurons + Softmax
+
+### Architecture
+
+$$
+784 \rightarrow 64 \rightarrow 32 \rightarrow 10
+$$
+
+#### Forward Pass
+
+**Layer 1 (Input $\rightarrow$ Hidden 1):**
+$$
+Z^{(1)} = XW^{(1)} + b^{(1)}, \quad A^{(1)} = \text{ReLU}(Z^{(1)})
+$$
+Where: $W^{(1)} \in \mathbb{R}^{784 \times 64}$, $b^{(1)} \in \mathbb{R}^{1 \times 64}$
+
+**Layer 2 (Hidden 1 $\rightarrow$ Hidden 2):**
+$$
+Z^{(2)} = A^{(1)}W^{(2)} + b^{(2)}, \quad A^{(2)} = \text{ReLU}(Z^{(2)})
+$$
+Where: $W^{(2)} \in \mathbb{R}^{64 \times 32}$, $b^{(2)} \in \mathbb{R}^{1 \times 32}$
+
+**Layer 3 (Hidden 2 $\rightarrow$ Output):**
+$$
+Z^{(3)} = A^{(2)}W^{(3)} + b^{(3)}, \quad \hat{Y} = \text{softmax}(Z^{(3)})
+$$
+Where: $W^{(3)} \in \mathbb{R}^{32 \times 10}$, $b^{(3)} \in \mathbb{R}^{1 \times 10}$
+
+#### Loss
+
+Cross-entropy over batch:
+$$
+\mathcal{L} = -\frac{1}{n}\sum_{i=1}^{n}\sum_{k=1}^{10} Y_{i,k}\log(\hat{Y}_{i,k})
+$$
+
+#### Backward Pass
+
+**Step 1: Output Layer Error**
+$$
+\Delta^{(3)} = \frac{1}{n}(\hat{Y} - Y)
+$$
+
+**Step 2: Output Layer Gradients**
+$$
+\frac{\partial \mathcal{L}}{\partial W^{(3)}} = (A^{(2)})^T \Delta^{(3)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(3)}} = \sum_{i=1}^{n}\Delta^{(3)}_{i,:}
+$$
+
+**Step 3: Hidden Layer 2 Error**
+$$
+\Delta^{(2)} = \left(\Delta^{(3)}(W^{(3)})^T\right) \odot \mathbb{1}_{Z^{(2)} > 0}
+$$
+
+**Step 4: Hidden Layer 2 Gradients**
+$$
+\frac{\partial \mathcal{L}}{\partial W^{(2)}} = (A^{(1)})^T \Delta^{(2)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(2)}} = \sum_{i=1}^{n}\Delta^{(2)}_{i,:}
+$$
+
+**Step 5: Hidden Layer 1 Error**
+$$
+\Delta^{(1)} = \left(\Delta^{(2)}(W^{(2)})^T\right) \odot \mathbb{1}_{Z^{(1)} > 0}
+$$
+
+**Step 6: Hidden Layer 1 Gradients**
+$$
+\frac{\partial \mathcal{L}}{\partial W^{(1)}} = X^T \Delta^{(1)}, \quad \frac{\partial \mathcal{L}}{\partial b^{(1)}} = \sum_{i=1}^{n}\Delta^{(1)}_{i,:}
+$$
+
+**Step 7: Parameter Update**
+For each layer $l \in \{1,2,3\}$:
+$$
+W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial b^{(l)}}
+$$
 
