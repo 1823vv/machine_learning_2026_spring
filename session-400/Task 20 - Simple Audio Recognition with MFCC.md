@@ -1,5 +1,11 @@
 # Task 20: Simple Audio Recognition with MFCC
 
+
+> [!INFO]
+> **Task for students:**
+> - Here we are using Random Forest classifier model.
+> - You should explore other models (logistic regression, simple neural networks with different settings of depth/width/activation functions etc.)
+
 **Environment Note**: This notebook requires the `librosa` library. Ensure your environment is prepared (e.g., `pip install librosa`) before running.
 
 **Goal**: Implement a miniature speech recognition system for 10 keyword classes.
