@@ -1,5 +1,7 @@
 # Generalization
 
+![](./img/generalization.jpg)
+
 ---
 
 ## 1. Goal

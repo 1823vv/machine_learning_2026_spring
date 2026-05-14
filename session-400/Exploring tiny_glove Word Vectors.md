@@ -3,10 +3,12 @@
 
 > [!INFO]
 > **Task for students**
-> - Go to 
+> - **Task 1**. Go to 
 > - https://nlp.stanford.edu/projects/glove/
 > - for downloading more glove embeddings
 > - and then use the same code and see how things change or not change.
+> - **Task 2**. Then go for word2vec embedding as well : 
+> - https://www.kaggle.com/datasets/sugataghosh/google-word2vec
 
 
 ---
