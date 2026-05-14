@@ -238,6 +238,7 @@ def __init__(self, input_units, output_units, learning_rate=0.1):
 
 **Vectorized operations for batch size $m$:**
 $$\frac{\partial \mathcal{L}}{\partial W^{(l)}} = \frac{1}{m} (A^{(l-1)})^T \Delta^{(l)}$$
+
 $$\frac{\partial \mathcal{L}}{\partial b^{(l)}} = \frac{1}{m} \sum_{i=1}^{m} \Delta^{(l)}_{i,:}$$
 
 ### 6.2 Code Implementation
@@ -264,7 +265,9 @@ grad_biases = np.sum(grad_output, axis=0)         # Sum over batch dimension
 
 **Mathematical model:**
 $$\hat{y} = xW + b$$
+
 $$\mathcal{L} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)})^2$$
+
 $$\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n} X^T (\hat{Y} - Y)$$
 
 **How it would appear in code:**
@@ -282,7 +285,9 @@ def mse_grad(predictions, targets):
 
 **Mathematical model:**
 $$\hat{y} = \sigma(xW + b)$$
+
 $$\mathcal{L} = -\frac{1}{n} \sum_{i=1}^{n} [y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)}) \log(1-\hat{y}^{(i)})]$$
+
 $$\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} X^T (\hat{Y} - Y)$$
 
 **Current code handles multi-class version:**
