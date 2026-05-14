@@ -4,6 +4,10 @@ Session 4, Session 5 and Session 7 form a miniseries of NN from scratch.
 
 ## Goal of this session
 
+![](./img/nnfromscratcharchitecture.jpg)
+![](./img/nnfromscratcharchitecture2.jpg)
+
+
 In this session you implement a **fully working neural network training loop** from scratch using NumPy:
 
 - A minimal layer system (`Layer`, `Dense`, `ReLU`)

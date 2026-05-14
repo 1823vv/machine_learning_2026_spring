@@ -2,6 +2,11 @@
 
 This document maps every key mathematical concept from the backpropagation lectures to its concrete implementation in `code-my_nn.py`. Each section shows the theory, the code, and the connection between them.
 
+
+![](./img/nnfromscratcharchitecture.jpg)
+![](./img/nnfromscratcharchitecture2.jpg)
+
+
 ---
 
 ## 1. Forward Pass: From Math to Code

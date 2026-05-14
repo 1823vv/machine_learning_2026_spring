@@ -1,5 +1,14 @@
 # Exploring tiny_glove Word Vectors
 
+
+> [!INFO]
+> **Task for students**
+> - Go to 
+> - https://nlp.stanford.edu/projects/glove/
+> - for downloading more glove embeddings
+> - and then use the same code and see how things change or not change.
+
+
 ---
 
 # Step 1: Import Libraries
