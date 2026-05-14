@@ -75,3 +75,4 @@ config.yml
 /finetuned_snake/
 **/finetuned_snake/**
 BagOfQuestions*.md
+BagOfQuestions*ans.md

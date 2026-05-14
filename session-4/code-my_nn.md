@@ -13,7 +13,7 @@ In this session you implement a **fully working neural network training loop** f
 
 This file is the **baseline** for the next two sessions:
 
-- Session 5 will refactor *“how parameters are updated”* into optimizer classes (GD / SGD / Adam)
+- Session 5 will refactor *“how parameters are updated”* into optimizer classes (GD / SGD / Momentum / Adam)
 - Session 7 will add regularization (Dropout, L1/L2)
 
 In Session 5 and Session 7, you will also see a more explicit, PyTorch-like separation:

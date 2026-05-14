@@ -1,6 +1,6 @@
 # Design and Implementation of a Minimal Neural Network for MNIST
 
-This document explains the **design philosophy**, **network structure**, and **backpropagation implementation** of the neural network defined in `my_nn.py`. The goal of the code is to demonstrate how a neural network can be implemented **from scratch using only NumPy**, without relying on frameworks such as PyTorch or TensorFlow.
+This document explains the **design philosophy**, **network structure**, and **backpropagation implementation** of the neural network defined in `code-my_nn.py`. The goal of the code is to demonstrate how a neural network can be implemented **from scratch using only NumPy**, without relying on frameworks such as PyTorch or TensorFlow.
 
 The design prioritizes:
 

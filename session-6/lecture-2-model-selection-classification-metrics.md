@@ -30,13 +30,7 @@ Example:
 
 ---
 
-## 3. Beyond Accuracy
-
-We need metrics that focus on the **positive class**.
-
----
-
-## 4. Precision
+## 3. Precision
 
 $$
 \text{Precision} = \frac{TP}{TP + FP}
@@ -52,7 +46,7 @@ Spam detection → precision matters
 
 ---
 
-## 5. Recall
+## 4. Recall
 
 $$
 \text{Recall} = \frac{TP}{TP + FN}
@@ -68,7 +62,7 @@ Disease detection → recall matters
 
 ---
 
-## 6. F1 Score (Optional)
+## 5. F1 Score 
 
 $$
 F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
