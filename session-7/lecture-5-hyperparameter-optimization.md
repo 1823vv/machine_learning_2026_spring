@@ -1,7 +1,9 @@
 # Hyperparameter Optimization
 
 
-![](./img/w6.jpg)
+![](./img/hy.jpg)
+
+
 
 
 ---
@@ -29,6 +31,9 @@ $$
 ---
 
 ### Hyperparameters
+
+![](./img/w6.jpg)
+
 
 Hyperparameters are not learned from data.
 

@@ -1,6 +1,6 @@
 # Neural Networks — Architecture and Notation
 
-![](./img/d2.jpg)
+![](./img/3b1b-1.gif)
 
 
 ---

@@ -1,6 +1,7 @@
 # Deep Dive into Softmax
 
-![](./img/sm2.jpg)
+![](./img/smideasgreenchalkboard.png)
+
 
 ---
 
@@ -45,6 +46,9 @@ These are not probabilities because:
 ---
 
 ## 2. Softmax Formula
+
+![](./img/sm2.jpg)
+
 
 Softmax converts logits into probabilities:
 

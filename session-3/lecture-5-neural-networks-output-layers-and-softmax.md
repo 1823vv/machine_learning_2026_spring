@@ -1,6 +1,6 @@
 # Neural Networks — Output Layers and Softmax
 
-![](./img/d2.jpg)
+![](./img/outputactivationfunction.jpg)
 
 ---
 

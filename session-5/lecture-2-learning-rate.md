@@ -81,6 +81,8 @@ Typical ranges depend on model and optimizer:
 
 ## 5. Learning Rate Schedules
 
+![](./img/ds.jpg)
+
 Rarely do we keep $\eta$ constant. **Schedules** adapt it over training to match optimization needs.
 
 ### Early Training

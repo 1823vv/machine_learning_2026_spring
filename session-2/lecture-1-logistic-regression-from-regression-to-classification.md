@@ -1,6 +1,6 @@
 # From Regression to Classification
 
-![](./img/lg2.jpg)
+![](./img/fromlrtolr.jpg)
 
 ---
 
