@@ -12,6 +12,7 @@
 1. Conceive a simple Machine Learning project (no need for complex models).
 2. Upload your code to GitHub.
 3. Use GitHub CI/CD to automatically train your model and upload it to Hugging Face Hub.
+4. Through the whole process, you don't, on your side, do anything with your huggingface model repo after creating the model repo. Things should be done automatically by GitHub CI/CD Actions.
 
 
 ## Inspiration
@@ -27,7 +28,7 @@
 
 You can use any YAML workflow template you like, as long as your GitHub repository is connected to Hugging Face and the CI/CD pipeline successfully uploads your model. The example might be a simple starting point that might work.
 
-Save this as `.github/workflows/train-and-upload.yml`:
+Save this as `.github/workflows/train-and-upload.yml` (JUST AN EXAMPLE HERE; DON'T USE IT DIRECTLY):
 
 ```yaml
 name: Train and Upload to Hugging Face
