@@ -1,6 +1,4 @@
-# Bag of Questions — Session 2 — ac
-
-## Question: Decision Boundary Story
+## Question: Decision Boundary
 
 A logistic regression classifier with two features uses:
 
@@ -15,13 +13,6 @@ and predicts class 1 when $\hat{y}>0.5$.
 3. Rewrite the boundary in the form $x_2 = ax_1 + c$, assuming $w_2 \neq 0$.
 4. What is special about the decision boundary of logistic regression with two input features?
 5. Does applying the nonlinear sigmoid make the decision boundary nonlinear? Explain.
-6. Draw a 2-D feature space with:
-   - $x_1$ on the horizontal axis,
-   - $x_2$ on the vertical axis,
-   - a straight decision boundary,
-   - one side labeled class 0 and the other side labeled class 1,
-   - a few sample points on both sides.
-7. Add arrows or color shading to your drawing to show where $z>0$, $z=0$, and $z<0$.
 
 ## Question: Numerical Boundary
 

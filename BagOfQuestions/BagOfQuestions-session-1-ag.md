@@ -7,17 +7,5 @@ A dataset shows a curved relationship between $x$ and $y$, so a straight line un
 3. For degree $k$, write the general polynomial regression model.
 4. Define the feature transformation $\phi(x)$ for degree $k$.
 5. Explain in one sentence how polynomial regression becomes multiple linear regression after feature transformation.
-6. Draw a diagram:
-
-   ```text
-   x -> [x, x^2, x^3, ..., x^k] -> linear regression
-   ```
-
-7. Explain why the model can be nonlinear in $x$ but still linear in parameters.
-8. Draw three curves on the same dataset: degree 1 underfitting, medium degree good fit, very high degree overfitting.
-
-## Question: Model Complexity
-
-1. What happens to flexibility as polynomial degree increases?
-2. Why can a very high-degree polynomial fit noise?
-3. Which later Session 6/7 idea helps choose model complexity?
+6. Explain why the model can be nonlinear in $x$ but still linear in parameters.
+7. Draw three curves on the same dataset: degree 1 underfitting, medium degree good fit, very high degree overfitting.

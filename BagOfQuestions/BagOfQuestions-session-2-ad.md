@@ -9,7 +9,7 @@ For binary logistic regression, the model outputs a probability $\hat{y}^{(i)} \
 3. If $y=1$, simplify the one-example BCE loss.
 4. If $y=0$, simplify the one-example BCE loss.
 5. Explain why BCE gives a very large penalty when the model is confidently wrong.
-6. Draw two curves on the same idea diagram:
+6. Draw two curves on the same diagram (an idea diagram):
    - loss when $y=1$ as a function of $\hat{y}$,
    - loss when $y=0$ as a function of $\hat{y}$.
 7. On your drawing, mark where the loss is small and where the loss is large.

@@ -1,4 +1,4 @@
-## Question: Activation Functions Are Not Optional
+## Question: Activation Functions 
 
 A neural network repeatedly applies linear transformations and activation functions.
 

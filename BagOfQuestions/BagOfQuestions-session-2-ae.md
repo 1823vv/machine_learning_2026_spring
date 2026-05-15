@@ -1,6 +1,4 @@
-# Bag of Questions — Session 2 — ae
-
-## Question: One Gradient Descent Step by Hand
+## Question: One Gradient Descent Step by Hand in Logistic Regression
 
 Consider one training sample:
 
@@ -32,12 +30,3 @@ $$
 5. Compute the gradient with respect to $b$.
 6. Update $W$ and $b$ using the leftarrow notation.
 7. Explain in words why the first weight increases and the second weight becomes less negative after this update.
-
-## Question: Shape Check
-
-For a batch $X\in\mathbb{R}^{n\times d}$, $W\in\mathbb{R}^{d\times 1}$, $Y\in\mathbb{R}^{n\times 1}$:
-
-1. What is the shape of $Z=XW+b$?
-2. What is the shape of $\hat{Y}=\sigma(Z)$?
-3. What is the shape of $X^{\mathsf{T}}(\hat{Y}-Y)$?
-4. Why does this match the shape of $W$?

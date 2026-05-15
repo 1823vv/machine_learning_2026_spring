@@ -1,6 +1,9 @@
-## Question: Debug a Linear Regression Implementation
+## Question: Debug Linear Regression Implementation
 
-A student writes this code in the `fit` function:
+TODO: improve the whole this file.
+
+TODO: make the background of code from scratch a bit more in detail. 
+We are working on `class MyOwnLinearRegression`. A student writes this code in the `fit` function:
 
 ```python
 y_predicted = X * self.weights + self.bias
@@ -12,18 +15,12 @@ self.weights = self.weights + self.lr * dw
 self.bias = self.bias + self.lr * db
 ```
 
-1. What is wrong with using `X * self.weights` for multiple linear regression?
-2. What should the prediction line be?
+1. What is wrong with using `X * self.weights` for multiple linear regression? What should the prediction line be after correction?
 3. What is wrong with using `X.T * (y_predicted - y)` for `dw`?
 4. What should the correct `dw` line be?
-5. What is wrong with updating with `+ self.lr * dw`?
-6. Rewrite the corrected code block.
-7. Explain why these bugs are shape bugs, optimization-direction bugs, or both.
-
-## Question: Shape Debugging
+5. What is wrong with updating with `+ self.lr * dw`? how to fix?
 
 Assume $X\in\mathbb{R}^{50\times 4}$ and `self.weights.shape == (4,)`.
 
-1. What shape should `y_predicted` have?
-2. What shape should `dw` have?
-3. Why is `np.dot(X.T, (y_predicted - y))` the right shape?
+6. What shape should `y_predicted` have?
+7. What shape should `dw` have?

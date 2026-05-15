@@ -1,31 +1,30 @@
-## Question: Linear Regression from Scratch — `fit` Function
+## Question: Linear Regression from Scratch 
 
-You are implementing linear regression from scratch with NumPy.
-
-The class has:
+We are implementing linear regression `class MyOwnLinearRegression` from scratch with NumPy. TODO BY AI: Make this look like the ## Question Fill the the `____YOUR_CODE_HERE__N_____` in BagOfQuestions-session-4.md .
 
 ```python
-self.lr
-self.n_iters
-self.weights
-self.bias
+class MyOwnLinearRegression:
+    def __init__(self, learning_rate=0.0001, n_iters=30000):
+        self.lr = learning_rate
+        self.n_iters = n_iters
+        self.weights = None
+        self.bias = None
+
+    def fit(self, X, y):
+        n_samples, n_features = X.shape
+        self.weights = np.zeros(n_features)
+        self.bias = 0
+
+        for _ in range(self.n_iters):
+            y_predicted = np.dot(X, self.weights) + self.bias
+
+            dw = (2 / n_samples) * np.dot(X.T, (y_predicted - y))
+            db = (2 / n_samples) * np.sum(y_predicted - y)
+            self.weights  = self.weights - self.lr * dw
+            self.bias  = self.bias -  self.lr * db
+
+    def predict(self, X):
+        y_predicted = np.dot(X, self.weights) + self.bias
+        return y_predicted
 ```
 
-1. Write the initialization of `self.weights` and `self.bias` inside `fit(X, y)`.
-2. Write the line that computes predictions using `np.dot`.
-3. Write the formula/code for `dw`.
-4. Write the formula/code for `db`.
-5. Write the parameter update lines.
-6. Explain why `self.weights` should have shape `(n_features,)` in this implementation.
-7. Explain why `db` is a scalar.
-8. Draw the flow of the `fit` function:
-
-   ```text
-   initialize -> predict -> compute gradients -> update -> repeat
-   ```
-
-## Question: `predict` Function
-
-1. Write the `predict(X)` function for this class.
-2. Should `predict(X)` update the weights? Explain.
-3. If `X.shape == (20, 3)` and `self.weights.shape == (3,)`, what is the shape of the prediction output?

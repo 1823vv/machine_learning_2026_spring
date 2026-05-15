@@ -1,11 +1,15 @@
 ## Question: Output Layers Depend on the Task
 
+TODO BY AI: no need for table. go for a bit more math. While very good set of questions, we have too many sub-questions here.
+
 The last layer of a neural network should match the prediction task.
+
+
 
 Create a table with these columns:
 
 ```text
-Task | Output dimension | Output activation | Typical loss | Interpretation
+Task | Output dimension | Output activation | Typical loss
 ```
 
 Fill the table for:
@@ -20,7 +24,6 @@ Then answer:
 5. Why is sigmoid natural for binary classification?
 6. Why is softmax natural for multiclass classification?
 7. Why should the output layer be designed together with the loss function?
-8. Draw three mini-pipelines, one for each task type.
 
 ## Question: MNIST Output
 

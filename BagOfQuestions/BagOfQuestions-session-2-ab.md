@@ -1,5 +1,3 @@
-# Bag of Questions — Session 2 — ab
-
 ## Question: The Sigmoid Function as a Probability Gate
 
 A logistic regression model computes:

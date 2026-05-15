@@ -19,10 +19,9 @@ $$
 7. If $W=2.0$, $g=-0.5$, and $\eta=0.1$, compute the updated $W$.
 8. Explain why the sign of the gradient matters.
 
-## Question: Session 4 to Session 5 Story
 
-In Session 4, `Dense.backward()` computed gradients and updated weights immediately. In Session 5, optimizers handle updates.
+## Question: Learning Rate Intuition
 
-1. Explain why separating “gradient computation” from “parameter update” is a better design.
-2. Draw a before/after diagram comparing the Session 4 design with the Session 5 design.
-3. Which part should own gradients? Which part should own update rules?
+1. What can happen if the learning rate is too small?
+2. What can happen if the learning rate is too large?
+3. Draw three optimization paths: too slow, good, and unstable.

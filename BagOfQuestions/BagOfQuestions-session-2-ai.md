@@ -1,5 +1,3 @@
-# Bag of Questions — Session 2 — ai
-
 ## Question: Probability, Threshold, and Business Meaning
 
 A logistic regression model predicts whether a user will buy a product. The output is:
