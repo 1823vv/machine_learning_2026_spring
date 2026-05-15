@@ -338,6 +338,7 @@ Following the framework from `lecture-5-backprop-in-neural-networks.md`:
    $$
    \frac{\partial \mathcal{L}}{\partial W^{(L)}} = (A^{(L-1)})^T \Delta^{(L)}
    $$
+
    $$
    \frac{\partial \mathcal{L}}{\partial b^{(L)}} = \sum_{i=1}^{n} \Delta^{(L)}_{i,:}
    $$
@@ -351,6 +352,7 @@ Following the framework from `lecture-5-backprop-in-neural-networks.md`:
    $$
    \frac{\partial \mathcal{L}}{\partial W^{(l)}} = (A^{(l-1)})^T \Delta^{(l)}
    $$
+
    $$
    \frac{\partial \mathcal{L}}{\partial b^{(l)}} = \sum_{i=1}^{n} \Delta^{(l)}_{i,:}
    $$
@@ -386,4 +388,4 @@ class Dense(Layer):
         return grad_input
 ```
 
-Note: The $\frac{1}{n}$ factor is **not** divided again in `backward` because it's already incorporated in `grad_output = Δ^{(L)}` from `softmax_crossentropy_with_logits`.
+Note: The $\frac{1}{n}$ factor is **not** divided again in `backward` because it's already incorporated in $\text{grad\_output} = \Delta^{(L)}$ from `softmax_crossentropy_with_logits`.
