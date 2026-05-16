@@ -26,7 +26,3 @@ Your answer goes here, after the `:`:
 - `____YOUR_CODE_HERE__5____`:
 - `____YOUR_CODE_HERE__6____`:
 - `____YOUR_CODE_HERE__7____`:
-
-## Question: Explain One Training Step
-
-Explain one training step in words using this order: `X -> forward -> logits -> loss -> initial gradient -> reverse layer loop -> parameter updates`.
