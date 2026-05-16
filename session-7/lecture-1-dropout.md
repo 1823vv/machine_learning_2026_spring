@@ -4,7 +4,7 @@
 
 ## 1. Motivation: Why Regularization is Needed
 
-> One good example of NN overfitting: [Tensorflow PlayGround](https://playground.tensorflow.org/#activation=relu&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.001&noise=50&networkShape=8,8,8,8,8,8&seed=0.67177&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=true&xSquared=true&ySquared=true&cosX=false&sinX=true&cosY=false&sinY=true&collectStats=false&problem=classification&initZero=false&hideText=false&activation_hide=false&percTrainData_hide=true&batchSize_hide=true&noise_hide=false&numHiddenLayers_hide=false&problem_hide=true&dataset_hide=false)
+> One good example of NN overfitting: [TensorFlow Playground](https://playground.tensorflow.org/#activation=relu&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.001&noise=50&networkShape=8,8,8,8,8,8&seed=0.67177&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=true&xSquared=true&ySquared=true&cosX=false&sinX=true&cosY=false&sinY=true&collectStats=false&problem=classification&initZero=false&hideText=false&activation_hide=false&percTrainData_hide=true&batchSize_hide=true&noise_hide=false&numHiddenLayers_hide=false&problem_hide=true&dataset_hide=false)
 
 
 
@@ -121,7 +121,7 @@ This reduces co-adaptation and improves generalization.
 A typical layer with dropout:
 
 $$
-h = \sigma(xW + b)
+h = \sigma(x W + b)
 $$
 
 During training:

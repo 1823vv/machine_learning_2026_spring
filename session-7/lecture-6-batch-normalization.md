@@ -6,17 +6,19 @@
 
 During training of deep neural networks, the distribution of activations in intermediate layers keeps changing as parameters update.
 
-Consider a layer:
+Under the row-vector convention, one linear layer computes:
 
 $$
-z = xW + b
+z = x W + b
 $$
+
+where $x \in \mathbb{R}^{1 \times d_{in}}$, $W \in \mathbb{R}^{d_{in} \times d_{out}}$, $b \in \mathbb{R}^{1 \times d_{out}}$, and $z \in \mathbb{R}^{1 \times d_{out}}$.
 
 As training progresses:
 
-* input distribution to each layer shifts
+* input distributions to later layers shift
 * later layers must continuously adapt
-* optimization becomes unstable
+* optimization can become unstable
 
 This phenomenon motivates Batch Normalization.
 
@@ -24,29 +26,31 @@ This phenomenon motivates Batch Normalization.
 
 ## 2. Core Idea
 
-Batch Normalization standardizes intermediate activations within a mini-batch.
+Batch Normalization standardizes intermediate activations within a mini-batch, feature by feature.
 
-Given a batch:
-
-$$
-z_1, z_2, \dots, z_m
-$$
-
-Compute batch statistics:
+For a batch $Z \in \mathbb{R}^{m \times d_{out}}$, where rows are samples and columns are activation features:
 
 $$
-\mu_B = \frac{1}{m} \sum_{i=1}^{m} z_i
+Z = X W + \mathbf{1}b
+$$
+
+Compute batch statistics for each feature $j$:
+
+$$
+\mu_{B,j} = \frac{1}{m} \sum_{i=1}^{m} Z_{i,j}
 $$
 
 $$
-\sigma_B^2 = \frac{1}{m} \sum_{i=1}^{m} (z_i - \mu_B)^2
+\sigma_{B,j}^2 = \frac{1}{m} \sum_{i=1}^{m} (Z_{i,j} - \mu_{B,j})^2
 $$
 
-Normalize:
+Normalize each activation:
 
 $$
-\hat{z}_i = \frac{z_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}
+\hat{Z}_{i,j} = \frac{Z_{i,j} - \mu_{B,j}}{\sqrt{\sigma_{B,j}^2 + \epsilon}}
 $$
+
+Equivalently, $\mu_B, \sigma_B^2, \gamma, \beta \in \mathbb{R}^{1 \times d_{out}}$ are row vectors that broadcast across the $m$ samples.
 
 ---
 
@@ -60,7 +64,7 @@ After normalization, we restore representation flexibility using:
 Final output:
 
 $$
-y_i = \gamma \hat{z}_i + \beta
+Y_{i,j} = \gamma_j \hat{Z}_{i,j} + \beta_j
 $$
 
 This ensures the network can recover any necessary distribution if normalization is not optimal.
@@ -83,7 +87,7 @@ Effectively:
 
 ## 5. Placement in Neural Networks
 
-Standard structure:
+A standard structure is:
 
 $$
 \text{Linear} \rightarrow \text{BatchNorm} \rightarrow \text{Activation}
@@ -92,10 +96,10 @@ $$
 Example:
 
 $$
-xW + b \rightarrow \text{BN} \rightarrow \text{ReLU}
+x W + b \rightarrow \text{BN} \rightarrow \text{ReLU}
 $$
 
-This ensures normalization happens before non-linearity.
+This means the affine pre-activation is normalized before the nonlinearity.
 
 ---
 
@@ -103,10 +107,11 @@ This ensures normalization happens before non-linearity.
 
 During training:
 
-* statistics are computed per mini-batch
+* statistics are computed from the current mini-batch
 * each batch introduces slight randomness
+* $\gamma$ and $\beta$ are learned by gradient descent like other parameters
 
-Running estimates are maintained:
+Running estimates are also maintained for inference:
 
 $$
 \mu_{running} \leftarrow (1 - \alpha)\mu_{running} + \alpha \mu_B
@@ -116,7 +121,7 @@ $$
 \sigma^2_{running} \leftarrow (1 - \alpha)\sigma^2_{running} + \alpha \sigma_B^2
 $$
 
-These approximate global dataset statistics.
+These estimates approximate global dataset statistics.
 
 ---
 
@@ -124,8 +129,9 @@ These approximate global dataset statistics.
 
 During inference:
 
-* batch statistics are not reliable
-* use running estimates instead
+* mini-batch statistics may be noisy or unavailable
+* running estimates are used instead
+* dropout-like randomness is not introduced
 
 Normalization becomes:
 
@@ -139,7 +145,7 @@ This ensures deterministic behavior.
 
 ## 8. Effects on Optimization
 
-Batch Normalization improves training in several ways:
+Batch Normalization improves training in several ways.
 
 ### 8.1 Faster Convergence
 
@@ -161,7 +167,7 @@ Because batch statistics vary:
 
 * noise is injected during training
 * model becomes more robust
-* overfitting is reduced
+* overfitting can be reduced
 
 ---
 
@@ -177,6 +183,7 @@ Batch Normalization applies the same idea internally:
 
 * inside hidden layers
 * during training dynamics
+* separately for each activation feature
 
 Thus it can be viewed as:
 
@@ -188,11 +195,10 @@ Thus it can be viewed as:
 
 Batch Normalization:
 
-* stabilizes intermediate activations
-* improves optimization speed
-* reduces sensitivity to initialization
-* provides regularization effect
+* follows the row-vector convention $Z = X W + \mathbf{1}b$
+* normalizes each activation feature across the mini-batch
+* learns $\gamma$ and $\beta$ to preserve representation flexibility
+* uses mini-batch statistics during training and running estimates during inference
+* stabilizes intermediate activations and improves optimization speed
 
 It is a core technique for training deep neural networks efficiently.
-
-

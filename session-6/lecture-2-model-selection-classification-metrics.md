@@ -65,7 +65,7 @@ Disease detection → recall matters
 
 ---
 
-## 5. F1 Score 
+## 5. F1 Score
 
 $$
 F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}

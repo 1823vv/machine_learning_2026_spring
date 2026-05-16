@@ -97,7 +97,7 @@ $$
 import torch
 import torch.nn as nn
 
-# A simple linear layer: z = xW + b
+# A simple linear layer: z = x W + b
 model = nn.Linear(d_in, d_out)
 
 # Loss function

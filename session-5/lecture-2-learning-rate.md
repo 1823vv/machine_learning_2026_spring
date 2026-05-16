@@ -16,7 +16,7 @@ $$
 g = \frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} \sum_{i=1}^n \frac{\partial \mathcal{L}_i}{\partial W}, \quad W \leftarrow W - \eta g
 $$
 
-**Key insight:** The gradient indicates **direction**, while the learning rate controls **step size**. 
+**Key insight:** The gradient indicates **direction**, while the learning rate controls **step size**.
 
 ---
 

@@ -55,7 +55,7 @@ $$
 
 In row-vector notation for a linear layer:
 $$
-z = xW + b, \quad v \leftarrow \beta v + (1-\beta) g, \quad W \leftarrow W - \eta v
+z = x W + b, \quad v \leftarrow \beta v + (1-\beta) g, \quad W \leftarrow W - \eta v
 $$
 
 Where:

@@ -10,7 +10,7 @@
 For a single layer:
 
 $$
-a = f(xW + b)
+a = f(x W + b)
 $$
 
 * $x \in \mathbb{R}^{1 \times d}$ — input row vector

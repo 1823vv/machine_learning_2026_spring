@@ -109,7 +109,7 @@ for _ in range(iterations):
     y_hat = w * X + b
     dw = (2/n) * np.sum((y_hat - y) * X)
     db = (2/n) * np.sum(y_hat - y)
-    
+
     w -= eta * dw
     b -= eta * db
 
