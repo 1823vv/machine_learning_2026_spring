@@ -53,7 +53,7 @@ $$
 z = f(x, y), \quad x = g(t), \quad y = h(t)
 $$
 
-The derivative of $z$ w.r.t $t$ is:
+The derivative of $z$ with respect to $t$ is:
 
 $$
 \underbrace{\frac{dz}{dt}}_{\text{total derivative}} = \underbrace{\frac{\partial z}{\partial x}}_{\text{path through } x} \, \underbrace{\frac{dx}{dt}}_{\text{rate of } x} + \underbrace{\frac{\partial z}{\partial y}}_{\text{path through } y} \, \underbrace{\frac{dy}{dt}}_{\text{rate of } y}

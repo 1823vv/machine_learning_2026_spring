@@ -10,7 +10,7 @@ Example:
 
 * Age: $[0, 100]$
 * Income: $[0, 100000]$
-* Binary feature: ${0, 1}$
+* Binary feature: $\{0, 1\}$
 
 These differences create problems for optimization.
 

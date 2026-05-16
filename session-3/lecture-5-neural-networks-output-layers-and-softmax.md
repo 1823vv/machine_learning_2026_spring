@@ -118,7 +118,7 @@ Where:
 
 ## 6. Practical Considerations
 
-1. **Dimensionality**: The output layer dimension must match the target variable or number of classes (for binary classifiction, we can have one neuron or two neurons).
+1. **Dimensionality**: The output layer dimension must match the target variable or number of classes (for binary classification, we can have one neuron or two neurons).
 2. **Choice of activation**:
 
    * Linear → regression

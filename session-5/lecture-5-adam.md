@@ -87,8 +87,8 @@ $$
 $$
 
 > [!CAUTION]
-> **Notation Alert:** 
-> In the expressions above, **$t$ is an exponent**, not an index. 
+> **Notation Alert:**
+> In the expressions above, **$t$ is an exponent**, not an index.
 > *   $\beta_1, \beta_2$: Constant hyperparameters (e.g., 0.9, 0.999).
 > *   $(\beta)^t$: The value of $\beta$ raised to the **power of the current time step $t$**.
 
@@ -144,7 +144,7 @@ Analogy: A ship navigating in fog:
 | Learning rate $\eta$ | 0.001         |
 | $\beta_1$            | 0.9           |
 | $\beta_2$            | 0.999         |
-| $\epsilon$           | 1e-8          |
+| $\epsilon$           | $10^{-8}$     |
 
 * Works well for most deep learning tasks
 * Minimal tuning required

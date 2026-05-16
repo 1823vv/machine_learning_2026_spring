@@ -107,13 +107,13 @@ $$
 \frac{\partial \mathcal{L}}{\partial \mathcal{L}} = 1
 $$
 
-2. Compute gradient w.r.t $u$:
+2. Compute gradient with respect to $u$:
 
 $$
 \frac{\partial \mathcal{L}}{\partial u} = \frac{\partial \mathcal{L}}{\partial \mathcal{L}} \, \frac{d\mathcal{L}}{du} = 1 \cdot 2u = 2u
 $$
 
-3. Compute gradients w.r.t inputs:
+3. Compute gradients with respect to inputs:
 
 $$
 \frac{\partial \mathcal{L}}{\partial a} = \frac{\partial \mathcal{L}}{\partial u} \, \frac{\partial u}{\partial a} = 2u \cdot b
