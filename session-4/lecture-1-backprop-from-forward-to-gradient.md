@@ -67,7 +67,7 @@ $$
 \frac{\partial \mathcal{L}}{\partial W}, \quad \frac{\partial \mathcal{L}}{\partial b}
 $$
 
-Gradients tell us the **direction and magnitude** in which to adjust each parameter to reduce the loss.
+Gradients tell us the **direction and magnitude of increasing loss**. Optimizers reduce the loss by moving in the negative-gradient direction.
 
 ---
 
@@ -96,3 +96,14 @@ $$
 
 Computing $\frac{\partial \mathcal{L}}{\partial W^{(l)}}$ manually for each layer is **impractical**.
 
+---
+
+## 7. Bridge to Optimization
+
+Backpropagation answers **how to compute gradients efficiently**. It does not perform the parameter update itself.
+
+```text
+forward pass -> loss -> backpropagation gradients -> optimizer update
+```
+
+Session 5 starts from this point: once we have $g = \frac{\partial \mathcal{L}}{\partial W}$, an optimizer decides how to update $W$.

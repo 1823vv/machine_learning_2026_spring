@@ -1,140 +1,149 @@
-# From Gradient Descent to Stochastic Gradient Descent
+# Optimization — From Gradient Descent to Mini-Batch SGD
 
 ![](./img/s1.jpg)
-
 
 ---
 
 ## 1. Full-Batch Gradient Descent
 
-Recall standard gradient descent on the full dataset. The gradient is the average over all $n$ samples:
+Full-batch gradient descent uses every training example to compute one update:
 
 $$
-g = \frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} \sum_{i=1}^n \frac{\partial \mathcal{L}_i}{\partial W}, \quad W \leftarrow W - \eta g
+g_{\text{full}} = \frac{\partial \mathcal{L}}{\partial W}
+= \frac{1}{n}\sum_{i=1}^{n}\frac{\partial \ell^{(i)}}{\partial W}
 $$
 
-**Observation:** Computing $g$ requires summing over all $n$ samples each step.
+$$
+W \leftarrow W - \eta g_{\text{full}}
+$$
 
-* Accurate gradient estimates
-* Smooth convergence
-* But very expensive for large datasets
+**Strength:** the gradient estimate is stable.
+
+**Weakness:** each update can be expensive when $n$ is large.
 
 ---
 
-## 2. The Inefficiency Problem
+## 2. The Core Trade-Off
 
-For modern datasets:
+Optimization repeatedly asks:
 
-* $n$ can be millions or more
-* Each iteration takes a long time
-* Full-batch updates are slow, even if precise
+```text
+How accurate does the gradient need to be for learning to progress?
+```
 
-**Key insight:** Exact gradient is not always necessary — an approximate gradient is often sufficient for learning.
-
----
-
-## 3. Stochastic Gradient Descent (SGD) & Mini-batch SGD
-
-**Stochastic Gradient Descent** in its **theoretical definition** uses only **one sample** per step (Batch Size $B = 1$):
-
-$$
-g = \frac{\partial \mathcal{L}_i}{\partial W}, \quad W \leftarrow W - \eta g
-$$
-
-**But in modern deep learning practice**, the term **"SGD" almost always refers to "Mini-batch SGD"** — using a **small random subset** to approximate the gradient:
-
-$$
-g = \frac{1}{B} \sum_{i \in \mathcal{B}} \frac{\partial \mathcal{L}_i}{\partial W}, \quad W \leftarrow W - \eta g
-$$
-
-Where:
-
-* $B$ — **Batch size** ($1 < B \ll n$)
-* $\mathcal{B}$ — The set of indices for the current mini-batch
-* $g$ — The mini-batch gradient
-
-### Important Terminology Note:
-
-Depending on the batch size $B$, the algorithm is named differently:
-
-| Name | Batch Size ($B$) | Description |
-| :--- | :--- | :--- |
-| **Batch GD** | $B = n$ | Uses every sample. Accurate but very slow. |
-| **One-sample SGD** | $B = 1$ | Uses only **one** sample per step. Extremely noisy. |
-| **Mini-batch SGD**| $1 < B < n$ | The "Goldilocks" zone. Fast, stable, and hardware-efficient. |
-
-> In this course and all subsequent discussions, unless otherwise specified, **"SGD" refers to "Mini-batch SGD"**. If we mean the one-sample version, we will explicitly say "One-sample SGD" or "Single-sample SGD".
-
-**Advantages:**
-
-* Updates are cheaper than full-batch GD
-* Faster per iteration
-* Introduces stochasticity that can help optimization
+A perfectly accurate full-dataset gradient is not always necessary. Often, an approximate gradient is enough.
 
 ---
 
-## 4. Intuition: Noisy Descent Helps
+## 3. Three Batch Choices
+
+Let $B$ be the number of examples used for one update, and let $n$ be the total number of training examples.
+
+| Name | Batch size | Gradient estimate | Course terminology |
+|---|---:|---|---|
+| Full-batch GD | $B = n$ | all examples | "GD" or "full-batch GD" |
+| One-sample SGD | $B = 1$ | one example | explicitly called "one-sample SGD" |
+| Mini-batch SGD | $1 < B \ll n$ | a small random batch | usually called "SGD" |
+
+> [!INFO]
+> In this course, **SGD means mini-batch SGD** unless we explicitly say "one-sample SGD."
+
+---
+
+## 4. Mini-Batch SGD Update
+
+Choose a mini-batch $\mathcal{B}$ with $B$ examples. The mini-batch gradient is:
+
+$$
+g_{\mathcal{B}} = \frac{1}{B}\sum_{i\in\mathcal{B}}\frac{\partial \ell^{(i)}}{\partial W}
+$$
+
+Then update:
+
+$$
+W \leftarrow W - \eta g_{\mathcal{B}}
+$$
+
+This has the same update shape as full-batch GD. Only the gradient estimate changes.
+
+---
+
+## 5. Why Mini-Batches Work Well
+
+Mini-batch SGD is popular because it balances three needs:
+
+1. **Speed:** each update uses only part of the dataset.
+2. **Stability:** averaging over $B > 1$ examples reduces noise.
+3. **Hardware efficiency:** matrix operations on batches are fast on GPUs.
+
+---
+
+## 6. Intuition: Noisy Descent
 
 ![](./img/s2.jpg)
 
+Mini-batch gradients are noisy approximations of the full gradient:
 
-* Mini-batch updates are **noisy approximations** of the true gradient
-* Noise allows escaping **shallow local minima or saddle points**
+$$
+g_{\mathcal{B}} \approx g_{\text{full}}
+$$
 
-**Visualization:** Descending a bumpy valley:
-
-* Full-batch GD → precise but slow path
-* Mini-batch SGD → jittery path that explores valleys and escapes plateaus
+The path can look less smooth, but each step is much cheaper.
 
 ![](./img/saddlepoint.jpg)
 
----
-
-## 5. Choosing Batch Size
-
-* Small batch → more noise, faster iteration
-* Large batch → smoother gradient, slower iteration
-
-Typical guidelines:
-
-| Dataset Size | Batch Size |
-| ------------ | ---------- |
-| Small        | 16–64      |
-| Medium       | 64–256     |
-| Large        | 256–1024+  |
-
-> Batch size interacts with learning rate: smaller batches often require smaller $\eta$ for stability.
+Noise can also help optimization move through flat regions or saddle points, although too much noise can make training unstable.
 
 ---
 
-## 6. PyTorch Example
+## 7. Choosing Batch Size
+
+| Batch size | Effect |
+|---|---|
+| Smaller | More noisy, cheaper steps, often needs smaller $\eta$ |
+| Larger | Smoother gradients, more expensive steps, often allows larger $\eta$ |
+
+Typical starting ranges:
+
+| Dataset/model scale | Batch size |
+|---|---:|
+| Small | 16-64 |
+| Medium | 64-256 |
+| Large | 256-1024+ |
+
+> Batch size and learning rate should be tuned together.
+
+---
+
+## 8. PyTorch Example
 
 ```python
 import torch
 from torch.utils.data import DataLoader
 
-# DataLoader automatically creates mini-batches
-# This is the standard Mini-batch SGD practice
+# DataLoader creates mini-batches.
 dataloader = DataLoader(dataset, batch_size=64, shuffle=True)
 
-# torch.optim.SGD works with mini-batches by default
+# In deep-learning practice, torch.optim.SGD is usually used with mini-batches.
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
 for epoch in range(num_epochs):
-    for X, y in dataloader:  # Each loop: one mini-batch
+    for X, y in dataloader:
         optimizer.zero_grad()
         prediction = model(X)
         loss = criterion(prediction, y)
-        loss.backward()            # Compute g on this mini-batch
-        optimizer.step()           # W <- W - eta * g
+        loss.backward()      # Computes g_B on this mini-batch
+        optimizer.step()     # Applies W <- W - eta * g_B
 ```
 
 ---
 
-## 7. Summary
+## 9. Summary
 
-* Full-batch GD: precise but computationally expensive
-* Mini-batch SGD: cheaper, faster, introduces helpful noise
-* Batch size controls the trade-off between gradient variance and efficiency
+The only change from full-batch GD to mini-batch SGD is how we estimate the gradient:
 
-**Key takeaway:** Modern deep learning almost always relies on **Mini-batch SGD** (commonly just called "SGD").
+$$
+g_{\text{full}} \quad \longrightarrow \quad g_{\mathcal{B}}
+$$
+
+In this course, **SGD means mini-batch SGD** unless stated otherwise.
