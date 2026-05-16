@@ -1,4 +1,4 @@
-#  Adam (Adaptive Moment Estimation)
+# Optimization — Adam (Adaptive Moment Estimation)
 
 ![](./img/9.gif)
 
@@ -22,15 +22,14 @@ This leads to **Adam (Adaptive Moment Estimation)**.
 
 ---
 
-## 2. Review — Mini-Batch Gradient Descent
+## 2. Review — From SGD to Momentum
 
-Mini-batch SGD updates parameters as:
+So far:
 
-$$
- g = \frac{1}{B} \sum_{i \in \mathcal{B}} \frac{\partial \mathcal{L}_i}{\partial W}, \quad W \leftarrow W - \eta g
-$$
+* **Mini-batch SGD** uses a mini-batch gradient $g_{\mathcal{B}}$ for each update.
+* **Momentum** smooths that gradient direction with a velocity term.
 
-Momentum adds a **velocity term** $v$ that smooths $g$. Adam goes further by also adapting the **learning rate per parameter**.
+Adam keeps the smoothing idea and adds **parameter-specific scaling**.
 
 ---
 
@@ -39,7 +38,7 @@ Momentum adds a **velocity term** $v$ that smooths $g$. Adam goes further by als
 ![](./img/5.gif)
 
 
-Adam tracks two moving averages:
+For readability, write $g = g_{\mathcal{B}}$ in the formulas below. Adam tracks two moving averages of this mini-batch gradient:
 
 ### 3.1 First Moment — Mean of Gradients
 
@@ -51,7 +50,7 @@ $$
 * Captures **directional trend** of gradients
 * $\beta_1$ typically 0.9
 
-> [!NOTE]
+> [!INFO]
 > **Why $m$ instead of $v$?**
 > In the momentum lecture we called the smoothed gradient $v$ (velocity). Adam uses $m$ (moment) for the same idea. Adam's $v$ is a *different* quantity — it tracks the volatility (squared gradients).
 
@@ -63,14 +62,12 @@ $$
 v^{(t)} \leftarrow \beta_2 v^{(t-1)} + (1-\beta_2) g^2
 $$
 
-* Measures **gradient magnitude and variability**
-* **Represents the "Volatility" of the gradients:**
-    * Large $v$ → **High volatility** (unstable/steep) → reduce step size for safety.
-    * Small $v$ → **Low volatility** (stable/flat) → increase step size to speed up.
+* Measures **gradient magnitude** using element-wise squares
+* Large $v$ means recent squared gradients are large, so Adam reduces the effective step for those parameters.
+* Small $v$ means recent squared gradients are small, so Adam allows a relatively larger effective step.
 * $\beta_2$ typically 0.999 (long-term memory of volatility)
 
 ---
-
 
 ## 4. Bias Correction
 
@@ -86,24 +83,20 @@ $$
 \hat{v}^{(t)} = \frac{v^{(t)}}{1-(\beta_2)^t}
 $$
 
-> [!CAUTION]
-> **Notation Alert:**
-> In the expressions above, **$t$ is an exponent**, not an index.
-> *   $\beta_1, \beta_2$: Constant hyperparameters (e.g., 0.9, 0.999).
-> *   $(\beta)^t$: The value of $\beta$ raised to the **power of the current time step $t$**.
+> [!INFO]
+> In $m^{(t)}$ and $v^{(t)}$, the superscript $(t)$ is a time-step index. In $(\beta_1)^t$ and $(\beta_2)^t$, $t$ is an exponent.
 
-### Why is this necessary?
-*   **The "Cold Start" Problem:** Without correction, $m^{(1)}$ would be $(1-\beta_1)g$. If $\beta_1 = 0.9$, your first update is only **10%** of what it should be.
-*   **The Fix:** At $t=1$, the denominator $1-(0.9)^1 = 0.1$. Dividing by $0.1$ effectively scales the moment back up to its true magnitude.
-*   **Self-Vanishing:** As training progresses ($t \to \infty$), the term $(\beta)^t$ quickly approaches **0**. The correction factor $1/(1-\beta^t)$ becomes **1**, meaning the correction naturally fades away once the moving averages become stable.
+Why this matters:
 
-**Key Outcome:** Ensures **early updates are not underestimated**, preventing the model from getting "stuck" or moving too slowly during the first few batches.
+* At the first step, zero initialization makes the moving averages too small.
+* Bias correction rescales them so early updates are not underestimated.
+* As $t$ grows, $(\beta)^t \to 0$, so the correction naturally fades away.
 
 ---
 
 ## 5. Adam Update Rule
 
-Parameter update:
+Parameter update, applied element-wise to each parameter:
 
 $$
 W \leftarrow W - \eta \frac{\hat{m}}{\sqrt{\hat{v}} + \epsilon}
@@ -124,7 +117,6 @@ Where:
 ## 6. Geometric Intuition
 
 ![](./img/8.gif)
-
 
 1. **First moment $m$** → smooths noisy gradients (like momentum)
 2. **Second moment $v$** → scales updates according to gradient volatility
@@ -153,12 +145,14 @@ Analogy: A ship navigating in fog:
 
 ## 8. Why Adam Works Well
 
-* Combines **SGD efficiency** with **momentum smoothing**
-* Adapts **step size per parameter**
-* Handles **noisy gradients**, **saddle points**, and **high-curvature landscapes**
-* Converges quickly and robustly
+Adam combines the ideas from the previous optimization lectures:
 
-**Takeaway:** Adam is a **safe, powerful default optimizer** for deep networks.
+| Previous idea | Adam version |
+|---|---|
+| Mini-batch gradient $g_{\mathcal{B}}$ | Uses a mini-batch gradient at every step |
+| Momentum | First moment $m$ smooths gradient direction |
+| Learning-rate scaling | Second moment $v$ rescales each parameter update |
+| Stable early training | Bias correction fixes zero-initialized moments |
 
 ---
 
@@ -188,10 +182,4 @@ for X, y in dataloader:
 
 ![](./img/hillvs.jpg)
 
-Adam is the natural culmination of **mini-batch SGD + momentum + adaptive learning rates**:
-
-1. Tracks **first moment** → smooths gradients (direction)
-2. Tracks **second moment** → scales steps (magnitude)
-3. Bias correction → stabilizes early training
-
-> Adam allows neural networks to **learn efficiently and robustly** across complex, high-dimensional loss landscapes.
+Adam is the natural culmination of **mini-batch SGD + momentum + adaptive learning rates**: $m$ smooths direction, $v$ rescales step sizes, and bias correction keeps early updates reliable.

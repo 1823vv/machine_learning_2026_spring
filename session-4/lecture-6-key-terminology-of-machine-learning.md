@@ -13,11 +13,11 @@ $$
 ### Key Terms
 
 * **Input / Feature / Variable**:
-  $x \in \mathbb{R}^d$ — the information we use to make predictions
+  $x \in \mathbb{R}^{1 \times d}$ — one input row vector used to make predictions
 * **Feature Vector**:
-  A collection of features, e.g. $x = (x_1, ..., x_d)$
+  A collection of features, e.g. $x = (x_1, \dots, x_d)$, written as a row vector in these sessions
 * **Sample / Instance / Observation**:
-  One data point $(x_i, y_i)$
+  One data point $(x^{(i)}, y^{(i)})$
 
 ---
 
@@ -41,10 +41,16 @@ $$
 
 ## 3. Model and Parameters
 
-The model defines how inputs map to outputs:
+The model defines how inputs map to outputs. In general notation we may write:
 
 $$
 \hat{y} = f(x; \theta)
+$$
+
+For neural-network layer formulas, we use the row-vector convention:
+
+$$
+z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}
 $$
 
 ### Key Terms
@@ -53,7 +59,7 @@ $$
   The mapping from $x$ to $\hat{y}$
 
 * **Parameters ($\theta$)**
-  The learnable components
+  A compact name for all learnable components. In neural-network formulas, these are usually written as layer weights $W^{(l)}$ and biases $b^{(l)}$.
 
 * **Weights**
   Parameters in neural networks
@@ -81,7 +87,7 @@ $$
 * **Layer**
   A transformation of the form:
   $$
-  h = \sigma(x W + b)
+  z = x W + b, \quad h = \sigma(z)
   $$
 
 * **Hidden Layer**
@@ -100,7 +106,7 @@ $$
 Learning is defined as minimizing error:
 
 $$
-\min_\theta \; \mathcal{L}(y, \hat{y})
+\min_{W,b} \; \mathcal{L}(\hat{y}, y)
 $$
 
 ### Key Terms
@@ -124,7 +130,7 @@ $$
 
 ### Final Insight
 
-> Machine learning is the process of learning parameters $\theta$
-> so that a function $f(x; \theta)$ produces predictions $\hat{y}$
+> Machine learning is the process of learning parameters such as $W$ and $b$
+> so that a function $f(x; W,b)$ produces predictions $\hat{y}$
 > that match targets $y$ by minimizing a loss,
 > while generalizing to new data.

@@ -39,7 +39,7 @@ $$
 For a neural-network layer, the row-vector form is:
 
 $$
-z^{(l)} = a^{(l-1)}W^{(l)} + b^{(l)}
+z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}
 $$
 
 where
@@ -309,7 +309,7 @@ For multiclass classification with $K$ classes, the output layer usually has $K$
 The final affine transformation is:
 
 $$
-z^{(L)} = a^{(L-1)}W^{(L)} + b^{(L)}
+z^{(L)} = a^{(L-1)} W^{(L)} + b^{(L)}
 $$
 
 where

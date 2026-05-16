@@ -1,165 +1,166 @@
-# Learning Rate
+# Optimization — Learning Rate
 
-First, let's open those URLs for visualization/play:
+First, open this visualization for experimentation:
+
 - https://uclaacm.github.io/gradient-descent-visualiser/#playground
 
 ---
 
-## 1. Review — Gradient Descent
+## 1. Review: The Update Rule
 
 ![](./img/gd.jpg)
 
-
-Recall the basic gradient descent update:
+Gradient descent updates a parameter by:
 
 $$
-g = \frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} \sum_{i=1}^n \frac{\partial \mathcal{L}_i}{\partial W}, \quad W \leftarrow W - \eta g
+g = \frac{\partial \mathcal{L}}{\partial W}, \quad W \leftarrow W - \eta g
 $$
 
-**Key insight:** The gradient indicates **direction**, while the learning rate controls **step size**.
+The two parts should not be confused:
+
+| Symbol | Meaning | Role |
+|---|---|---|
+| $g$ | Gradient | Direction and sensitivity |
+| $\eta$ | Learning rate | Step-size multiplier |
 
 ---
 
 ## 2. What Does the Learning Rate Do?
 
-The learning rate $\eta$ is a **scalar hyperparameter** that scales updates in parameter space. It directly affects:
+The learning rate $\eta$ is a scalar hyperparameter that scales the update:
 
-* **Speed of convergence** — how fast the model learns
-* **Stability** — whether training oscillates or diverges
+$$
+\Delta W = -\eta g
+$$
 
-Intuitively:
-
-* Small $\eta$ → tiny steps, slow progress
-* Large $\eta$ → large steps, risk of overshooting
+The learning rate does not choose the direction. It only scales the step taken in the negative-gradient direction.
 
 ---
 
-## 3. Learning Rate Scenarios
+## 3. Three Learning-Rate Regimes
 
 ### 3.1 Too Small
 
 ![](./lr_0.001.gif)
 
-* Training progresses slowly
-* May require many iterations
-* Inefficient and computation-heavy
+* Updates are tiny.
+* The loss may decrease, but very slowly.
+* Training wastes time and compute.
 
 ### 3.2 Too Large
 
 ![](./lr_1.gif)
 
-* Updates overshoot the optimum
-* Loss may oscillate or diverge
-* Training can fail entirely
+* Updates jump over good parameter values.
+* The loss may oscillate or diverge.
+* Training can fail even when the gradient direction is correct.
 
-### 3.3 Just Right
+### 3.3 Reasonable
 
 ![](./lr_0.03.gif)
 
-$$
-\eta \approx \text{optimal}
-$$
+* Updates are large enough to make progress.
+* Updates are small enough to remain stable.
+* The loss decreases efficiently.
 
-* Fast convergence without overshooting
-* Training is stable and efficient
-
----
-
-## 4. Practical Learning Rate Values
-
-Typical ranges depend on model and optimizer:
-
-| Scenario                | Typical Value |
-| ----------------------- | ------------- |
-| Simple gradient descent | 0.01          |
-| Deep neural networks    | 0.001         |
-| Adaptive optimizers     | 0.001         |
-| Very large models       | 0.0001        |
-
+> [!INFO]
+> A bad learning rate can make a correct gradient look useless.
 
 ---
 
-## 5. Learning Rate Schedules
+## 4. Why Learning Rate and Gradient Magnitude Interact
+
+The actual parameter change depends on both $\eta$ and $g$:
+
+$$
+\|\Delta W\| = \eta \|g\|
+$$
+
+So instability can come from either:
+
+* a learning rate that is too large, or
+* gradients that are very large.
+
+This is one reason deep-learning training often uses normalization, careful initialization, gradient clipping, warmup, and adaptive optimizers.
+
+---
+
+## 5. Practical Starting Values
+
+Typical starting values depend on the optimizer and model:
+
+| Situation | Common starting point |
+|---|---:|
+| Simple GD or mini-batch SGD | $0.01$ |
+| SGD with momentum | $0.01$ |
+| Adam | $0.001$ |
+| Large or unstable models | smaller values plus warmup |
+
+These values are starting points, not laws. The best value depends on the model, data, batch size, and optimizer.
+
+---
+
+## 6. Learning-Rate Schedules
 
 ![](./img/ds.jpg)
 
-Rarely do we keep $\eta$ constant. **Schedules** adapt it over training to match optimization needs.
+A fixed $\eta$ is simple, but training often benefits from changing $\eta$ over time.
 
 ### Early Training
 
-* Parameters far from optimum
-* Large updates accelerate progress
+* Parameters are far from a good solution.
+* Larger steps can speed up progress.
 
 ### Late Training
 
-* Gradients diminish
-* Overshooting is dangerous
-* Smaller $\eta$ enables fine-tuning
+* Parameters are closer to a good solution.
+* Smaller steps help avoid overshooting and improve fine-tuning.
 
 ---
 
-## 6. Common Schedules
+## 7. Common Schedules
 
 ### Step Decay
 
 Reduce $\eta$ at predefined epochs:
 
+```text
+epoch 0-30   lr = 0.01
+epoch 30-60  lr = 0.001
+epoch 60-90  lr = 0.0001
 ```
-epoch 0–30   lr = 0.01
-epoch 30–60  lr = 0.001
-epoch 60–90  lr = 0.0001
-```
-
-Simple yet effective.
 
 ### Exponential Decay
 
-Smooth decay over time:
+Decrease smoothly:
 
 $$
-\eta_t = \eta_0 e^{-k t}
+\eta_t = \eta_0 e^{-kt}
 $$
-
-Gradually decreases step size.
 
 ### Cosine Decay
 
-Smoothly varies $\eta$ following a cosine curve:
-
-* Avoids sudden jumps
-* Empirically effective in modern deep learning
+Vary $\eta$ smoothly with a cosine-shaped curve. This is common in modern deep-learning training.
 
 ---
 
-## 7. Learning Rate Warmup
+## 8. Learning-Rate Warmup
 
-Large models often use a **warmup phase**:
+Warmup starts with a very small learning rate and gradually increases it:
 
-* Start with a very small learning rate
-* Gradually increase to the target value
-* Then follow a decay schedule
-
-Example:
-
-```
-step 0–2000 → increase lr
-step 2000+  → decay schedule
+```text
+step 0-2000  -> increase lr
+step 2000+   -> decay schedule
 ```
 
-Why it works:
-
-* Early gradients can be unstable
-* Large steps risk divergence
-* Gradual ramp-up stabilizes training
-
-Warmup is now standard in large-scale models.
+Warmup helps because early gradients can be unstable. It is especially useful for large neural networks.
 
 ---
 
-## 8. Summary
+## 9. Summary
 
-* Learning rate $\eta$ scales gradient updates
-* Too small → painfully slow learning
-* Too large → instability or divergence
-* Proper choice → fast, stable, efficient convergence
-* Use schedules and warmup for best results
+* The gradient gives direction.
+* The learning rate controls step size.
+* Too small means slow learning.
+* Too large means oscillation or divergence.
+* Schedules and warmup make training more stable.

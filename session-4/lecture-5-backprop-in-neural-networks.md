@@ -218,6 +218,11 @@ $$
 
 For the full dataset with inputs $X \in \mathbb{R}^{n \times d}$ (stacked as rows):
 
+> [!INFO]
+> **Full batch vs. mini-batch**
+>
+> This section uses $n$ because it describes the full training set. In mini-batch training, replace $n$ with the mini-batch size $B$ and replace $(X, Y)$ with the mini-batch matrices. The formulas keep the same shape.
+
 $$
 \underbrace{\Delta^{(l)}}_{\text{batch error signals}} = \underbrace{\frac{\partial \mathcal{L}}{\partial Z^{(l)}}}_{\text{gradient w.r.t. pre-activations}} \quad \text{(matrix of errors for all samples)}
 $$
@@ -271,13 +276,13 @@ Where: $W^{(1)} \in \mathbb{R}^{784 \times 64}$, $b^{(1)} \in \mathbb{R}^{1 \tim
 
 **Layer 2 (Hidden 1 $\rightarrow$ Hidden 2):**
 $$
-Z^{(2)} = A^{(1)}W^{(2)} + b^{(2)}, \quad A^{(2)} = \text{ReLU}(Z^{(2)})
+Z^{(2)} = A^{(1)} W^{(2)} + b^{(2)}, \quad A^{(2)} = \text{ReLU}(Z^{(2)})
 $$
 Where: $W^{(2)} \in \mathbb{R}^{64 \times 32}$, $b^{(2)} \in \mathbb{R}^{1 \times 32}$
 
 **Layer 3 (Hidden 2 $\rightarrow$ Output):**
 $$
-Z^{(3)} = A^{(2)}W^{(3)} + b^{(3)}, \quad \hat{Y} = \text{softmax}(Z^{(3)})
+Z^{(3)} = A^{(2)} W^{(3)} + b^{(3)}, \quad \hat{Y} = \text{softmax}(Z^{(3)})
 $$
 Where: $W^{(3)} \in \mathbb{R}^{32 \times 10}$, $b^{(3)} \in \mathbb{R}^{1 \times 10}$
 
@@ -325,5 +330,7 @@ For each layer $l \in \{1,2,3\}$:
 $$
 W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial W^{(l)}}, \quad b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial b^{(l)}}
 $$
+
+This last line is the bridge to Session 5: once backpropagation has produced the gradients, an optimizer decides how to turn them into parameter updates.
 
 ![](./img/trainnncover.gif)

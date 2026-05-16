@@ -146,17 +146,19 @@ Each layer transforms the representation learned by the previous layer.
 
 ## 5. The Emergence of Neural Networks
 
-By stacking layers, we get:
+By stacking layers, we get a network function from input to output:
 
 $$
-a^{(L)} = f(x)
+\hat{y} = a^{(L)}
 $$
 
-where $f$ is a composition of functions:
+Each layer repeats the same pattern:
 
 $$
-f(x) = f^{(L)}(f^{(L-1)}(\cdots f^{(1)}(x)))
+z^{(l)} = a^{(l-1)} W^{(l)} + b^{(l)}, \quad a^{(l)} = f^{(l)}(z^{(l)})
 $$
+
+So a neural network is a composition of these layer transformations.
 
 ---
 
