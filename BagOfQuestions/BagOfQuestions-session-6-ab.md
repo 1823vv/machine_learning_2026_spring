@@ -1,21 +1,27 @@
 ## Question: Classification Metrics for an Imbalanced Dataset
 
-A disease dataset has 10,000 patients. Only 100 patients truly have the disease. A trivial model predicts “no disease” for everyone.
+Consider a binary classifier for a medical screening task. The positive class is rare. The confusion matrix counts are:
 
-1. Compute the accuracy of this trivial model.
-2. Why is this accuracy misleading?
-3. Define precision using $TP$ and $FP$.
-4. Define recall using $TP$ and $FN$.
-5. Define F1 score using precision and recall.
-6. In disease detection, why might recall be especially important?
-7. In spam detection, why might precision be especially important?
-8. Draw a small diagram explaining the difference between false positives and false negatives.
+```text
+True Positive  (TP) = 40
+False Positive (FP) = 160
+False Negative (FN) = 10
+True Negative  (TN) = 790
+```
+
+1. Compute accuracy.
+2. Compute precision.
+3. Compute recall.
+4. Compute the F1 score.
+5. Explain why accuracy alone can be misleading for imbalanced datasets.
+6. In this medical screening setting, why might recall be especially important?
 
 ## Question: Choosing the Right Metric
 
-For each situation below, choose accuracy, precision, recall, or F1, and justify briefly:
+Different machine-learning applications require different evaluation metrics. A metric should match the cost of different mistakes.
 
-1. Fraud detection where missing fraud is very expensive.
-2. Email spam filtering where deleting an important email is very bad.
-3. Balanced 10-class digit classification.
-4. Imbalanced classification where both false positives and false negatives matter.
+1. For spam detection, when might precision be more important than recall?
+2. For disease screening, when might recall be more important than precision?
+3. For a balanced classification problem, when might accuracy be acceptable?
+4. Explain why the “best” model can change when the evaluation metric changes.
+5. Draw a small decision diagram for selecting accuracy, precision, recall, or F1.

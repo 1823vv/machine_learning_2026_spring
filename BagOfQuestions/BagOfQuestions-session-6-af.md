@@ -1,24 +1,22 @@
 ## Question: Bias–Variance Tradeoff Drawing
 
-A model can fail because it is too simple or too sensitive to training data.
+The bias–variance tradeoff describes how model complexity affects underfitting and overfitting.
 
-1. Define high bias.
-2. Define high variance.
-3. Explain underfitting using training error and validation error.
-4. Explain overfitting using training error and validation error.
-5. Draw three models on the same dataset:
-   - underfitting,
-   - good fit,
-   - overfitting.
-6. Draw training error and validation error as a function of model complexity.
-7. Mark the sweet spot between high bias and high variance.
-8. Explain why increasing model complexity usually reduces bias but increases variance.
+1. Explain high bias in words.
+2. Explain high variance in words.
+3. Draw training error and validation error as model complexity increases.
+4. Mark the underfitting region.
+5. Mark the overfitting region.
+6. Mark a reasonable model-complexity region.
+7. Give one example of a model that might have high bias.
+8. Give one example of a model that might have high variance.
 
 ## Question: Learning Curves
 
-Learning curves plot training error and validation error against dataset size.
+Learning curves show model performance as the training set size increases. They can help diagnose whether more data is likely to help.
 
-1. What do learning curves look like for high bias?
-2. What do learning curves look like for high variance?
-3. If validation error is high and training error is low, what should you suspect?
-4. If both training and validation errors are high and close, what should you suspect?
+1. Draw training error and validation error as functions of training-set size for a high-variance model.
+2. Explain why more data can help reduce variance.
+3. Draw learning curves for a high-bias model.
+4. Explain why simply adding more data may not fix high bias.
+5. Name one strategy for reducing high bias and one strategy for reducing high variance.

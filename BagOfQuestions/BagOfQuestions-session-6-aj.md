@@ -1,27 +1,28 @@
 ## Question: Bivariate Normal Distribution and Covariance Matrix
 
-Consider this code idea from Session 6:
+A bivariate normal distribution describes two continuous random variables, such as $X_1$ and $X_2$, jointly. Its covariance matrix can be written as
 
-```python
-mu = [0, 0]
-sigma = [[1, 0.5],
-         [0.5, 1]]
-```
+$$
+\Sigma = \begin{bmatrix}
+\sigma_1^2 & \sigma_{12} \\
+\sigma_{12} & \sigma_2^2
+\end{bmatrix}.
+$$
 
-This defines a bivariate normal distribution.
-
-1. What does the vector `mu` represent?
-2. What does the matrix `sigma` represent?
-3. Explain the meaning of the diagonal entries of `sigma`.
-4. Explain the meaning of the off-diagonal entries of `sigma`.
-5. If the covariance is positive, what shape/orientation do you expect in the scatter plot?
-6. If the covariance is negative, what shape/orientation do you expect in the scatter plot?
-7. If the covariance is zero, what relationship do you expect between the two variables?
-8. Draw three scatter plots for covariance $0.5$, $-0.5$, and $0$.
+1. What do the diagonal entries of $\Sigma$ represent?
+2. What do the off-diagonal entries represent?
+3. If $\sigma_{12}>0$, what visual pattern would you expect in a scatter plot?
+4. If $\sigma_{12}<0$, what visual pattern would you expect?
+5. If $\sigma_{12}=0$, what visual pattern would you expect?
+6. Draw scatter plots for positive, negative, and near-zero covariance.
+7. Explain the difference between covariance and correlation.
 
 ## Question: Why Probability Distributions Matter for Model Selection
 
-1. Why is randomness important when we split data into train/validation/test sets?
-2. Why can performance estimates vary depending on the random split?
-3. How does cross-validation help reduce dependence on one random split?
-4. Explain how understanding distributions can help interpret noisy evaluation results.
+Evaluation metrics are computed on finite datasets, so validation performance can vary depending on which examples are sampled. Thinking probabilistically helps us reason about uncertainty.
+
+1. Why might validation accuracy vary if we resample the validation set?
+2. Why is a larger validation set usually more stable than a tiny validation set?
+3. How can cross-validation reduce dependence on one lucky or unlucky split?
+4. Why should small differences in validation score be interpreted carefully?
+5. Draw a simple picture of two models whose validation-score distributions overlap.

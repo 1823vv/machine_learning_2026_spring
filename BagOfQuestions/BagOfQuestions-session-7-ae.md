@@ -1,29 +1,20 @@
 ## Question: Data Augmentation as Label-Preserving Transformation
 
-Data augmentation creates new training examples by transforming existing data.
+Data augmentation creates new training examples by applying transformations that should not change the label. For example, a small shift of an MNIST digit usually keeps the same digit label.
 
-1. Write the general data-augmentation idea as a formula:
-
-   $$
-   x' = T(x)
-   $$
-
-2. What important condition must be true about the label after transformation?
-3. For an image-classification task, list four possible transformations that often preserve the label.
-4. For each transformation, give one example where it is safe and one example where it might not be safe.
-5. Draw a small diagram showing one original image going through several transformations to create several training examples.
-6. Explain how data augmentation can be understood as regularization.
-7. Explain the phrase: “augmentation teaches invariance.”
+1. Define data augmentation in your own words.
+2. Give three label-preserving transformations for image classification.
+3. Give one transformation that might not be label-preserving for digit recognition.
+4. Explain why augmentation can improve generalization.
+5. Draw a simple diagram showing one original image becoming several augmented training examples.
+6. Why should augmentation usually be applied to training data, not to the final test labels or test-set definition?
 
 ## Question: Augmentation for Text
 
-For a sentiment-classification task, consider these augmentations:
+For text classification, augmentation is more delicate than for images because small word changes can change meaning.
 
-- synonym replacement,
-- back translation,
-- random deletion.
-
-1. Explain why text augmentation is more delicate than image augmentation.
-2. Give one synonym-replacement example that preserves meaning.
-3. Give one synonym-replacement example that changes meaning or label.
-4. Explain why back translation can preserve semantics while changing surface form.
+1. Give one possible label-preserving text augmentation.
+2. Give one text transformation that could accidentally change the label.
+3. Why is augmentation domain-dependent?
+4. Explain why human judgment may be needed to decide whether an augmentation is valid.
+5. Compare image augmentation and text augmentation in one short paragraph.
