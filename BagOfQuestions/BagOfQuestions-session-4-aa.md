@@ -6,7 +6,7 @@ In our own Neural Network From Scratch implementation with NumPy for MNIST digit
 Dense(784, 64) -> ReLU -> Dense(64, 32) -> ReLU -> Dense(32, 10)
 ```
 
-Use the course row-vector convention: for `Dense(d_in, d_out)`, the weight matrix has shape $W \in \mathbb{R}^{d_{in} \times d_{out}}$ and the bias has shape $b \in \mathbb{R}^{1 \times d_{out}}$.
+Use the row-vector convention: for `Dense(d_in, d_out)`, the weight matrix has shape $W \in \mathbb{R}^{d_{in} \times d_{out}}$ and the bias has shape $b \in \mathbb{R}^{1 \times d_{out}}$.
 
 1. Draw this neural network as a schema with input layer, hidden layers, ReLU activations, logits layer, and softmax probability output.
 2. Why is the input dimension 784 for MNIST digit recognition?

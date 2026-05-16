@@ -223,7 +223,7 @@ Avoid overly long lists. A question can have many parts, but if it reaches 12 or
 
 ### Public-Facing Wording Ban for Generated Question Files
 
-In generated files such as `BagOfQuestions-session-N-XX.md`, especially for `N=5`, `N=6`, and `N=7`, do **not** use misleading meta-words inside the student-facing question text. Avoid words that reveal internal organization or sound like authoring notes rather than exam prompts.
+In generated files such as `BagOfQuestions-session-N-XX.md`, do **not** use misleading meta-words inside the student-facing question text. Avoid words that reveal internal organization or sound like authoring notes rather than exam prompts.
 
 Banned or strongly discouraged in generated question files:
 
@@ -243,10 +243,10 @@ Use neutral replacements instead:
 - Instead of "exam answer", write "written answer".
 - Instead of naming a session or file path, describe the concept, model, or implementation students need to reason about.
 
-A useful validation command for upper-session generated files is:
+A useful validation command for generated files is:
 
 ```bash
-rg -n -i "\b(story|session|course|exam|lecture|chapter|repository|file path|code-my)\b" BagOfQuestions/BagOfQuestions-session-{5,6,7}-*.md
+rg -n -i "\b(story|session|course|exam|lecture|chapter|repository|file path|code-my)\b" BagOfQuestions/BagOfQuestions-session-*-*.md
 ```
 
 This command should return no matches unless the user explicitly asks for one of those terms. Also avoid administrative wording such as score percentages, assessment policies, no-materials rules, or comments that questions may be adjusted later; generated question files should contain only the student-facing problem statement.

@@ -1,5 +1,3 @@
-# Bag of Questions — Session 2 — ad
-
 ## Question: Binary Cross-Entropy Loss
 
 For binary logistic regression, the model outputs a probability $\hat{y}^{(i)} \in (0,1)$ for each sample $i$, and the label is $y^{(i)} \in \{0,1\}$.

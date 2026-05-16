@@ -1,6 +1,6 @@
 ## Question: Neural Network Figure with Code Names
 
-Draw the Session 4 MNIST network and annotate it with the exact code class names.
+Draw the MNIST network and annotate it with the exact code class names.
 
 Your figure should include:
 

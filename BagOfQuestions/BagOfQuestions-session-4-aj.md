@@ -1,6 +1,6 @@
 ## Question: Fill in the Training Function
 
-Fill in the blanks in this Session 4 training function:
+Fill in the blanks in this NumPy neural-network training function:
 
 ```python
 def train(network, X, y):
@@ -27,7 +27,7 @@ Your answers:
 - `____YOUR_CODE_HERE__6____`:
 - `____YOUR_CODE_HERE__7____`:
 
-## Question: Explain the Story of One Training Step
+## Question: Explain One Training Step
 
 Explain the training step in words using this order:
 
