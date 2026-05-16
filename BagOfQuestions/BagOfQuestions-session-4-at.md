@@ -19,12 +19,9 @@ Your answer should use these exact terms:
 Then answer:
 
 1. Where in the code are pixels normalized?
-2. Where in the code are logits produced?
-3. Where in the code is cross-entropy computed?
-4. Where in the code are predictions converted into class indices?
-5. Where in the code are training and validation accuracy printed?
-6. Draw a single large schema connecting all parts of the training path.
-7. If validation accuracy is much lower than training accuracy, what problem might be happening?
+2. Where in the code are logits produced? Where in the code is cross-entropy computed?
+3. Where in the code are predictions converted into class indices? Where in the code are training and validation accuracy printed?
+4. Draw a single large schema connecting all parts of the training path. If validation accuracy is much lower than training accuracy, what problem might be happening?
 
 ## Question: Short Final Check
 

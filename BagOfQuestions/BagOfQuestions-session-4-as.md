@@ -16,9 +16,6 @@ Your figure should include:
 Then answer:
 
 1. Which boxes are layers in the `network` list?
-2. Which boxes are not layers in the `network` list but are still needed for loss or prediction?
-3. Which boxes contain trainable parameters?
-4. Which boxes are activation functions?
-5. Which box produces logits?
-6. Which box produces probabilities?
-7. Why is it useful to draw softmax separately from the final dense layer?
+2. Which boxes are not layers in the `network` list but are still needed for loss or prediction? Which boxes contain trainable parameters?
+3. Which boxes are activation functions? Which box produces logits?
+4. Which box produces probabilities? Why is it useful to draw softmax separately from the final dense layer?

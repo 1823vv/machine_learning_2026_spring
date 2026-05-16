@@ -15,8 +15,6 @@ y_k = 0 \quad \text{for} \quad k \neq c.
 $$
 
 1. What is the shape of a one-hot label for one example?
-2. What is the shape of a one-hot label matrix for $n$ examples?
-3. What information is stored by a sparse class label?
-4. Explain why sparse labels and one-hot labels can represent the same target.
-5. Why might sparse labels save memory when $K$ is large?
-6. Explain why a sparse class index should not be interpreted as a continuous numerical target.
+2. What is the shape of a one-hot label matrix for $n$ examples? What information is stored by a sparse class label?
+3. Explain why sparse labels and one-hot labels can represent the same target. Why might sparse labels save memory when $K$ is large?
+4. Explain why a sparse class index should not be interpreted as a continuous numerical target.

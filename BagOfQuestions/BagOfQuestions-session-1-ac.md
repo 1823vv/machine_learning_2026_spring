@@ -6,17 +6,10 @@ A house-price model uses three features:
 size, number_of_rooms, distance_to_city_center
 ```
 
-for short, let's call those three features $x_1$, $x_2$ and $x_3$.
+For short, call those features $x_1$, $x_2$, and $x_3$. Under the row-vector convention, one input is $x \in \mathbb{R}^{1 \times 3}$ and the model can be written as $\hat{y}=xW+b$.
 
-1. Write the multiple linear regression model in scalar form.
-2. Write the same model in row-vector form:
-
-   $$
-   \hat{y}=xW+b
-   $$
-
-3. If there are $d=3$ features, what are the shapes of $x$, $W$, $b$, and $\hat{y}$ for one sample?
-4. If we stack $n=100$ samples as rows in $X$, what is the shape of $X$?
-5. What is the shape of $\hat{Y}=XW+b$?
-6. Draw the matrix multiplication $XW$ and mark the inner dimensions that must match (hence your drawing should focus on showing the shape of matrices).
-7. If the weight for `distance_to_city_center` is negative, what might that mean?
+1. Write the multiple linear regression model in scalar form and in row-vector form.
+2. For one sample with $d=3$ features, state the shapes of $x$, $W$, $b$, and $\hat{y}$.
+3. If $n=100$ samples are stacked as rows in $X$, state the shapes of $X$ and $\hat{Y}=XW+\mathbf{1}b$.
+4. Draw the matrix multiplication $XW$ and mark the inner dimensions that must match.
+5. If the weight for `distance_to_city_center` is negative, explain what that might mean.

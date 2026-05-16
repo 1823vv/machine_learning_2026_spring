@@ -16,11 +16,7 @@ $$
 \ell = (\hat y - y)^2.
 $$
 
-1. Draw the computation graph from $x$ to $z$ to $\hat y$ to $\ell$.
-2. Write $\frac{\partial \ell}{\partial \hat y}$.
-3. Write $\frac{\partial \hat y}{\partial z}$.
-4. Use the chain rule to write $\delta = \frac{\partial \ell}{\partial z}$.
-5. Write $\frac{\partial \ell}{\partial W}$ in terms of $x^T$ and $\delta$.
-6. Write $\frac{\partial \ell}{\partial b}$.
-7. Write the gradient descent updates for $W$ and $b$ using learning rate $\eta$ and the notation $\leftarrow$.
-8. Explain why this is backpropagation even though the model has only one layer.
+1. Draw the computation graph from $x$ to $z$ to $\hat y$ to $\ell$. Write $\frac{\partial \ell}{\partial \hat y}$.
+2. Write $\frac{\partial \hat y}{\partial z}$. Use the chain rule to write $\delta = \frac{\partial \ell}{\partial z}$.
+3. Write $\frac{\partial \ell}{\partial W}$ in terms of $x^T$ and $\delta$. Write $\frac{\partial \ell}{\partial b}$.
+4. Write the gradient descent updates for $W$ and $b$ using learning rate $\eta$ and the notation $\leftarrow$. Explain why this is backpropagation even though the model has only one layer.

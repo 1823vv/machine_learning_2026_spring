@@ -1,6 +1,6 @@
 ## Question: Numerically Stable Softmax
 
-In `code-my_nn.py`, softmax is computed using:
+In our own NumPy neural-network implementation, softmax is computed using:
 
 ```python
 exp_logits = np.exp(logits - np.max(logits, axis=1, keepdims=True))
@@ -8,12 +8,9 @@ softmax_probs = exp_logits / np.sum(exp_logits, axis=1, keepdims=True)
 ```
 
 1. Why can directly computing `np.exp(logits)` be dangerous?
-2. What does `np.max(logits, axis=1, keepdims=True)` compute?
-3. Why do we subtract the maximum logit separately for each row/sample?
-4. Explain mathematically why subtracting the same constant from every logit in a row does not change softmax probabilities.
-5. Why is `keepdims=True` useful for broadcasting?
-6. Give an example of logits where direct exponentiation might overflow.
-7. Draw a before/after picture of a row of logits before and after subtracting the maximum.
+2. What does `np.max(logits, axis=1, keepdims=True)` compute? Why do we subtract the maximum logit separately for each row/sample?
+3. Explain mathematically why subtracting the same constant from every logit in a row does not change softmax probabilities. Why is `keepdims=True` useful for broadcasting?
+4. Give an example of logits where direct exponentiation might overflow. Draw a before/after picture of a row of logits before and after subtracting the maximum.
 
 ## Question: Epsilon in Cross-Entropy
 

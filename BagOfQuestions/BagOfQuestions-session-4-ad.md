@@ -3,12 +3,9 @@
 For a multi-class classification problem with $n$ samples and $K$ classes, let $Y_{i,k}$ be the one-hot label and $\hat{Y}_{i,k}$ be the predicted probability.
 
 1. Write the categorical cross-entropy loss over the full batch.
-2. For one sample, if the true class is class 3, simplify the cross-entropy loss.
-3. Explain why a confident correct prediction has small loss.
-4. Explain why a confident wrong prediction has large loss.
-5. Draw the curve of $-\log(p)$ as $p$ goes from 0 to 1.
-6. On your drawing, mark where the model is confident and correct.
-7. On your drawing, mark where the model is confident and wrong.
+2. For one sample, if the true class is class 3, simplify the cross-entropy loss. Explain why a confident correct prediction has small loss.
+3. Explain why a confident wrong prediction has large loss. Draw the curve of $-\log(p)$ as $p$ goes from 0 to 1.
+4. On your drawing, mark where the model is confident and correct. On your drawing, mark where the model is confident and wrong.
 
 ## Question: One-Hot Labels
 

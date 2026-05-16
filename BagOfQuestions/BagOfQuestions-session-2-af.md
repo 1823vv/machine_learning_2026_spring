@@ -3,13 +3,13 @@
 We are implementing binary logistic regression `class MyOwnLogisticRegression` from scratch with NumPy. The model receives a feature matrix `X` with shape `(n_samples, n_features)` and a binary target vector `y` with values in `{0, 1}`. First we compute the linear score
 
 $$
-z = Xw + b,
+z=XW+\mathbf{1}b,
 $$
 
 then we convert it to a probability with the sigmoid function
 
 $$
-\sigma(z) = \frac{1}{1 + e^{-z}}.
+\sigma(z)=\frac{1}{1+e^{-z}}.
 $$
 
 Fill in the `____YOUR_CODE_HERE__N_____` blanks in the code skeleton below.
@@ -66,7 +66,6 @@ Your answer goes here, after the `:`:
 
 Then answer the following short questions:
 
-1. Why does logistic regression need the sigmoid function after the linear score?
+1. Why does logistic regression need the sigmoid function after the linear score, and what does `y_probability` mean before it is converted into class labels?
 2. Why is the gradient coefficient `(1 / n_samples)` here instead of `(2 / n_samples)` as in the usual MSE formula for linear regression?
 3. What probability threshold is used in this `predict` function?
-4. What does `y_probability` mean before it is converted into class labels?

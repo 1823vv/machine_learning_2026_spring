@@ -14,12 +14,7 @@ $$
 
 The forward equations are $z=xW+b$ and $\hat y=z$. The loss is $\ell=(\hat y-y)^2$.
 
-1. Compute $z$.
-2. Compute $\hat y$.
-3. Compute $\ell$.
-4. Compute $\frac{\partial \ell}{\partial \hat y}$.
-5. Compute $\delta=\frac{\partial \ell}{\partial z}$.
-6. Compute $\frac{\partial \ell}{\partial W}=x^T\delta$.
-7. Compute $\frac{\partial \ell}{\partial b}$.
-8. With learning rate $\eta=0.1$, compute the updated $W$ and $b$.
-9. Draw the scalar computation graph and place each gradient beside the corresponding edge.
+1. Compute $z$. Compute $\hat y$.
+2. Compute $\ell$. Compute $\frac{\partial \ell}{\partial \hat y}$.
+3. Compute $\delta=\frac{\partial \ell}{\partial z}$. Compute $\frac{\partial \ell}{\partial W}=x^T\delta$.
+4. Compute $\frac{\partial \ell}{\partial b}$. With learning rate $\eta=0.1$, compute the updated $W$ and $b$. Draw the scalar computation graph and place each gradient beside the corresponding edge.

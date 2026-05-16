@@ -1,6 +1,6 @@
 ## Question: Fill in the Training Function
 
-Fill in the blanks in this NumPy neural-network training function:
+In our own NumPy neural-network implementation, one training step runs a forward pass, computes softmax cross-entropy, and then walks backward through the layer list. Fill in the `____YOUR_CODE_HERE__N____` blanks.
 
 ```python
 def train(network, X, y):
@@ -17,7 +17,7 @@ def train(network, X, y):
     return ____YOUR_CODE_HERE__7____
 ```
 
-Your answers:
+Your answer goes here, after the `:`:
 
 - `____YOUR_CODE_HERE__1____`:
 - `____YOUR_CODE_HERE__2____`:
@@ -29,8 +29,4 @@ Your answers:
 
 ## Question: Explain One Training Step
 
-Explain the training step in words using this order:
-
-```text
-X -> forward -> logits -> loss -> initial gradient -> reverse layer loop -> parameter updates
-```
+Explain one training step in words using this order: `X -> forward -> logits -> loss -> initial gradient -> reverse layer loop -> parameter updates`.

@@ -1,12 +1,9 @@
-## Question: GitHub Pull Request Workflow 
+## Question: GitHub Pull Request Workflow
 
-We are working on a team project with Git/GitHub workflow.
+We are working on a team project with a Git/GitHub workflow. A pull request is used to propose changes, review them, and merge them safely.
 
-1. What is a GitHub Pull Request?
-2. Why should you usually create a feature branch before making changes?
-3. Write the command to create and switch to a new branch named `feature/linear-regression-notes`.
-4. After editing files, write the commands to stage and commit changes.
-5. Write the command to push the branch to GitHub.
-6. After pushing, what steps happen on GitHub to create the PR?
-7. What should reviewers do before merging?
-
+1. Explain what a GitHub Pull Request is and why a feature branch is usually created before making changes.
+2. Write the command to create and switch to a new branch named `feature/linear-regression-notes`.
+3. After editing files, write the commands to stage and commit changes.
+4. Write the command to push the branch to GitHub, and describe what steps happen on GitHub to create the pull request.
+5. Explain what reviewers should check before merging.

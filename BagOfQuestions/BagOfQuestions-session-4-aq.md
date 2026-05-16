@@ -7,12 +7,9 @@ loss, grad_logits = softmax_crossentropy_with_logits(logits, y)
 ```
 
 1. What are `logits`?
-2. What is `y`?
-3. What scalar does `loss` represent?
-4. What does `grad_logits` represent in the training loop?
-5. Why does the function combine softmax and cross-entropy instead of requiring a separate softmax layer at the end of the network?
-6. What is the shape of `grad_logits` if `logits.shape == (256, 10)`?
-7. Draw a diagram showing how logits and labels enter the loss function.
+2. What is `y`? What scalar does `loss` represent?
+3. What does `grad_logits` represent in the training loop? Why does the function combine softmax and cross-entropy instead of requiring a separate softmax layer at the end of the network?
+4. What is the shape of `grad_logits` if `logits.shape == (256, 10)`? Draw a diagram showing how logits and labels enter the loss function.
 
 ## Question: Last Dense Layer
 

@@ -35,6 +35,20 @@ Operational rules:
 
 ---
 
+
+### Recent Instructor Style: Concise, High-Density Prompts
+
+The latest instructor-edited Session 7 files show an additional style preference that future agents should imitate when revising neighboring generated files:
+
+1. Prefer fewer, higher-density numbered items over long checklist-style lists. It is often better to merge tightly related requests into one item, for example asking students to draw both training/validation accuracy and loss curves in the same sub-question.
+2. Keep rich conceptual tasks, drawings, and small calculations, but avoid splitting every tiny step into its own numbered line when the ideas naturally belong together. A question with about three to five substantial numbered items is often preferable to one with seven to ten tiny items.
+3. It is acceptable to replace a less relevant second `## Question` block with one stronger standalone block if that makes the file more focused and easier to use directly. Do not recreate deleted files or deleted question styles just because older instructions mention them.
+4. For fill-in-the-blank prose questions, `_____YOUR_TEXT_HERE_N_____` placeholders are acceptable when the expected answer is a short phrase rather than Python code. For code skeletons, continue using the established `____YOUR_CODE_HERE__N_____` placeholder style.
+5. Prefer direct, student-facing language such as "In our own NumPy neural-network implementation" over repository filenames. Use exact file paths only for the agent's internal inspection, not in the question text.
+6. When a question asks for explanation, drawing, and interpretation, combine related tasks into a coherent scenario rather than producing a long isolated list of micro-prompts.
+
+---
+
 ## Core Principle: Every `## Question` Must Stand Alone
 
 The most important rule is:

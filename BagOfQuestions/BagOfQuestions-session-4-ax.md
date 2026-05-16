@@ -17,9 +17,6 @@ $$
 $$
 
 1. Draw the computation graph from $x$ to $z$ to $\hat y$ to $\ell$.
-2. Write the derivative $\frac{d\sigma}{dz}$ in terms of $\hat y$.
-3. Write $\frac{\partial \ell}{\partial \hat y}$.
-4. Use the chain rule to show that $\frac{\partial \ell}{\partial z}=\hat y-y$.
-5. Write $\frac{\partial \ell}{\partial W}$ in terms of $x^T$ and $\hat y-y$.
-6. Write $\frac{\partial \ell}{\partial b}$.
-7. Explain why the error signal $\hat y-y$ is central to logistic-regression training.
+2. Write the derivative $\frac{d\sigma}{dz}$ in terms of $\hat y$. Write $\frac{\partial \ell}{\partial \hat y}$.
+3. Use the chain rule to show that $\frac{\partial \ell}{\partial z}=\hat y-y$. Write $\frac{\partial \ell}{\partial W}$ in terms of $x^T$ and $\hat y-y$.
+4. Write $\frac{\partial \ell}{\partial b}$. Explain why the error signal $\hat y-y$ is central to logistic-regression training.

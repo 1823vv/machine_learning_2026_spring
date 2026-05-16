@@ -7,12 +7,9 @@ z = [2, 1, 0]
 $$
 
 1. Write the softmax formula.
-2. Compute the exponentials approximately using $e^2 \approx 7.39$, $e^1 \approx 2.72$, and $e^0=1$.
-3. Compute the sum of exponentials.
-4. Compute the three softmax probabilities approximately.
-5. Check that the probabilities sum to approximately 1.
-6. Which class is predicted by argmax?
-7. Draw a bar chart of the three logits and another bar chart of the three softmax probabilities.
+2. Compute the exponentials approximately using $e^2 \approx 7.39$, $e^1 \approx 2.72$, and $e^0=1$. Compute the sum of exponentials.
+3. Compute the three softmax probabilities approximately. Check that the probabilities sum to approximately 1.
+4. Which class is predicted by argmax? Draw a bar chart of the three logits and another bar chart of the three softmax probabilities.
 
 ## Question: Negative Logits Are Fine
 
