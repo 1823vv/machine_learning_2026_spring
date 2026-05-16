@@ -1,20 +1,23 @@
-# Why Inverted Dropout?
+# Why Inverted Dropout
 
 ![](./img/whyinverteddropout.png)
 
+---
+
 ## 1. Question
 
-In our neural-network-from-scratch implementation (and in the underlying dropout implementations used by frameworks such as PyTorch and TensorFlow), why do we divide the sampled dropout mask by the keep probability $1-p$?
-
+In our neural-network-from-scratch implementation, as well as in PyTorch and TensorFlow-style APIs, why does dropout use
 ```python
 self.mask = np.random.binomial(1, 1 - self.p, size=input.shape) / (1 - self.p)
 ```
 
-## 2. Short Answer
+Here $p$ is the drop probability, so the keep probability is $1-p$. We assume $0 \le p < 1$.
 
-Inverted dropout keeps the expected activation magnitude constant during training.
+---
 
-When we apply Dropout during training, we randomly "drop" (zero out) each unit with probability $p$. If we only did
+## 2. Answer: Keep the Expected Activation Magnitude Constant
+
+When we apply dropout during training, we randomly "drop" (zero out) each unit with probability $p$. If we only did
 
 ```python
 mask = np.random.binomial(1, 1 - p, size=input.shape)
@@ -45,8 +48,6 @@ self.mask = np.random.binomial(1, 1 - self.p, size=input.shape) / (1 - self.p)
    By scaling at *training* time, we don't need to do any special scaling at *inference* time—when we set `self.training = False`, our `forward` simply returns the raw inputs (no mask), and we've already preserved the correct activation magnitudes.
 
 This approach—often called **inverted dropout**—is the standard way to implement dropout because it simplifies the forward pass at test time (no extra scaling needed) while ensuring that both training and inference use activations on the same scale.
-
-
 
 ## 3. Compared to the Initial Dropout Implementation
 
@@ -90,13 +91,13 @@ See the original article proposing Dropout:
 
 ![](./img/dp.jpg)
 
-## 4. Still Lost? Why the Paper's $p$ Looks Different
+## 4. Notation Difference in the Original Dropout Paper
 
 <details>
 <summary>
-Surprise!
+Details
 </summary>
-The <b>p</b> in the original article is the probability of a unit being <b>present</b>, while in our implementation (and in the implementations of TensorFlow and PyTorch), it is the probability of a unit being <b>dropped</b>.
+The important detail is that <b>p</b> in the original paper denotes the probability of a unit being <b>present</b>, while in our implementation, TensorFlow, and PyTorch, <b>p</b> denotes the probability of a unit being <b>dropped</b>.
 
 ![](./img/pd-1.jpg)
 </details>

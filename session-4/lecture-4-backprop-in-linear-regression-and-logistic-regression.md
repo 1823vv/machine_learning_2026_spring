@@ -45,11 +45,11 @@ For one sample, the forward pass is a chain of operations:
 
 
 $$
-x \longrightarrow \boxed{\times W}  \longrightarrow \boxed{+b} \longrightarrow z\longrightarrow \hat{y} \longrightarrow \boxed{- y}  \longrightarrow  \boxed{(\cdot)^2} \longrightarrow \ell
+x \longrightarrow \boxed{\times W}  \longrightarrow \boxed{+b} \longrightarrow z = \hat{y} \longrightarrow \boxed{- y}  \longrightarrow  \boxed{(\cdot)^2} \longrightarrow \ell
 $$
 
 
-Where $z^{(i)} = x^{(i)} W$ is the linear projection and $\ell^{(i)} = (\hat{y}^{(i)} - y^{(i)})^2$ is the per-example squared error.
+Where $z^{(i)} = x^{(i)} W + b$ is the linear pre-activation, $\hat{y}^{(i)} = z^{(i)}$ because linear regression uses no activation function, and $\ell^{(i)} = (\hat{y}^{(i)} - y^{(i)})^2$ is the per-example squared error.
 
 ### 2.3 Backward Pass: Chain Rule
 
@@ -67,7 +67,7 @@ $$
 
 **Step 2: Gradient of prediction w.r.t. pre-activation**
 
-Since $\hat{y}^{(i)} = z^{(i)} + b$:
+Since $\hat{y}^{(i)} = z^{(i)}$:
 
 $$
 \frac{\partial \hat{y}^{(i)}}{\partial z^{(i)}} = 1
@@ -75,7 +75,7 @@ $$
 
 **Step 3: Gradient of pre-activation w.r.t. weights**
 
-Since $z^{(i)} = x^{(i)} W$:
+Since $z^{(i)} = x^{(i)} W + b$:
 
 $$
 \underbrace{\frac{\partial z^{(i)}}{\partial W}}_{\text{linear gradient}} = \underbrace{x^{(i)T}}_{\text{input transpose}}

@@ -129,4 +129,4 @@ High degree:
 
 * very flexible
 * fits noise
-* overfitting 
+* overfitting

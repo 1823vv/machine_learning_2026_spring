@@ -265,7 +265,7 @@ $$
 
 **Layer 1 (Input $\rightarrow$ Hidden 1):**
 $$
-Z^{(1)} = XW^{(1)} + b^{(1)}, \quad A^{(1)} = \text{ReLU}(Z^{(1)})
+Z^{(1)} = X W^{(1)} + b^{(1)}, \quad A^{(1)} = \text{ReLU}(Z^{(1)})
 $$
 Where: $W^{(1)} \in \mathbb{R}^{784 \times 64}$, $b^{(1)} \in \mathbb{R}^{1 \times 64}$
 
