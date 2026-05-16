@@ -1,18 +1,20 @@
-## Question: Regression Metrics — MSE, MAE, and R²
+## Question: Regression Metrics — MSE, MAE, and $R^2$
 
-For a regression model, we have true targets $y^{(i)}$ and predictions $\hat{y}^{(i)}$.
+For regression, suppose the true targets are $y^{(i)}$, predictions are $\hat y^{(i)}$, and there are $n$ examples.
 
-1. Write the formula for Mean Squared Error.
-2. Write the formula for Mean Absolute Error, using the course convention for absolute value.
+1. Write the mean squared error formula.
+2. Write the mean absolute error formula using double pipes for absolute value.
 3. Explain why MSE penalizes large errors more strongly than MAE.
-4. Draw two error bars, one small and one large, and explain how MSE and MAE treat them differently.
-5. Define $SS_{res}$.
-6. Define $SS_{tot}$.
-7. Write the formula for $R^2$.
-8. Explain the meaning of $R^2=1$, $R^2=0$, and $R^2<0$.
+4. Explain why MAE can be easier to interpret in the original target unit.
+5. Write the $R^2$ formula or explain its meaning in words.
+6. Give one situation where $R^2$ can be misleading.
 
-## Question: Which Metric Would You Use?
+## Question: Which Regression Metric Would You Use?
 
-1. If outliers are very important and should be punished strongly, would you prefer MSE or MAE?
-2. If you want an error measured in the same unit scale as the target, why might MAE be easier to interpret?
-3. Why is $R^2$ a relative metric rather than an absolute error metric?
+A model predicts apartment prices. Most predictions are close, but a few luxury apartments have very large prediction errors.
+
+1. Which metric, MSE or MAE, is more sensitive to the luxury-apartment errors?
+2. Which metric might be more robust to those few large errors?
+3. If large errors on luxury apartments are very costly, which metric might you emphasize?
+4. Draw a small residual plot with a few large outliers.
+5. Explain why reporting more than one regression metric can be helpful.

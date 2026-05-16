@@ -1,28 +1,21 @@
 ## Question: L1 and L2 Optimization View
 
-For L2 regularization, the objective includes:
+Regularized training can be viewed as minimizing a loss while penalizing the size of weights. L1 and L2 penalties have different mathematical shapes.
 
-$$
-\lambda \sum_{j=1}^{d} W_j^2
-$$
-
-For L1 regularization, the objective includes:
-
-$$
-\lambda \sum_{j=1}^{d} \|W_j\|
-$$
-
-1. Write the gradient contribution of L2 regularization for weight $W_j$.
-2. Write the gradient contribution of L1 regularization for weight $W_j$ away from zero.
-3. Write the L2 update rule for $W_j$ using leftarrow notation.
-4. Rewrite the L2 update to show the multiplicative shrinkage term on $W_j$.
-5. Explain why L2 is called weight decay.
-6. Write the L1 update rule for $W_j$ using leftarrow notation.
-7. Explain why L1 can drive weights exactly to zero more naturally than L2.
-8. Draw a number line showing how a positive weight and a negative weight are both pushed toward zero by L1.
+1. Write the L1 penalty using double pipes for absolute value.
+2. Write the L2 penalty.
+3. Draw the contour shape of an L1 constraint in two dimensions.
+4. Draw the contour shape of an L2 constraint in two dimensions.
+5. Explain why L1 is more likely to produce exactly zero weights.
+6. Explain why L2 usually shrinks weights smoothly instead of setting many exactly to zero.
+7. In one sentence, connect regularization to model generalization.
 
 ## Question: Smooth versus Non-Smooth
 
-1. Why is L2 smooth at zero?
-2. Why is L1 non-smooth at zero?
-3. How does this difference relate to sparsity?
+The L2 penalty is smooth, while the L1 penalty has a sharp corner at zero. This difference matters for optimization and sparsity.
+
+1. Draw the one-dimensional functions $\|w\|$ and $w^2$.
+2. Where is the L1 penalty non-smooth?
+3. Why does the L1 corner help produce sparse solutions?
+4. Why is L2 often easier to optimize with gradient-based methods?
+5. Give one practical reason to prefer sparse models.

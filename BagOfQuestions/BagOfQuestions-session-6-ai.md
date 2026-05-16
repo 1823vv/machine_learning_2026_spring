@@ -1,19 +1,19 @@
 ## Question: L1/L2 Geometry — Diamond, Circle, and First Touch
 
-Regularized optimization can be viewed as minimizing loss subject to a constraint.
+In two dimensions, regularized optimization can be visualized by drawing loss contours and a constraint region. L1 has a diamond-shaped region, while L2 has a circular region.
 
-1. Write the L2 constrained form.
-2. Write the L1 constrained form.
-3. Draw the L2 constraint in two dimensions as a circle.
-4. Draw the L1 constraint in two dimensions as a diamond.
-5. Draw elliptical loss contours around an unconstrained optimum.
-6. Mark the point where a loss contour first touches the L2 constraint.
-7. Mark the point where a loss contour first touches the L1 constraint.
-8. Explain why the corners of the L1 diamond make sparse solutions more likely.
-9. Explain why L2 solutions are usually dense rather than exactly sparse.
+1. Draw elliptical loss contours for a two-weight model with parameters $W_1$ and $W_2$.
+2. Draw the L1 constraint region as a diamond.
+3. Draw the L2 constraint region as a circle.
+4. Explain the “first touch” idea between a loss contour and a constraint region.
+5. Why does the diamond shape make it more likely that the solution has $W_1=0$ or $W_2=0$?
 
 ## Question: Connecting Geometry to Feature Selection
 
-1. What does it mean for a weight to become exactly zero?
-2. Why can zero weights be interpreted as feature selection?
-3. Which regularization method is more useful for this behavior?
+L1 regularization is often connected to feature selection because it can set some weights exactly to zero.
+
+1. Explain why a zero weight can mean a feature is not used by a linear model.
+2. Why does L1 regularization tend to create sparse solutions?
+3. Why does L2 regularization usually keep many small nonzero weights?
+4. Give one advantage of feature selection.
+5. Give one risk of relying only on automatic feature selection.

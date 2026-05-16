@@ -1,37 +1,30 @@
 ## Question: Inverted Dropout Formula and Expectation
 
-In inverted dropout, we scale the kept activations during training.
+In inverted dropout, each activation is multiplied by a random mask during training. For dropout probability $p$, the keep probability is $1-p$:
 
-1. Write the formula for the inverted dropout mask:
+$$
+\text{mask} \sim \frac{\mathrm{Bernoulli}(1-p)}{1-p}.
+$$
 
-   $$
-   m_i \sim ?
-   $$
+The dropout output for an activation $a$ is
 
-2. If dropout probability is $p$, what is the probability that a unit is kept?
-3. If a unit is kept, what value does the inverted dropout mask take?
-4. If a unit is dropped, what value does the mask take?
-5. Show that
+$$
+\tilde a = a \cdot \text{mask}.
+$$
 
-   $$
-   \mathbb{E}[m_i] = 1
-   $$
-
-   for inverted dropout.
-6. Therefore, show that for an activation $h_i$,
-
-   $$
-   \mathbb{E}[h_i m_i] = h_i.
-   $$
-
-7. Explain why this makes inference simpler.
+1. What is the probability that a unit is kept?
+2. What is the probability that a unit is dropped?
+3. Why do we divide by $1-p$ in inverted dropout?
+4. Show that the expected value of $\tilde a$ equals $a$.
+5. What happens during inference when using inverted dropout?
+6. Draw a small network showing dropped units and scaled surviving units.
 
 ## Question: Original Dropout versus Inverted Dropout
 
-Create a table comparing original dropout and inverted dropout with these rows:
+There are two common ways to handle dropout scaling: scale activations at training time, or scale them at inference time.
 
-1. train-time mask,
-2. train-time scaling,
-3. inference-time scaling,
-4. whether inference is a no-op,
-5. why the course implementation prefers inverted dropout.
+1. In inverted dropout, when are surviving activations scaled?
+2. In original dropout, when are activations scaled?
+3. Why is inverted dropout convenient at inference time?
+4. What would go wrong if we dropped units during inference for normal prediction?
+5. Explain the phrase “training mode versus evaluation mode” for dropout.

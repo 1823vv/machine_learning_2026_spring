@@ -1,26 +1,21 @@
-## Question: Confusion Matrix Story
+## Question: Confusion Matrix Scenario
 
-Consider a binary classifier with this confusion matrix:
+A binary classifier predicts whether an email is spam. Use the following notation: TP, FP, FN, and TN.
 
-|                 | Predicted Positive | Predicted Negative |
-| --------------- | ------------------ | ------------------ |
-| Actual Positive | 40                 | 10                 |
-| Actual Negative | 20                 | 130                |
-
-1. Identify $TP$, $FN$, $FP$, and $TN$.
-2. Compute accuracy.
-3. Compute precision.
-4. Compute recall.
-5. Compute F1 score.
-6. In words, interpret the precision value.
-7. In words, interpret the recall value.
-8. Draw the confusion matrix and mark which cells correspond to mistakes.
+1. Define TP in this spam-classification context.
+2. Define FP in this context.
+3. Define FN in this context.
+4. Define TN in this context.
+5. Draw a 2-by-2 confusion matrix with predicted labels on one axis and true labels on the other axis.
+6. Write formulas for accuracy, precision, recall, and F1.
+7. Explain which error type is more annoying for a user: FP or FN. Justify your answer.
 
 ## Question: Multi-Class Extension
 
-For MNIST digit classification, the confusion matrix is $10\times 10$.
+For multiclass classification, such as recognizing digits from 0 to 9, there are more than two possible labels. A confusion matrix can still summarize predictions.
 
-1. What does each row represent?
-2. What does each column represent?
-3. What does a large off-diagonal value mean?
-4. How could a confusion matrix reveal that the model often confuses digit 4 and digit 9?
+1. What is the shape of a confusion matrix for 10-class digit classification?
+2. What does a diagonal entry represent?
+3. What does an off-diagonal entry represent?
+4. How can a confusion matrix reveal that the model confuses two specific classes?
+5. Draw a small example showing confusion between digit 4 and digit 9.

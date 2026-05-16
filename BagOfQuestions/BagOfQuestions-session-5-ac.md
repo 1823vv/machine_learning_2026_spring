@@ -1,30 +1,34 @@
-## Question: Full-Batch GD versus Mini-Batch SGD
+## Question: Full-Batch Gradient Descent versus Mini-Batch SGD
 
-For a dataset with $n$ samples, full-batch gradient descent uses:
+For a dataset $\mathcal{D}=\{(x^{(i)},y^{(i)})\}_{i=1}^n$, full-batch gradient descent computes a gradient using all $n$ training examples. Mini-batch SGD computes a gradient using a mini-batch $\mathcal{B}$ of size $B$, where $1 < B \ll n$ in the practical mini-batch meaning of SGD.
 
-$$
-g = \frac{1}{n}\sum_{i=1}^{n}\frac{\partial \mathcal{L}_i}{\partial W}
-$$
-
-Mini-batch SGD uses:
+Full-batch gradient:
 
 $$
-g = \frac{1}{B}\sum_{i\in\mathcal{B}}\frac{\partial \mathcal{L}_i}{\partial W}
+g = \frac{1}{n}\sum_{i=1}^{n}\frac{\partial \ell^{(i)}}{\partial W}.
+$$
+
+Mini-batch gradient:
+
+$$
+g = \frac{1}{B}\sum_{i\in\mathcal{B}}\frac{\partial \ell^{(i)}}{\partial W}.
 $$
 
 1. Explain the meaning of $B$ and $\mathcal{B}$.
-2. What is the batch size for full-batch GD?
+2. What is the batch size for full-batch gradient descent?
 3. What is the batch size for one-sample SGD?
-4. What is the usual meaning of “SGD” in this course?
-5. Draw two optimization paths:
-   - a smooth full-batch GD path,
-   - a noisy mini-batch SGD path.
-6. Why is full-batch GD expensive for very large datasets?
+4. What is the usual practical meaning of “SGD” in modern mini-batch training?
+5. Draw two optimization paths: a smooth full-batch path and a noisier mini-batch path.
+6. Why can full-batch gradient descent be expensive for very large datasets?
 7. Why can mini-batch SGD be faster in practice?
-8. Why can mini-batch noise sometimes help escape saddle points or shallow bad regions?
+8. Why can mini-batch noise sometimes help optimization?
 
-## Question: Batch Size Trade-off
+## Question: Batch Size Trade-Off
 
-1. What happens when the batch size is very small?
-2. What happens when the batch size is very large?
+In mini-batch training, the batch size $B$ affects computation time, gradient noise, memory use, and sometimes generalization.
+
+1. What usually happens when the batch size is very small?
+2. What usually happens when the batch size is very large?
 3. Why does batch size interact with learning rate?
+4. Give one reason a practitioner might choose a medium-sized mini-batch instead of using the entire dataset.
+5. Draw a simple comparison of noisy small-batch updates and smoother large-batch updates.

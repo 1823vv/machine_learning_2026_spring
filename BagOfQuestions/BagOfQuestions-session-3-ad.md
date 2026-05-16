@@ -1,34 +1,15 @@
 ## Question: Output Layers Depend on the Task
 
-TODO BY AI: no need for table. go for a bit more math. While very good set of questions, we have too many sub-questions here.
+A neural network's final layer must match the prediction task. Assume that the last hidden representation of one example is a vector $h$. The network then produces logits or outputs using a final affine transformation such as
 
-The last layer of a neural network should match the prediction task.
+$$
+z = Wh + b.
+$$
 
+For each case below, write the appropriate output dimension, the usual final activation, and the typical loss formula.
 
-
-Create a table with these columns:
-
-```text
-Task | Output dimension | Output activation | Typical loss
-```
-
-Fill the table for:
-
-1. regression with one continuous target,
-2. binary classification,
-3. multiclass classification with 10 classes.
-
-Then answer:
-
-4. Why is a linear output natural for regression?
-5. Why is sigmoid natural for binary classification?
-6. Why is softmax natural for multiclass classification?
-7. Why should the output layer be designed together with the loss function?
-
-## Question: MNIST Output
-
-For MNIST digit classification:
-
-1. How many output neurons are needed?
-2. What does each output neuron represent before softmax?
-3. What does each output value represent after softmax?
+1. **One-output regression.** The target is one continuous number $y \in \mathbb{R}$. What should the output dimension be? Should the final output usually be linear, sigmoid, or softmax? Write the mean squared error loss for one example.
+2. **Binary classification.** The target is $y \in \{0,1\}$. What should the output dimension be if we use one logit? Write the sigmoid formula $\sigma(z)$. Write the binary cross-entropy loss for one example.
+3. **Multiclass classification with 10 classes.** The target class is $c \in \{0,1,\ldots,9\}$. What should the output dimension be? Write the softmax formula for class $k$. Write the cross-entropy loss for one example using the correct class $c$.
+4. In words, explain why the output layer and the loss function should be designed together.
+5. For MNIST digit classification, what does each output neuron represent before softmax, and what does each output value represent after softmax?
