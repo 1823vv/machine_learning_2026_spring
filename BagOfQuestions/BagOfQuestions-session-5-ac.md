@@ -15,9 +15,8 @@ g = \frac{1}{B}\sum_{i\in\mathcal{B}}\frac{\partial \ell^{(i)}}{\partial W}.
 $$
 
 1. Explain the meaning of $B$ and $\mathcal{B}$. What is the batch size for full-batch gradient descent?
-2. What is the batch size for one-sample SGD? What is the usual practical meaning of “SGD” in modern mini-batch training?
-3. Draw two optimization paths: a smooth full-batch path and a noisier mini-batch path. Why can full-batch gradient descent be expensive for very large datasets?
-4. Why can mini-batch SGD be faster in practice? Why can mini-batch noise sometimes help optimization?
+2. Draw two optimization paths: a smooth full-batch path and a noisier mini-batch path. Why can full-batch gradient descent be expensive for very large datasets?
+3. Why can mini-batch SGD be faster in practice? Why can mini-batch noise sometimes help optimization?
 
 ## Question: Batch Size Trade-Off
 

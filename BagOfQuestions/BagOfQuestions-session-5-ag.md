@@ -14,12 +14,3 @@ $$
 2. What is the meaning of the time step $t$? Explain why the correction factor is especially important for small $t$.
 3. What happens to $1-\beta_1^t$ as $t$ becomes large? What happens to $1-\beta_2^t$ as $t$ becomes large?
 4. Write the full Adam update rule using $\hat m$, $\hat v$, $\eta$, and $\epsilon$.
-
-## Question: Adam Notation Alert
-
-In optimization, the symbol $v$ can mean different things depending on the algorithm. In momentum, $v$ usually means velocity. In Adam, $v$ usually means a second-moment moving average of squared gradients.
-
-1. In momentum, what does $v$ store?
-2. In Adam, what does $v$ store? Why can using the same symbol be confusing?
-3. Why is it important to define notation before writing formulas in a written answer?
-4. Rewrite one sentence explaining Adam's $v$ without using the word “velocity.”

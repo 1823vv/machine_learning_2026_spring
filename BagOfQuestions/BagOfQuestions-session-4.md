@@ -1,23 +1,3 @@
-# Bag of Questions - Session 4
-> For Session 4, we will focus on code `code-my_nn.py`, with some elements from lecture md files
-
-
-
-## Question
-
-What is the mathematical formula for cross-entropy loss? 
-
-
-## Question
-
-
-What is the difference between **logits** and **probabilities**?
-
-
-Why is `np.max(logits, axis=1, keepdims=True)` subtracted before exponentiation in softmax? What's the mathmatical explanation for doing this?
-
-
-
 ## Question
 
 In our NN from scratch implementation, If we replace ReLU with Sigmoid, what changes mathematically and practically?
