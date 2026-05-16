@@ -1,8 +1,8 @@
 ## Question: Alternative Activation Layers
 
-A neural-network implementation can replace ReLU with other activation functions.
+A NumPy neural network can replace ReLU with other activation functions while keeping the same layer interface: `forward(self, input)` returns the layer output, and `backward(self, grad_output)` returns the gradient with respect to the layer input.
 
-1. Write the formula for the sigmoid activation function.
-2. Write a Python class `Sigmoid(Layer)` with `forward` and `backward` methods. Write the formula for Leaky ReLU.
-3. Write a Python class `LeakyReLU(Layer)` with `forward` and `backward` methods. Draw ReLU and Leaky ReLU on the same axes.
-4. Explain one possible practical advantage of Leaky ReLU compared with ReLU. Explain one possible practical disadvantage of sigmoid in deeper neural networks.
+1. Write the sigmoid formula and its derivative in terms of the sigmoid output. Then write the Leaky ReLU formula and its derivative using negative-side slope $\alpha=0.01$.
+2. Fill in a short code sketch for `Sigmoid(Layer)` and `LeakyReLU(Layer)`. In both classes, the forward method should store `self.input = input` before returning the activation.
+3. Draw ReLU and Leaky ReLU on the same axes. Use the drawing to explain the possible advantage of Leaky ReLU when many inputs are negative.
+4. Explain why sigmoid outputs are useful as probabilities in binary classification but can be less convenient inside many hidden layers.

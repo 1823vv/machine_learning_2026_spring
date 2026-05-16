@@ -1,20 +1,22 @@
-## Question: The `forward(network, X)` Function
+## Question: Logistic Regression as a Sigmoid Computation Graph
 
-A minimal NumPy neural-network implementation uses:
+Treat binary logistic regression as a one-layer neural network with sigmoid activation. For one example,
 
-```python
-def forward(network, X):
-    activations = []
-    input = X
+$$
+z=xW+b,
+$$
 
-    for layer in network:
-        input = layer.forward(input)
-        activations.append(input)
+$$
+\hat y=\sigma(z)=\frac{1}{1+e^{-z}},
+$$
 
-    return activations
-```
+where $x \in \mathbb{R}^{1 \times d}$, $W \in \mathbb{R}^{d \times 1}$, $b \in \mathbb{R}^{1 \times 1}$, and $y \in \{0,1\}$. The binary cross-entropy loss is
 
-1. What does this function return?
-2. If the network has 5 layers in the list, how many activation objects are returned? Why is `input` reassigned after each layer?
-3. What is `activations[-1]`? Why is the final output called logits instead of probabilities?
-4. Draw a table with one row per layer for the MNIST network and include the output shape of each layer for batch size 128. Should `forward(network, X)` modify weights? Explain.
+$$
+\ell=-\left[y\log(\hat y)+(1-y)\log(1-\hat y)\right].
+$$
+
+1. Draw the computation graph from $x$ to $z$ to $\hat y$ to $\ell$.
+2. Write $\frac{\partial \ell}{\partial \hat y}$ and $\frac{\partial \hat y}{\partial z}$.
+3. Multiply these two derivatives and simplify to get $\delta=\frac{\partial \ell}{\partial z}=\hat y-y$.
+4. Write $\frac{\partial \ell}{\partial W}=x^T\delta$ and $\frac{\partial \ell}{\partial b}=\delta$. Explain why this error signal is simpler than the two separate derivatives look at first.
