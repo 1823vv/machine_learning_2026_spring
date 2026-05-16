@@ -1,4 +1,4 @@
-## Question: DeepSeek-Style Model Size Comparison with Easy Numbers
+## Question: DeepSeek-Style Model Size Comparison
 
 A team describes two tiny DeepSeek-style language-model demos. The names sound advanced, but the counting is only dense-layer parameter counting. Both models use a vocabulary of $1000$ tokens and output one score for each possible next token.
 
@@ -8,4 +8,3 @@ Model A uses hidden width $10$. It has one dense layer from $10$ inputs to $20$ 
 2. For Model B, count the parameters in the first dense layer and in the output layer.
 3. Compute the total counted parameters for Model A and for Model B.
 4. Which part is larger in each model: the small internal dense layer or the output vocabulary layer? Explain using the numbers.
-5. Does doubling the internal sizes make every parameter count double? Use the two totals to support your answer.
