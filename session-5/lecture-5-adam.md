@@ -44,7 +44,7 @@ Adam tracks two moving averages:
 ### 3.1 First Moment — Mean of Gradients
 
 $$
-m^{(t)} = \beta_1 m^{(t-1)} + (1-\beta_1) g
+m^{(t)} \leftarrow \beta_1 m^{(t-1)} + (1-\beta_1) g
 $$
 
 * Similar to momentum's $v$: both smooth the raw gradient $g$
@@ -60,7 +60,7 @@ $$
 ### 3.2 Second Moment — Mean of Squared Gradients
 
 $$
-v^{(t)} = \beta_2 v^{(t-1)} + (1-\beta_2) g^2
+v^{(t)} \leftarrow \beta_2 v^{(t-1)} + (1-\beta_2) g^2
 $$
 
 * Measures **gradient magnitude and variability**
@@ -87,8 +87,8 @@ $$
 $$
 
 > [!CAUTION]
-> **Notation Alert:** 
-> In the expressions above, **$t$ is an exponent**, not an index. 
+> **Notation Alert:**
+> In the expressions above, **$t$ is an exponent**, not an index.
 > *   $\beta_1, \beta_2$: Constant hyperparameters (e.g., 0.9, 0.999).
 > *   $(\beta)^t$: The value of $\beta$ raised to the **power of the current time step $t$**.
 

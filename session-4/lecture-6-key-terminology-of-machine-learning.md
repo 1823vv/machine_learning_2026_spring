@@ -81,7 +81,7 @@ $$
 * **Layer**
   A transformation of the form:
   $$
-  h = \sigma(xW + b)
+  h = \sigma(x W + b)
   $$
 
 * **Hidden Layer**

@@ -157,7 +157,7 @@ $$
 Define the weight matrix $W \in \mathbb{R}^{d \times 1}$:
 
 $$
-W = 
+W =
 \begin{bmatrix}
 w_1 \\
 w_2 \\
@@ -169,7 +169,7 @@ $$
 And the target matrix $Y \in \mathbb{R}^{n \times 1}$ (each row is a sample's target):
 
 $$
-Y = 
+Y =
 \begin{bmatrix}
 y^{(1)} \\
 y^{(2)} \\
@@ -181,7 +181,7 @@ $$
 Now, all predictions can be written as:
 
 $$
-\hat{Y} = XW + \mathbf{1}b
+\hat{Y} = X W + \mathbf{1}b
 $$
 
 where $\hat{Y} \in \mathbb{R}^{n \times 1}$ is the matrix of predictions for all samples (each row is a sample's prediction), $b \in \mathbb{R}^{1 \times 1}$ is the bias (scalar as row vector), and $\mathbf{1} \in \mathbb{R}^{n \times 1}$ is a column vector of ones.
@@ -189,13 +189,13 @@ where $\hat{Y} \in \mathbb{R}^{n \times 1}$ is the matrix of predictions for all
 The Mean Squared Error (MSE) loss function in matrix form is:
 
 $$
-\mathcal{L}(W, b) = \frac{1}{n}(XW + \mathbf{1}b - Y)^{\mathsf{T}}(XW + \mathbf{1}b - Y)
+\mathcal{L}(W, b) = \frac{1}{n}(X W + \mathbf{1}b - Y)^{\mathsf{T}}(X W + \mathbf{1}b - Y)
 $$
 
 This is equivalent to:
 
 $$
-\mathcal{L}(W, b) = \frac{1}{n}\|XW + \mathbf{1}b - Y\|_2^2
+\mathcal{L}(W, b) = \frac{1}{n}\|X W + \mathbf{1}b - Y\|_2^2
 $$
 
 where $\|\cdot\|_2$ denotes the Euclidean norm.
@@ -203,10 +203,10 @@ where $\|\cdot\|_2$ denotes the Euclidean norm.
 The gradients of the loss are:
 
 $$
-\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n}X^{\mathsf{T}}(XW + \mathbf{1}b - Y)
+\frac{\partial \mathcal{L}}{\partial W} = \frac{2}{n}X^{\mathsf{T}}(X W + \mathbf{1}b - Y)
 $$
 
 $$
-\frac{\partial \mathcal{L}}{\partial b} = \frac{2}{n}\mathbf{1}^{\mathsf{T}}(XW + \mathbf{1}b - Y)
+\frac{\partial \mathcal{L}}{\partial b} = \frac{2}{n}\mathbf{1}^{\mathsf{T}}(X W + \mathbf{1}b - Y)
 $$
 
