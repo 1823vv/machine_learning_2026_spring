@@ -499,7 +499,7 @@ $$
 
 This is optional for now, but it is an important idea in deep learning for text and recommendation systems.
 
-## 12. Optional: Label Smoothing
+## 12. Label Smoothing (Optional)
 
 Standard one-hot labels put probability $1$ on the correct class and $0$ on every incorrect class.
 
