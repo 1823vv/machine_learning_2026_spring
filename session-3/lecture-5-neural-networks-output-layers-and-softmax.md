@@ -16,7 +16,7 @@ The output layer is **the final step in a neural network**, transforming learned
    * Binary classification → 1 probability
    * Multiclass classification → $K$ probabilities
 
-2. The output layer also determines **the activation function** applied to raw outputs ($z^L$).
+2. The output layer also determines **the activation function** applied to raw outputs ($z^{(L)}$).
 
 3. The output layer is tightly coupled to the **loss function**, ensuring that learning signals correctly optimize the task.
 
@@ -116,9 +116,9 @@ Where:
 
 ---
 
-## 6. Practical Considerations
+## 5. Practical Considerations
 
-1. **Dimensionality**: The output layer dimension must match the target variable or number of classes (for binary classifiction, we can have one neuron or two neurons).
+1. **Dimensionality**: The output layer dimension must match the target variable or number of classes (for binary classification, we can have one neuron or two neurons).
 2. **Choice of activation**:
 
    * Linear → regression

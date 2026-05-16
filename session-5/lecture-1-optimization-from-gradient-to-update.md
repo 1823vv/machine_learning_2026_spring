@@ -1,127 +1,158 @@
-# From Gradient to Parameter Update
+# Optimization — From Gradient to Parameter Update
 
 ![](./img/0.gif)
 
 > [!INFO]
-> **Parameter Notation Convention**
+> **Notation used in this optimization session**
 >
-> From this session on, you'll notice a consistent choice in parameter notation:
+> We keep the row-vector convention from `session-0/lecture-0-notation-for-session-1-to-session-7.md`:
 >
-> - **Combined parameters** (Weights and Biases, usually denoted as $\theta = [W; b]$ or $\Theta = [W; b]$ ) are denoted as $W$, rather than $\theta$ or $\Theta$, for the sake of clarity
+> $$
+> z = x W + b
+> $$
 >
-> When you see $W$ in formulas, think "all trainable parameters" including biases where applicable.
+> Optimizer formulas often show the update for $W$ only. Biases follow the same pattern:
+>
+> $$
+> b \leftarrow b - \eta \frac{\partial \mathcal{L}}{\partial b}
+> $$
+>
+> In this session, $g$ denotes a **parameter gradient**, such as $g = \frac{\partial \mathcal{L}}{\partial W}$.
 
 ---
 
-## 1. Review — What We Already Have
+## 1. What Backpropagation Gives Us
 
-By now, after backpropagation, we can compute the gradient of the loss $\mathcal{L}$ with respect to the parameters $W$:
+Backpropagation computes gradients. For a full dataset of $n$ training examples, the full-batch gradient for $W$ is:
 
 $$
-g = \frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} \sum_{i=1}^n \frac{\partial \mathcal{L}_i}{\partial W}
+g = \frac{\partial \mathcal{L}}{\partial W}
+  = \frac{1}{n}\sum_{i=1}^{n}\frac{\partial \ell^{(i)}}{\partial W}
 $$
 
-We denote this gradient compactly by $g$. This tells us **the direction in which the loss increases**.
+This gradient tells us the direction in which the loss increases fastest.
+
+> [!INFO]
+> A gradient is **information**, not yet learning.
 
 ---
 
-## 2. The Key Question
+## 2. The Missing Step: Update the Parameters
+
+To make the model learn, we must use the gradient to change the parameters.
 
 ```text
-What do we do with this gradient?
+backpropagation computes g
+optimization uses g to update W
 ```
 
-* Computing $\frac{\partial \mathcal{L}}{\partial W}$ gives information, but **no actual learning happens yet**.
-* Gradient alone does not update the model.
-
----
-
-## 3. The Core Idea of Optimization
-
-The basic principle of optimization in deep learning:
-
-```text
-Move parameters in the direction that reduces the loss.
-```
-
-Formally, we define an **update rule** to translate gradient information into parameter changes.
-
----
-
-## 4. Gradient Descent Update Rule
-
-![](./img/3.gif)
-
-
-The simplest update rule is **gradient descent (GD)**:
-
-$$
-W \leftarrow W - \eta g, \quad g = \frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} \sum_{i=1}^n \frac{\partial \mathcal{L}_i}{\partial W}
-$$
-
-> This is the most fundamental bridge from "having a gradient" to "actually learning".
-
----
-
-## 5. Intuition Behind Gradient Descent
-
-* Gradient is the **slope** of the loss function along the parameter dimension.
-* Negative gradient points toward **steepest descent**.
-* By moving a small step $\eta$ in that direction, we reduce the loss:
-
-```text
-Gradient = slope
-Move downhill = reduce loss
-```
-
----
-
-## 6. Key Insight — Gradient ≠ Learning
-
-Computing gradients is only **information gathering**.
-**Learning happens only when we apply updates**:
+The basic optimizer is **Gradient Descent (GD)**:
 
 $$
 W \leftarrow W - \eta g
 $$
 
-* Gradient alone tells us **where to go**.
-* Update rule tells us **how far to go**.
-* Step size $\eta$ controls **speed** of learning.
+where:
+
+* $W$ — parameter being updated
+* $g = \frac{\partial \mathcal{L}}{\partial W}$ — gradient of the loss with respect to $W$
+* $\eta$ — learning rate
 
 ---
 
-## 7. PyTorch Example
+## 3. Why the Minus Sign?
+
+The gradient points uphill: it points toward increasing loss.
+
+To reduce the loss, we move in the opposite direction:
+
+$$
+- g
+$$
+
+So the update is:
+
+$$
+\text{new parameter} = \text{old parameter} - \text{step size} \times \text{gradient}
+$$
+
+or, in our update notation:
+
+$$
+W \leftarrow W - \eta g
+$$
+
+---
+
+## 4. What the Learning Rate Controls
+
+The learning rate $\eta$ decides how much of the gradient direction we follow in one update:
+
+$$
+\Delta W = -\eta g
+$$
+
+* Direction comes from $-g$
+* Step size comes from $\eta$
+
+This is why optimization has two separate ideas:
+
+| Idea | Question answered |
+|---|---|
+| Gradient $g$ | Which direction reduces the loss? |
+| Learning rate $\eta$ | How far should we move in that direction? |
+
+The next lecture focuses entirely on choosing $\eta$.
+
+---
+
+## 5. What Changes in Later Optimizers?
+
+The update shape remains recognizable:
+
+$$
+W \leftarrow W - \eta(\text{update direction})
+$$
+
+Later lectures change one piece at a time:
+
+* **Learning rate:** how large the step is.
+* **Mini-batches:** how the gradient is estimated.
+* **Momentum and Adam:** how the raw gradient is smoothed or rescaled.
+
+---
+
+## 6. PyTorch Example
 
 ```python
 import torch
 import torch.nn as nn
 
-# A simple linear layer: z = x W + b
+# A linear layer follows the row-vector idea: z = x W + b
 model = nn.Linear(d_in, d_out)
-
-# Loss function
 criterion = nn.MSELoss()
 
-# Optimizer: applies W <- W - eta * g
+# SGD applies parameter updates using the gradients computed by backpropagation.
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
 for X, y in dataloader:
-    optimizer.zero_grad()      # Clear old gradients
-    prediction = model(X)      # Forward pass
+    optimizer.zero_grad()      # 1. Clear gradients from the previous mini-batch
+    prediction = model(X)      # 2. Forward pass
     loss = criterion(prediction, y)
-    loss.backward()            # Compute g = dL/dW
-    optimizer.step()             # Apply W <- W - eta * g
+    loss.backward()            # 3. Backpropagation computes gradients g
+    optimizer.step()           # 4. Optimizer applies W <- W - eta * g
 ```
 
 ---
 
-## 8. Summary
+## 7. Summary
 
-1. Gradient gives **direction**, not learning.
-2. Update rule translates gradient into **actual parameter changes**.
-3. Gradient descent is the simplest **optimization rule**:
+1. Backpropagation computes gradients.
+2. Optimization updates parameters using those gradients.
+3. Gradient descent uses the update rule:
 
 $$
 W \leftarrow W - \eta g
 $$
+
+4. The gradient gives the direction; the learning rate gives the step size.
