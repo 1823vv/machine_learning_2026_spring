@@ -22,7 +22,7 @@ class MyOwnLogisticRegression:
         self.weights = None
         self.bias = None
 
-    def sigmoid(self, z):
+    def _sigmoid(self, z):
         return ____YOUR_CODE_HERE__1_____
 
     def fit(self, X, y):
@@ -32,7 +32,7 @@ class MyOwnLogisticRegression:
 
         for _ in range(self.n_iters):
             linear_model = np.dot(____YOUR_CODE_HERE__4_____, ____YOUR_CODE_HERE__5_____) + self.bias
-            y_predicted = self.sigmoid(____YOUR_CODE_HERE__6_____)
+            y_predicted = self._sigmoid(____YOUR_CODE_HERE__6_____)
 
             dw = (1 / n_samples) * np.dot(____YOUR_CODE_HERE__7_____, (y_predicted - y))
             db = (1 / n_samples) * np.sum(____YOUR_CODE_HERE__8_____)
@@ -42,7 +42,7 @@ class MyOwnLogisticRegression:
 
     def predict(self, X):
         linear_model = np.dot(____YOUR_CODE_HERE__11_____, ____YOUR_CODE_HERE__12_____) + self.bias
-        y_probability = self.sigmoid(____YOUR_CODE_HERE__13_____)
+        y_probability = self._sigmoid(____YOUR_CODE_HERE__13_____)
         y_predicted_class = [1 if p >= 0.5 else 0 for p in ____YOUR_CODE_HERE__14_____]
         return np.array(y_predicted_class)
 ```

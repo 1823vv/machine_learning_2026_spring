@@ -138,7 +138,7 @@ The same update structure applies to full batch, mini-batch, or stochastic gradi
 
 ---
 
-# 7. Batch Matrix Form (Optional)
+# 7. Batch Matrix Form
 
 We can write everything in a compact matrix form for efficient computation.
 
