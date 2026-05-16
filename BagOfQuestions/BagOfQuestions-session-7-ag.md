@@ -1,7 +1,7 @@
 
 ## Question: Dropout 
 
-Fill in the blank in the following text:
+Fill in the `____YOUR_CODE_HERE__N____` in the following text:
 
 In our Neural Network from scratch implementation (as well as for the underlying implementation of PyTorch and TensorFlow), for Dropout, we have 
 ```python
@@ -33,3 +33,13 @@ By contrast, the "original" (or naïve) dropout implementation works like this:
    ```
    – We multiply every activation by the keep probability `_____YOUR_TEXT_HERE_7_____` to match the expected magnitude during training.
 
+
+Your answer goes here, after the `:`:
+
+- `____YOUR_CODE_HERE__1____`:
+- `____YOUR_CODE_HERE__2____`:
+- `____YOUR_CODE_HERE__3____`:
+- `____YOUR_CODE_HERE__4____`:
+- `____YOUR_CODE_HERE__5____`:
+- `____YOUR_CODE_HERE__6____`:
+- `____YOUR_CODE_HERE__7____`:
