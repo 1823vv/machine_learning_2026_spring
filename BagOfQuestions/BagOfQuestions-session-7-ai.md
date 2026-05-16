@@ -1,29 +1,9 @@
-## Question: Training Mode versus Evaluation Mode
+## Question: Batch Normalization versus Z-Score Normalization
 
-Some neural-network layers behave differently during training and evaluation. Dropout and batch normalization are two important examples.
+In machine learning, we use normalization tricks to make training faster and more stable. We are familiar with standard **Z-score normalization** used on input features, as well as **Batch Normalization** used inside neural networks.
 
-1. Explain what dropout does during training.
-2. Explain what dropout should do during evaluation.
-3. Explain what batch normalization uses during training.
-4. Explain what batch normalization should use during inference.
-5. Draw a two-column table comparing train mode and evaluation mode for dropout, batch normalization, and ordinary dense layers.
-6. What can go wrong if dropout is accidentally left on during validation or testing?
-7. What can go wrong if validation metrics are computed while the model is in the wrong mode?
-
-## Question: Running Statistics in Batch Normalization
-
-Batch normalization can maintain running estimates of mean and variance for inference:
-
-$$
-\mu_{running} \leftarrow (1-\alpha)\mu_{running}+\alpha\mu_B,
-$$
-
-$$
-\sigma^2_{running} \leftarrow (1-\alpha)\sigma^2_{running}+\alpha\sigma_B^2.
-$$
-
-1. Explain the meaning of $\mu_B$ and $\sigma_B^2$.
-2. Explain the meaning of the running estimates.
-3. Why are running estimates useful during inference?
-4. Why would using statistics from a single test batch be unstable?
-5. What is the role of $\alpha$ in the running-statistics update?
+1. Write the standard Z-score normalization formula used to scale an input feature $x$ using its dataset mean $\mu$ and standard deviation $\sigma$.
+2. In a neural network, *where* exactly is Batch Normalization applied compared to standard Z-score feature normalization?
+3. Batch Normalization standardizes intermediate activations $z_1, z_2, \dots, z_B$ across a mini-batch to get $\hat{z}_i$. Write the formula for $\hat{z}_i$ using the mini-batch mean $\mu_B$, mini-batch variance $\sigma_B^2$, and a small safety constant $\epsilon$.
+4. After standardizing the values to get $\hat{z}_i$, Batch Normalization applies two learnable parameters ($\gamma$ and $\beta$) to calculate the final output: $\tilde{z}_i = \gamma \hat{z}_i + \beta$. What happens to this output if the network learns $\gamma = \sqrt{\sigma_B^2 + \epsilon}$ and $\beta = \mu_B$?
+5. Why does Batch Normalization need these extra learnable parameters ($\gamma$ and $\beta$), whereas standard input Z-score normalization does not?

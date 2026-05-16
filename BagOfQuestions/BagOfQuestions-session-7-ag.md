@@ -1,29 +1,35 @@
-## Question: Grid Search versus Random Search
 
-You need to tune two hyperparameters: learning rate $\eta$ and regularization strength $\lambda$. Candidate values are
+## Question: Dropout 
 
-$$
-\eta \in \{0.1, 0.01, 0.001\},
-$$
+Fill in the blank in the following text:
 
-$$
-\lambda \in \{0, 0.001, 0.01, 0.1\}.
-$$
+In our Neural Network from scratch implementation (as well as for the underlying implementation of PyTorch and TensorFlow), for Dropout, we have 
+```python
+self.mask = np.random.binomial(1, 1 - p, size=input.shape) / _____YOUR_TEXT_HERE_1_____
+``` 
 
-1. How many configurations does grid search evaluate?
-2. Draw the grid-search points in a 2-D hyperparameter plane.
-3. Explain why grid search becomes expensive when the number of hyperparameters grows.
-4. Explain the core idea of random search.
-5. Draw random-search points in the same 2-D plane.
-6. Suppose $\eta$ matters much more than $\lambda$. Explain why random search may be more efficient than grid search under the same trial budget.
-7. In one sentence, explain why hyperparameter optimization is often called black-box optimization.
+This is called **Inverted Dropout**, with the purpose of keeping the expected activation magnitude constant. When we apply Dropout during training, we randomly "drop" (zero out) each unit with probability $p$. **If we only did**
 
-## Question: Trial Budget
+```python
+mask = np.random.binomial(1, 1 - p, size=input.shape)
+output = input * mask
+```
 
-A practitioner only has enough compute budget to train 20 candidate models while tuning hyperparameters.
+**then** on average only a fraction `_____YOUR_TEXT_HERE_2_____` of our units **would** be "alive," so the total activation magnitude **would** shrink by a factor of `_____YOUR_TEXT_HERE_3_____`.  **To compensate**, we can **scale up** the remaining units by `_____YOUR_TEXT_HERE_4_____` **so that** the expected sum of activations stays the same as it would have been without dropout. 
 
-1. Why is training one model considered expensive?
-2. How would you decide which hyperparameter ranges to search first?
-3. Why should the test set not be used repeatedly during hyperparameter tuning?
-4. Why is it useful to record every trial's hyperparameters and validation score?
-5. How might you refine the search after seeing the first few trials?
+By scaling at *training* time, we don't need to do any special scaling at *inference* time—when we set `self.training = _____YOUR_TEXT_HERE_5_____`, our `forward` simply returns the raw inputs (no mask), and we've already preserved the correct activation magnitudes.
+
+By contrast, the "original" (or naïve) dropout implementation works like this:
+
+1. **Training**  
+   ```python
+   mask = np.random.binomial(1, 1 - p, size=input.shape)
+   output = input * mask
+   ```
+   – We drop units but **do not** rescale them.  
+2. **Inference**  
+   ```python
+   output = input * _____YOUR_TEXT_HERE_6_____
+   ```
+   – We multiply every activation by the keep probability `_____YOUR_TEXT_HERE_7_____` to match the expected magnitude during training.
+

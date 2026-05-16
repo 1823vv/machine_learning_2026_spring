@@ -2,19 +2,21 @@
 
 Data augmentation creates new training examples by applying transformations that should not change the label. For example, a small shift of an MNIST digit usually keeps the same digit label.
 
-1. Define data augmentation in your own words.
-2. Give three label-preserving transformations for image classification.
-3. Give one transformation that might not be label-preserving for digit recognition.
-4. Explain why augmentation can improve generalization.
-5. Draw a simple diagram showing one original image becoming several augmented training examples.
-6. Why should augmentation usually be applied to training data, not to the final test labels or test-set definition?
+1. Define data augmentation and explain how it modifies the effective capacity and generalization behavior of a machine learning model.
+2. Provide three distinct examples of label-preserving transformations commonly used for computer vision or image classification tasks.
+3. Describe the primary challenges encountered when designing data augmentation strategies for natural language processing (text data) compared to computer vision (image data). Give one example of a text-based transformation.
 
-## Question: Augmentation for Text
 
-For text classification, augmentation is more delicate than for images because small word changes can change meaning.
 
-1. Give one possible label-preserving text augmentation.
-2. Give one text transformation that could accidentally change the label.
-3. Why is augmentation domain-dependent?
-4. Explain why human judgment may be needed to decide whether an augmentation is valid.
-5. Compare image augmentation and text augmentation in one short paragraph.
+## Question: L1 and L2 Regularization — Formula, Geometry, and Intuition
+
+In linear regression, regularization helps prevent overfitting by adding penalty terms to the loss function. Let $\mathcal{L}_{data}(w)$ be the original data loss and $\lambda > 0$ be the regularization strength.
+
+1. Write the complete objective function for linear regression with L1 regularization (Lasso).
+2. Write the complete objective function for linear regression with L2 regularization (Ridge).
+3. Which regularization method (L1 or L2) can produce exactly zero weights? Which one tends to shrink weights smoothly?
+4. In 2D space with weights $w_1$ and $w_2$, draw two figures:
+   - First figure: Show data loss contours (ellipses) and the L1 constraint region. Mark where a contour first touches the constraint region.
+   - Second figure: Show data loss contours (ellipses) and the L2 constraint region. Mark where a contour first touches the constraint region.
+5. Based on your drawings, explain why one method leads to sparse solutions (feature selection) while the other does not.
+6. Why is $\lambda$ considered a hyperparameter that needs tuning?

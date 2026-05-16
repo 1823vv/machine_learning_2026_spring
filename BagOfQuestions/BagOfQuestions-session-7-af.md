@@ -1,35 +1,24 @@
-## Question: Hyperparameters Are Not Parameters
+## Question: Model Parameters versus Hyperparameters
 
-A model parameter is learned directly from training data, while a hyperparameter is chosen outside the training update and selected using validation performance.
+In machine learning frameworks, parameters and hyperparameters serve fundamentally different roles during optimization and model selection.
 
-1. Give three examples of learned parameters.
-2. Give five examples of hyperparameters.
-3. Explain why learning rate $\eta$ is a hyperparameter.
-4. Explain why dropout probability $p$ is a hyperparameter.
-5. Write the usual parameter-learning objective:
+1. Contrast the core mechanism by which a model **parameter** is determined with how a **hyperparameter** is chosen.
+2. Provide two specific examples of learned parameters in a neural network architecture.
+3. Provide two specific examples of model or optimization hyperparameters.
+4. Explain why the learning rate $\eta$ cannot be updated directly using the same training gradient descent steps applied to the network weights.
+5. Explain why the dropout probability $p$ cannot be optimized by minimizing the training loss function.
+6. Explain why hyperparameter selection must be guided by validation dataset performance rather than training dataset performance.
 
-   $$
-   W^* = \arg\min_W \mathcal{L}_{train}(W;\lambda).
-   $$
 
-6. Write a hyperparameter-selection objective using validation loss:
+## Question: Hyperparameter Configurations and Failure Modes
 
-   $$
-   \lambda^* = \arg\min_\lambda \mathcal{L}_{val}(W^*(\lambda);\lambda).
-   $$
+Improperly configured hyperparameters can cause distinct training or generalization failures, leading to problems such as divergence, severe overfitting, or underfitting.
 
-7. Draw a two-level diagram: inner loop trains parameters, outer loop chooses hyperparameters.
-8. Explain why validation loss, not training loss, is used for hyperparameter selection.
+Describe the typical impact on both training performance and validation performance for each of the following scenarios:
 
-## Question: Bad Hyperparameters, Different Failures
-
-Different bad hyperparameter choices can cause different training or generalization failures.
-
-For each case below, explain what might happen to training and validation performance:
-
-1. learning rate too large,
-2. learning rate too small,
-3. dropout probability too high,
-4. L2 strength too small,
-5. model depth too large for a small dataset,
-6. batch size extremely small.
+1. The learning rate $\eta$ is set to an excessively large value.
+2. The learning rate $\eta$ is set to an excessively small, non-zero value.
+3. The dropout drop probability $p$ is set too close to 1.
+4. The L2 regularization penalty strength $\lambda$ is set too close to 0.
+5. The neural network depth and capacity are exceptionally large relative to a very small training dataset.
+6. The mini-batch size used for stochastic optimization is set to an extremely small value (e.g., a batch size of 1).
