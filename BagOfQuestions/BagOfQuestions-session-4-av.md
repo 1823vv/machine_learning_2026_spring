@@ -12,11 +12,7 @@ $$
 \mathcal{L} = \frac{1}{n}\sum_{i=1}^n (\hat y^{(i)} - y^{(i)})^2.
 $$
 
-1. Write the shape of $\hat{Y}$.
-2. Write the matrix formula for $\frac{\partial \mathcal{L}}{\partial \hat{Y}}$.
-3. Since the activation is identity, what is $\Delta = \frac{\partial \mathcal{L}}{\partial Z}$?
-4. Write the matrix formula for $\frac{\partial \mathcal{L}}{\partial W}$.
-5. Write the matrix formula for $\frac{\partial \mathcal{L}}{\partial b}$.
-6. Check the shapes of $\Delta$, $X^T\Delta$, and $\mathbf{1}^T\Delta$.
-7. Explain why averaging by $n$ changes the gradient scale but not the direction.
-8. Draw the batch computation graph and label every matrix shape.
+1. Write the shape of $\hat{Y}$. Write the matrix formula for $\frac{\partial \mathcal{L}}{\partial \hat{Y}}$.
+2. Since the activation is identity, what is $\Delta = \frac{\partial \mathcal{L}}{\partial Z}$? Write the matrix formula for $\frac{\partial \mathcal{L}}{\partial W}$.
+3. Write the matrix formula for $\frac{\partial \mathcal{L}}{\partial b}$. Check the shapes of $\Delta$, $X^T\Delta$, and $\mathbf{1}^T\Delta$.
+4. Explain why averaging by $n$ changes the gradient scale but not the direction. Draw the batch computation graph and label every matrix shape.

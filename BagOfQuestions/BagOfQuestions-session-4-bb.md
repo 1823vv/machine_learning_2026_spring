@@ -13,9 +13,6 @@ $$
 $$
 
 1. Compute $\frac{\partial \ell}{\partial \hat y}$.
-2. Compute $\frac{\partial \hat y}{\partial z}$.
-3. Multiply the two derivatives and simplify.
-4. Show the final result $\frac{\partial \ell}{\partial z}=\hat y-y$.
-5. Explain why this simplification is useful for implementation.
-6. Explain what happens to $\hat y-y$ when the prediction is too high for an example with $y=0$.
-7. Explain what happens to $\hat y-y$ when the prediction is too low for an example with $y=1$.
+2. Compute $\frac{\partial \hat y}{\partial z}$. Multiply the two derivatives and simplify.
+3. Show the final result $\frac{\partial \ell}{\partial z}=\hat y-y$. Explain why this simplification is useful for implementation.
+4. Explain what happens to $\hat y-y$ when the prediction is too high for an example with $y=0$. Explain what happens to $\hat y-y$ when the prediction is too low for an example with $y=1$.

@@ -1,12 +1,10 @@
 ## Question: Linear Regression from Scratch
 
-We are implementing linear regression `class MyOwnLinearRegression` from scratch with NumPy. The model receives a feature matrix `X` with shape `(n_samples, n_features)` and a target vector `y` with shape `(n_samples,)`. The prediction rule is
+We are implementing linear regression `class MyOwnLinearRegression` from scratch with NumPy. The model receives a feature matrix `X` with shape `(n_samples, n_features)` and a target vector `y` with shape `(n_samples,)`. In mathematical notation, this corresponds to $X \in \mathbb{R}^{n \times d}$ and $Y \in \mathbb{R}^{n \times 1}$. The batch prediction rule is
 
 $$
-\hat y = Xw + b,
+\hat{Y}=XW+\mathbf{1}b.
 $$
-
-and the model is trained by gradient descent on mean squared error.
 
 Fill in the `____YOUR_CODE_HERE__N_____` blanks in the code skeleton below.
 
@@ -52,7 +50,6 @@ Your answer goes here, after the `:`:
 
 Then answer the following short questions:
 
-1. Why should `self.weights` have one entry for each feature?
+1. Why should `self.weights` have one entry for each feature, and what is the role of `self.bias`?
 2. Why do we use `np.dot(X, self.weights)` instead of elementwise multiplication `X * self.weights` for prediction?
-3. What is the role of the bias term `self.bias`?
-4. In the line for `dw`, why do we use `X.T`?
+3. In the line for `dw`, why do we use `X.T`, and what shape should `dw` have?

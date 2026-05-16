@@ -19,8 +19,6 @@ Y \in \mathbb{R}^{n \times K}.
 $$
 
 1. What does each row of $Y$ represent?
-2. What should the sum of each row of $Y$ be for single-label multiclass classification?
-3. What should the sum of each row of $\hat{Y}$ be after softmax?
-4. If $n=128$ and $K=10$, what are the shapes of $Z$, $\hat{Y}$, and $Y$?
-5. The softmax cross-entropy gradient often has the form $\frac{1}{n}(\hat{Y}-Y)$. What is its shape?
-6. Why would a target matrix with shape $128 \times 1$ not match the one-hot version expected by this formula?
+2. What should the sum of each row of $Y$ be for single-label multiclass classification? What should the sum of each row of $\hat{Y}$ be after softmax?
+3. If $n=128$ and $K=10$, what are the shapes of $Z$, $\hat{Y}$, and $Y$? The softmax cross-entropy gradient often has the form $\frac{1}{n}(\hat{Y}-Y)$. What is its shape?
+4. Why would a target matrix with shape $128 \times 1$ not match the one-hot version expected by this formula?

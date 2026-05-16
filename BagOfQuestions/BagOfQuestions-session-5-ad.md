@@ -8,14 +8,10 @@ model(X_batch) -> loss -> zero_grad -> backward -> step
 
 Here $X_{batch}$ is a mini-batch of inputs, the model produces predictions, the loss compares predictions to targets, gradients are computed, and the optimizer updates parameters.
 
-1. What happens during `model(X_batch)`?
-2. What does the loss compare?
-3. Why do old gradients need to be cleared before computing new gradients?
-4. What happens during the backward step?
-5. What happens during the optimizer step?
-6. Draw this pipeline as a loop over mini-batches.
-7. In this rhythm, where are parameters changed?
-8. In this rhythm, where are gradients computed?
+1. What happens during `model(X_batch)`? What does the loss compare?
+2. Why do old gradients need to be cleared before computing new gradients? What happens during the backward step?
+3. What happens during the optimizer step? Draw this pipeline as a loop over mini-batches.
+4. In this rhythm, where are parameters changed? In this rhythm, where are gradients computed?
 
 ## Question: Responsibility Separation in a Training Loop
 

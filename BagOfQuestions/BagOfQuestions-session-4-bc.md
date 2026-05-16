@@ -13,9 +13,6 @@ $$
 $$
 
 1. Write the formula for $\frac{\partial \mathcal{L}}{\partial W}$.
-2. Write the formula for $\frac{\partial \mathcal{L}}{\partial b}$.
-3. Write the formula for $\frac{\partial \mathcal{L}}{\partial X}$.
-4. Check the shape of each gradient.
-5. Explain why $\frac{\partial \mathcal{L}}{\partial X}$ is needed when this layer is not the first layer.
-6. Explain how the one-output linear-regression case is recovered when the output dimension is 1.
-7. Draw the forward and backward arrows for this layer.
+2. Write the formula for $\frac{\partial \mathcal{L}}{\partial b}$. Write the formula for $\frac{\partial \mathcal{L}}{\partial X}$.
+3. Check the shape of each gradient. Explain why $\frac{\partial \mathcal{L}}{\partial X}$ is needed when this layer is not the first layer.
+4. Explain how the one-output linear-regression case is recovered when the output dimension is 1. Draw the forward and backward arrows for this layer.

@@ -2,16 +2,16 @@
 
 We have already implemented `class MyOwnLinearRegression` from scratch with NumPy. Now we want to adapt the same general training structure to binary logistic regression. In both cases, the model stores `self.weights`, stores `self.bias`, loops for several gradient descent iterations, computes predictions, computes gradients, and updates parameters.
 
-However, logistic regression is for classification. Therefore, after computing the linear score
+However, logistic regression is for classification. After computing the linear score
 
 $$
-z = Xw + b,
+z=XW+\mathbf{1}b,
 $$
 
 we pass the score through the sigmoid function to obtain a probability:
 
 $$
-\hat y = \sigma(z) = \frac{1}{1 + e^{-z}}.
+\hat y = \sigma(z)=\frac{1}{1+e^{-z}}.
 $$
 
 Fill in the `____YOUR_CODE_HERE__N_____` blanks in the logistic regression fragment below.
@@ -42,5 +42,4 @@ Then answer the following short questions:
 
 1. Name two things that stay almost the same when moving from linear regression code to logistic regression code.
 2. Name two things that must change when moving from linear regression to logistic regression.
-3. Why does logistic regression output a probability before outputting a class label?
-4. Why does the final `predict` function usually return class labels, while the sigmoid output itself gives probabilities?
+3. Explain why logistic regression outputs a probability before returning a class label, and why the final `predict` function usually returns class labels.

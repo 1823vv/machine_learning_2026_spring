@@ -17,11 +17,7 @@ class Dense(Layer):
         return grad_input
 ```
 
-1. What is wrong with using `input * self.weights` in the forward pass?
-2. What should the correct forward line be?
-3. What is wrong with using `self.input.T * grad_output` for `grad_weights`?
-4. What should the correct `grad_weights` line be?
-5. What is wrong with using `grad_output * self.weights.T` for `grad_input`?
-6. What should the correct `grad_input` line be?
-7. What is wrong with updating parameters using `+ self.learning_rate * gradient`?
-8. Rewrite the corrected version of this `Dense` class.
+1. What is wrong with using `input * self.weights` in the forward pass? What should the correct forward line be?
+2. What is wrong with using `self.input.T * grad_output` for `grad_weights`? What should the correct `grad_weights` line be?
+3. What is wrong with using `grad_output * self.weights.T` for `grad_input`? What should the correct `grad_input` line be?
+4. What is wrong with updating parameters using `+ self.learning_rate * gradient`? Rewrite the corrected version of this `Dense` class.

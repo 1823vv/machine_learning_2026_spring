@@ -12,12 +12,9 @@ class Layer:
 ```
 
 1. Explain why it is useful for every layer to have a `forward` method.
-2. Explain why it is useful for every layer to have a `backward` method.
-3. Which layers in the MNIST network have trainable parameters?
-4. Which layers do not have trainable parameters?
-5. Draw a sequence diagram showing how `forward(network, X)` calls each layer.
-6. Draw a second sequence diagram showing the reverse order used during training.
-7. Explain why this simple interface makes it easier to add new layers later.
+2. Explain why it is useful for every layer to have a `backward` method. Which layers in the MNIST network have trainable parameters?
+3. Which layers do not have trainable parameters? Draw a sequence diagram showing how `forward(network, X)` calls each layer.
+4. Draw a second sequence diagram showing the reverse order used during training. Explain why this simple interface makes it easier to add new layers later.
 
 ## Question: Layer List Design
 
