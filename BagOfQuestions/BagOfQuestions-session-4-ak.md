@@ -1,6 +1,6 @@
 ## Question: The `forward(network, X)` Function
 
-The Session 4 implementation uses:
+A minimal NumPy neural-network implementation uses:
 
 ```python
 def forward(network, X):

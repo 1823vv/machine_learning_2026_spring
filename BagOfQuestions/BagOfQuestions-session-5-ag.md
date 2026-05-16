@@ -1,26 +1,28 @@
 ## Question: Bias Correction in Adam
 
-Adam initializes the first and second moments at zero. This creates a cold-start issue.
-
-The bias correction formulas are:
+Adam initializes the moving averages $m$ and $v$ at zero. Early in training, this can bias the moving averages toward zero. Adam therefore uses bias-corrected moments:
 
 $$
-\hat{m}^{(t)}=\frac{m^{(t)}}{1-\beta_1^t}
+\hat m = \frac{m}{1-\beta_1^t},
 $$
 
 $$
-\hat{v}^{(t)}=\frac{v^{(t)}}{1-\beta_2^t}
+\hat v = \frac{v}{1-\beta_2^t}.
 $$
 
-1. Why are the moving averages biased toward zero at the beginning of training?
-2. If $\beta_1=0.9$ and $t=1$, what is $1-\beta_1^t$?
-3. Why does dividing by this quantity correct the scale of $m^{(1)}$?
-4. As $t$ becomes large, what happens to $\beta_1^t$ and $\beta_2^t$?
-5. Why does the correction naturally become less important later in training?
-6. Draw a curve showing a correction factor starting large and approaching 1 over time.
-7. Explain why early updates might be too small without bias correction.
+1. Why are $m$ and $v$ biased toward zero at the beginning of training?
+2. What is the meaning of the time step $t$?
+3. Explain why the correction factor is especially important for small $t$.
+4. What happens to $1-\beta_1^t$ as $t$ becomes large?
+5. What happens to $1-\beta_2^t$ as $t$ becomes large?
+6. Write the full Adam update rule using $\hat m$, $\hat v$, $\eta$, and $\epsilon$.
 
-## Question: Notation Alert
+## Question: Adam Notation Alert
 
-1. In $\beta_1^t$, what does the superscript $t$ mean?
-2. Why is it important not to confuse this with layer index notation from neural networks?
+In optimization, the symbol $v$ can mean different things depending on the algorithm. In momentum, $v$ usually means velocity. In Adam, $v$ usually means a second-moment moving average of squared gradients.
+
+1. In momentum, what does $v$ store?
+2. In Adam, what does $v$ store?
+3. Why can using the same symbol be confusing?
+4. Why is it important to define notation before writing formulas in a written answer?
+5. Rewrite one sentence explaining Adam's $v$ without using the word “velocity.”

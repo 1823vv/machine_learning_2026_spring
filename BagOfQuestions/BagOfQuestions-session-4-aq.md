@@ -17,4 +17,4 @@ loss, grad_logits = softmax_crossentropy_with_logits(logits, y)
 ## Question: Last Dense Layer
 
 1. Why does the network end with `Dense(32, 10)` and not `ReLU()`?
-2. Why do we not put a softmax layer directly in the network list in this Session 4 implementation?
+2. Why do we not put a softmax layer directly in the network list in this implementation?

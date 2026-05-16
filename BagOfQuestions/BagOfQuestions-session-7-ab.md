@@ -1,20 +1,20 @@
-## Question: Dropout as Training Many Sub-networks
+## Question: Dropout as Training Many Sub-Networks
 
-During training, dropout randomly deactivates neurons.
+Dropout randomly removes some activations during training. In a neural network, this means each mini-batch may effectively train a slightly different sub-network.
 
-1. Write the Bernoulli sampling formula for a dropout mask using dropout probability $p$.
-2. Explain the meaning of $p$, $1-p$, mask value 0, and mask value 1.
-3. Write the dropout forward-pass formula using activation $h$ and mask $m$.
-4. Draw a neural network before dropout and one sampled sub-network after dropout. Cross out the dropped neurons.
-5. Explain why dropout can be interpreted as training many shared-parameter sub-networks.
-6. Explain how dropout reduces co-adaptation between neurons.
-7. During inference, should dropout still randomly remove neurons? Explain why or why not.
+1. Explain in words what dropout does during training.
+2. Draw a neural network layer before and after dropout is applied.
+3. Why can dropout reduce co-adaptation between neurons?
+4. Why can dropout improve generalization?
+5. What does dropout do during evaluation/inference?
+6. Why should dropout behavior be different during training and evaluation?
 
 ## Question: Dropout and Generalization
 
-A student says: “Dropout makes training harder, so it must always make the model worse.”
+Suppose a neural network overfits: training accuracy is high, but validation accuracy is much lower. A practitioner adds dropout between hidden layers.
 
-1. Explain what is correct in this statement.
-2. Explain what is wrong in this statement.
-3. Draw two possible curves for training accuracy and validation accuracy, one without dropout and one with dropout.
-4. In your drawing, show a case where dropout has lower training accuracy but higher validation accuracy.
+1. What dropout probability $p$ might be reasonable to try first for hidden layers?
+2. What can happen if $p$ is too small?
+3. What can happen if $p$ is too large?
+4. Draw training and validation curves before and after a successful dropout change.
+5. Explain why the best dropout probability should be selected using validation data.

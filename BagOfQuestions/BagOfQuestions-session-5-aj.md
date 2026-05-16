@@ -1,27 +1,21 @@
-## Question: Debugging Neural Network Optimization Without Writing New Optimizer Code
+## Question: Debugging Neural-Network Optimization Without Writing New Optimizer Code
 
-A neural network on MNIST is not learning. Accuracy stays near 10%.
+A neural network is not learning: the training loss is almost constant for many epochs. You are not asked to write a new optimizer. Instead, reason about possible optimization and implementation problems.
 
-You are not asked to write optimizer code. Instead, design a debugging plan.
+1. Give two possible learning-rate problems.
+2. Give one possible data preprocessing problem.
+3. Give one possible initialization problem.
+4. Give one possible activation-function problem.
+5. Give one possible label/loss mismatch problem.
+6. Explain how checking whether gradients are all zero or extremely large could help.
+7. Draw a debugging checklist from input data to predictions to loss to gradients to parameter updates.
 
-1. Why is 10% accuracy suspicious for MNIST?
-2. What data shapes would you print first?
-3. What activation or logits shapes would you print through the network?
-4. Why should you check whether gradients are nonzero?
-5. Why should you check whether parameters actually change after an optimizer step?
-6. Why should you check for `nan` or extremely large loss values?
-7. Draw a debugging flowchart:
+## Question: Assertions and Breakpoints for Shape Debugging
 
-   ```text
-   data shapes -> forward outputs -> loss -> gradients -> parameter update -> accuracy
-   ```
+In a neural-network implementation using row-vector batches, a mini-batch activation matrix often has shape $A^{(l-1)} \in \mathbb{R}^{B \times n_{l-1}}$, and a dense layer weight matrix has shape $W^{(l)} \in \mathbb{R}^{n_{l-1} \times n_l}$.
 
-8. Explain how a too-large learning rate could create `nan` values.
-9. Explain how a too-small learning rate could make learning look stuck.
-
-## Question: Assertions and Breakpoints
-
-1. What is one useful assertion for a Dense layer input shape?
-2. What is one useful assertion for logits shape in MNIST?
-3. When is a breakpoint more useful than print debugging?
-4. Why should breakpoints be removed before committing code?
+1. What should the shape of $Z^{(l)}=A^{(l-1)}W^{(l)}+\mathbf{1}b^{(l)}$ be?
+2. Why are shape checks useful before blaming the optimizer?
+3. Give two examples of assertions you might conceptually check, without writing code.
+4. Explain why NaN or infinite losses are often optimization red flags.
+5. Where in the training loop would you inspect predictions, loss, gradients, and updated parameters?

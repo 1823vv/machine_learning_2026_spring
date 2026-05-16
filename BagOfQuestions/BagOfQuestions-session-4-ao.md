@@ -1,6 +1,6 @@
-## Question: Full-Batch Gradient Descent in Session 4
+## Question: Full-Batch Gradient Descent in a NumPy Neural Network
 
-In Session 4, the training loop uses the entire training dataset for each update.
+In this NumPy neural-network training loop, the entire training dataset is used for each update.
 
 1. What does “full-batch gradient descent” mean?
 2. In the code, where do you see that the whole `X_train` and `y_train` are passed into `train` at once?

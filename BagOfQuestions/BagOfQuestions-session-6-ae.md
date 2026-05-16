@@ -1,25 +1,21 @@
 ## Question: Train / Validation / Test Split
 
-A dataset is split into train, validation, and test sets.
+In model selection, data is often split into training, validation, and test sets. Each split has a different role.
 
 1. What is the training set used for?
 2. What is the validation set used for?
 3. What is the test set used for?
-4. Write two typical split ratios.
-5. Why should the test set be used only once at the end?
-6. Explain information leakage in the context of repeated test-set use.
-7. Draw a workflow:
-
-   ```text
-   train model -> evaluate validation -> adjust hyperparameters -> final test once
-   ```
-
-8. Explain why using validation accuracy to choose a model is better than using training accuracy.
+4. Draw a workflow showing: train models, compare validation performance, choose a model, and evaluate once on the test set.
+5. Why should the test set not be used repeatedly during model selection?
+6. What is data leakage?
+7. Give one example of data leakage in preprocessing or model selection.
 
 ## Question: K-Fold Cross-Validation
 
-1. Explain K-fold cross-validation in words.
-2. For $K=5$, how many times do we train the model?
-3. Why can K-fold cross-validation reduce variance in performance estimates?
-4. What is the computational cost of K-fold cross-validation?
-5. When might a single train/validation/test split be sufficient?
+K-fold cross-validation estimates generalization performance by splitting the training data into $K$ folds and rotating which fold is used for validation.
+
+1. Explain the steps of K-fold cross-validation.
+2. If $K=5$, how many times is the model trained?
+3. Why can cross-validation be useful when the dataset is small?
+4. Why is cross-validation more expensive than a single train/validation split?
+5. After cross-validation selects a hyperparameter, what data should be used to train the final model before the final test evaluation?

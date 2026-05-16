@@ -1,6 +1,6 @@
 ## Question: Dense Layer Shapes
 
-In the course implementation, a dense layer uses:
+In a NumPy neural-network implementation, a dense layer uses:
 
 ```python
 return np.dot(input, self.weights) + self.biases

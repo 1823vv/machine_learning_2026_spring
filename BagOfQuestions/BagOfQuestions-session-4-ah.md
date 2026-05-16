@@ -1,6 +1,6 @@
 ## Question: Alternative Activation Layers
 
-The course mentions replacing ReLU with other activation functions.
+A neural-network implementation can replace ReLU with other activation functions.
 
 1. Write the formula for the sigmoid activation function.
 2. Write a Python class `Sigmoid(Layer)` with `forward` and `backward` methods.
@@ -10,7 +10,7 @@ The course mentions replacing ReLU with other activation functions.
 6. Explain one practical advantage of Leaky ReLU compared with ReLU.
 7. Explain one practical disadvantage of sigmoid in deeper neural networks.
 
-## Question: Activation Choice Story
+## Question: Activation Choice Scenario
 
 A student trains a deep network with sigmoid activations and sees very slow learning.
 
