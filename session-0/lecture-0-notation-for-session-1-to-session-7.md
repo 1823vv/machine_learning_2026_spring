@@ -76,6 +76,52 @@ For regression and binary classification with batch size $n$:
 | $Y$ | $ \mathbb{R}^{n \times 1}$ | Batch target matrix (rows are sample targets) |
 | $\hat{Y}$ | $ \mathbb{R}^{n \times 1}$ | Batch prediction matrix (rows are sample predictions) |
 
+
+### Dropout Notation
+
+For dropout, use the same activation notation as the neural-network convention above. Prefer $a$ for activations instead of introducing a separate $h$ notation.
+
+| Symbol | Meaning |
+|--------|---------|
+| $a$ | Activation before dropout, for one unit, one vector, or one layer |
+| $\tilde a$ | Activation after dropout |
+| $p$ | Drop probability |
+| $1-p$ | Keep probability |
+| $m$ | Binary keep mask: $m_i=1$ means keep activation $a_i$, and $m_i=0$ means drop activation $a_i$ |
+| $\odot$ | Element-wise multiplication |
+
+For one activation coordinate:
+
+$$
+m_i \sim \operatorname{Bernoulli}(1-p),
+\qquad
+\tilde a_i = a_i\frac{m_i}{1-p}.
+$$
+
+For a vector or matrix of activations:
+
+$$
+\tilde a = a \odot \frac{m}{1-p}.
+$$
+
+The expectation calculation should be written coordinate-by-coordinate:
+
+$$
+\mathbb{E}[\tilde a_i]
+= \mathbb{E}\left[a_i\frac{m_i}{1-p}\right]
+= a_i\frac{\mathbb{E}[m_i]}{1-p}
+= a_i\frac{1-p}{1-p}
+= a_i.
+$$
+
+During inference, inverted dropout does nothing:
+
+$$
+\tilde a = a.
+$$
+
+> Note: in NumPy implementations, a code variable named `mask` or `self.mask` may store the scaled mask $m/(1-p)$. In the math notation above, $m$ denotes the binary keep mask before scaling.
+
 ---
 
 ## 2. Key Notation Summary
@@ -103,6 +149,8 @@ For regression and binary classification with batch size $n$:
 | $\theta$ | Parameter vector (column form) |
 | $\eta$ | Learning rate |
 | $\lambda$ | Regularization strength |
+| $p$ | Dropout drop probability |
+| $1-p$ | Dropout keep probability |
 
 ### Parameter Updates
 
@@ -140,6 +188,8 @@ This notation clearly indicates an **in-place update** (mutating the parameter) 
 | $\delta^{(l)}$ | Error signal at layer $l$ |
 | $\sigma(\cdot)$ | Sigmoid activation function |
 | $\text{ReLU}(z) = \max(0, z)$ | ReLU activation function |
+| $m$ | Binary dropout keep mask |
+| $\tilde a$ | Activation after dropout |
 
 ### Dataset
 
@@ -157,6 +207,7 @@ $$
 | **Logistic Regression** | Row-vector world | $\hat{y} = \sigma(xW + b)$ |
 | **Multiple Linear Regression** | Row-vector world | $\hat{y} = xW + b$ |
 | **Simple Linear Regression** | Scalar form | $\hat{y} = wx + b$ |
+| **Inverted Dropout** | Activation notation; no extra keep-probability variable | $\tilde a = a \odot \frac{m}{1-p}$ |
 
 ---
 
