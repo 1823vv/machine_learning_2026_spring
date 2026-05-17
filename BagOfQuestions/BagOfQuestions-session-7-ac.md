@@ -1,19 +1,18 @@
 ## Question: Inverted Dropout Formula and Expectation
 
-In inverted dropout, each activation is multiplied by a random mask during training. For dropout probability $p$, the keep probability is $1-p$:
+In our own NumPy neural-network implementation, inverted dropout randomly drops activations during training and scales the surviving activations so that no extra scaling is needed during inference. Let $p$ be the drop probability. For one activation coordinate $a_i$, sample a binary keep mask
 
 $$
-\text{mask} \sim \frac{\mathrm{Bernoulli}(1-p)}{1-p}.
+m_i \sim \operatorname{Bernoulli}(1-p),
 $$
 
-The dropout output for an activation $a$ is
+where $m_i=1$ means the activation is kept and $m_i=0$ means it is dropped. The inverted-dropout output is
 
 $$
-\tilde a = a \cdot \text{mask}.
+\tilde a_i = a_i\frac{m_i}{1-p}.
 $$
 
-1. Draw a small network showing dropped units and. 
-2. Why do we divide by $1-p$ in inverted dropout?
-3. Show that the expected value of $\tilde a$ equals $a$.
-4. What happens during inference when using inverted dropout?
-
+1. Draw a small neural network layer before and after dropout, showing which units are kept and which units are dropped.
+2. Explain why inverted dropout divides by $1-p$ during training.
+3. Show the expectation calculation proving that $\mathbb{E}[\tilde a_i]=a_i$.
+4. State what happens to the dropout layer during evaluation/inference.
