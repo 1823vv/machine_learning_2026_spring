@@ -41,6 +41,7 @@ Deadline for submission:
 
 Bilibili videos:
 - https://space.bilibili.com/472463946/lists/1487100?type=season
+- https://www.bilibili.com/video/BV1VaokBDEnV
 
 Be default, you agree to share your videos on Bilibili by the prof as well.
 
