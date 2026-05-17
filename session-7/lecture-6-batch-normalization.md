@@ -195,7 +195,6 @@ Thus it can be viewed as:
 
 Batch Normalization:
 
-* follows the row-vector convention $Z = X W + \mathbf{1}b$
 * normalizes each activation feature across the mini-batch
 * learns $\gamma$ and $\beta$ to preserve representation flexibility
 * uses mini-batch statistics during training and running estimates during inference
