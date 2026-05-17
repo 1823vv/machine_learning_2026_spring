@@ -149,8 +149,17 @@ Forward:
 
 Backward:
 
-* $$
-\frac{\partial \mathcal{L}}{\partial x} = \frac{\partial \mathcal{L}}{\partial u} \, \frac{\partial u}{\partial x} + \frac{\partial \mathcal{L}}{\partial v} \, \frac{\partial v}{\partial x} = 1 \cdot y + 1 \cdot z = y + z
+$$
+\frac{\partial \mathcal{L}}{\partial x}
+= \frac{\partial \mathcal{L}}{\partial u} \, \frac{\partial u}{\partial x}
++ \frac{\partial \mathcal{L}}{\partial v} \, \frac{\partial v}{\partial x}
+= 1 \cdot y + 1 \cdot z = y + z
 $$
 
 **Observation:** Gradient contributions **accumulate** along all paths.
+
+---
+
+## 6. Key Takeaway
+
+A computation graph makes backpropagation systematic: move backward from $\mathcal{L}$, apply each node's local derivative, and sum contributions when multiple paths meet.

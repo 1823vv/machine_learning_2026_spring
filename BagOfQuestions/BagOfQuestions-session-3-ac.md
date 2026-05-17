@@ -5,4 +5,5 @@ A neural network repeatedly applies linear transformations and activation functi
 1. Explain why activation functions introduce nonlinearity.
 2. Draw the ReLU activation function. Write the formula for ReLU.
 3. Draw the sigmoid activation function. Write the formula for sigmoid.
-4. Draw the tanh activation function and mark its output range. If a network stacks many linear layers but uses no activation functions, what simpler model is it equivalent to? Explain why this would be bad for learning complex image or text patterns.
+4. Draw the tanh activation function and mark its output range. 
+5. If a network stacks many linear layers but uses no activation functions, what simpler model is it equivalent to? Explain why this would be bad for learning complex image or text patterns.

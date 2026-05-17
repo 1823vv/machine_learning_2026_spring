@@ -18,7 +18,7 @@ Fill in the `____YOUR_CODE_HERE__N_____` blanks in the logistic regression fragm
 
 ```python
 linear_model = np.dot(____YOUR_CODE_HERE__1_____, ____YOUR_CODE_HERE__2_____) + self.bias
-y_predicted = self.sigmoid(____YOUR_CODE_HERE__3_____)
+y_predicted = self._sigmoid(____YOUR_CODE_HERE__3_____)
 
 dw = (1 / n_samples) * np.dot(____YOUR_CODE_HERE__4_____, (____YOUR_CODE_HERE__5_____ - y))
 db = (1 / n_samples) * np.sum(____YOUR_CODE_HERE__6_____ - y)

@@ -86,18 +86,32 @@ $$
 
 ## 5. Local Gradients
 
-Each node in the computation graph only needs **local derivatives**:
+Each node in the computation graph only needs its **local derivative** plus the incoming backward signal.
 
-* Linear layer: $z = a W + b$
-
-$$
-\frac{\partial z}{\partial W} = a^T, \quad \frac{\partial z}{\partial a} = W^T, \quad \frac{\partial z}{\partial b} = 1
-$$
-
-* Activation layer: $a = f(z)$
+For a row-vector linear layer:
 
 $$
-\frac{\partial a}{\partial z} = f'(z)
+z = a W + b
 $$
 
-By combining local derivatives using the chain rule, we get the **full gradient**.
+If the incoming error signal is $\delta_z = \frac{\partial \mathcal{L}}{\partial z}$, then:
+
+$$
+\frac{\partial \mathcal{L}}{\partial W} = a^T \delta_z, \quad
+\frac{\partial \mathcal{L}}{\partial a} = \delta_z W^T, \quad
+\frac{\partial \mathcal{L}}{\partial b} = \delta_z
+$$
+
+For an activation layer $a = f(z)$:
+
+$$
+\frac{\partial \mathcal{L}}{\partial z} = \frac{\partial \mathcal{L}}{\partial a} \odot f'(z)
+$$
+
+This is the pattern used in the full neural-network backpropagation formulas.
+
+---
+
+## 6. Key Takeaway
+
+Backpropagation is the chain rule organized layer by layer: each layer receives a backward signal, multiplies by local derivatives, and passes the result to the previous layer.

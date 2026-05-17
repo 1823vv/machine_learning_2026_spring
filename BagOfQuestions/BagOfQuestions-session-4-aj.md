@@ -1,32 +1,22 @@
-## Question: Fill in the Training Function
+## Question: Linear Regression as a Computation Graph
 
-In our own NumPy neural-network implementation, one training step runs a forward pass, computes softmax cross-entropy, and then walks backward through the layer list. Fill in the `____YOUR_CODE_HERE__N____` blanks.
+Treat linear regression with one output as a one-layer neural network with identity activation. For one example, use the row-vector convention
 
-```python
-def train(network, X, y):
-    activations = ____YOUR_CODE_HERE__1____
-    logits = ____YOUR_CODE_HERE__2____
+$$
+z=xW+b,
+$$
 
-    loss, grad_logits = ____YOUR_CODE_HERE__3____(logits, y)
+$$
+\hat y=z,
+$$
 
-    grad_output = ____YOUR_CODE_HERE__4____
-    for i in range(len(network))[____YOUR_CODE_HERE__5____]:
-        layer = network[i]
-        grad_output = layer.____YOUR_CODE_HERE__6____(grad_output)
+where $x \in \mathbb{R}^{1 \times d}$, $W \in \mathbb{R}^{d \times 1}$, $b \in \mathbb{R}^{1 \times 1}$, and $y \in \mathbb{R}^{1 \times 1}$. The per-example squared-error loss is
 
-    return ____YOUR_CODE_HERE__7____
-```
+$$
+\ell=(\hat y-y)^2.
+$$
 
-Your answer goes here, after the `:`:
-
-- `____YOUR_CODE_HERE__1____`:
-- `____YOUR_CODE_HERE__2____`:
-- `____YOUR_CODE_HERE__3____`:
-- `____YOUR_CODE_HERE__4____`:
-- `____YOUR_CODE_HERE__5____`:
-- `____YOUR_CODE_HERE__6____`:
-- `____YOUR_CODE_HERE__7____`:
-
-## Question: Explain One Training Step
-
-Explain one training step in words using this order: `X -> forward -> logits -> loss -> initial gradient -> reverse layer loop -> parameter updates`.
+1. Draw the computation graph from $x$ to $z$ to $\hat y$ to $\ell$ and label the identity activation.
+2. Compute $\frac{\partial \ell}{\partial \hat y}$ and $\frac{\partial \hat y}{\partial z}$.
+3. Use the chain rule to compute $\delta=\frac{\partial \ell}{\partial z}$.
+4. Write $\frac{\partial \ell}{\partial W}$ in terms of $x^T$ and $\delta$, and write $\frac{\partial \ell}{\partial b}$.

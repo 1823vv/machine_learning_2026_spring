@@ -46,7 +46,7 @@ Let's implement Logistic Regression using Gradient Descent:
 ```python
 import numpy as np
 
-class MyOwnLogisticRegressionGD:
+class MyOwnLogisticRegression:
     def __init__(self, learning_rate=0.001, n_iters=1000):
         self.lr = learning_rate
         self.n_iters = n_iters
@@ -81,8 +81,8 @@ class MyOwnLogisticRegressionGD:
         y_predicted_cls = [1 if i > 0.5 else 0 for i in y_predicted]
         return np.array(y_predicted_cls)
 
-    def _sigmoid(self, x):
-        return 1 / (1 + np.exp(-x))
+    def _sigmoid(self, z):
+        return 1 / (1 + np.exp(-z))
 ```
 
 

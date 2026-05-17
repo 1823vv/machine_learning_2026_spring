@@ -1,31 +1,24 @@
-#  Momentum
-
+# Optimization — Momentum
 
 ![](./img/7.gif)
 
-
-
 ---
 
-## 1. Review — Mini-Batch Gradient Descent
+## 1. Review — Mini-Batch SGD
 
-From the previous lecture, mini-batch gradient descent (SGD) updates parameters as:
+From the previous lecture, mini-batch SGD uses a mini-batch gradient $g_{\mathcal{B}}$ and updates:
 
 $$
-W \leftarrow W - \eta g, \quad g = \frac{1}{B} \sum_{i \in \mathcal{B}} \frac{\partial \mathcal{L}_i}{\partial W}
+W \leftarrow W - \eta g_{\mathcal{B}}
 $$
 
-Mini-batch SGD is efficient for large datasets, but the stochasticity (noise) in each mini-batch gradient can cause oscillations in **narrow valleys** or **high-curvature directions**.
-
-**Problem:** Even with a good learning rate, SGD can be **slow to converge** in some directions due to oscillations.
+This is efficient, but the mini-batch gradient is noisy. In narrow valleys or high-curvature directions, that noise can cause zig-zagging and slow progress.
 
 ---
 
 ## 2. Motivation for Momentum
 
-
 ![](./img/1.gif)
-
 
 Imagine descending a **long, narrow valley**:
 
@@ -43,24 +36,22 @@ We want:
 
 ## 3. Momentum Update Rule
 
-Momentum introduces a **velocity term** $v$ that smooths the gradient $g$ over time:
+Momentum introduces a **velocity term** $v$ that smooths the mini-batch gradient over time. For readability, write $g = g_{\mathcal{B}}$ inside the update:
 
 $$
-v \leftarrow \beta v + (1 - \beta) g
+v \leftarrow \beta v + (1 - \beta) g, \quad W \leftarrow W - \eta v
 $$
 
-$$
-W \leftarrow W - \eta v
-$$
+The forward-pass notation is unchanged; for example, a row-vector linear layer is still $z = x W + b$. Momentum only changes the optimizer update.
 
-In row-vector notation for a linear layer:
-$$
-z = x W + b, \quad v \leftarrow \beta v + (1-\beta) g, \quad W \leftarrow W - \eta v
-$$
+> [!INFO]
+> **Momentum notation vs. Adam notation**
+>
+> Here $v$ means **velocity**. In the Adam lecture, $v$ will mean the **second moment** (moving average of squared gradients). The meanings are different, even though the same letter is commonly used in optimizer notation.
 
 Where:
 
-* $g$ — mini-batch gradient
+* $g$ — mini-batch gradient $g_{\mathcal{B}}$
 * $v$ — accumulated velocity (smoothed gradient)
 * $\beta \in [0,1)$ — momentum coefficient (commonly 0.9)
 * $\eta$ — learning rate
@@ -94,8 +85,6 @@ Visual analogy:
 3. Works especially well for **deep networks** with **high-curvature loss surfaces**
 4. Learning rate may need slight adjustment when using momentum
 
-**Summary:** Momentum lets parameters **carry speed in consistent directions**, reducing oscillation and accelerating learning.
-
 ---
 
 ## 6. PyTorch Example
@@ -103,7 +92,7 @@ Visual analogy:
 ```python
 import torch.optim as optim
 
-# SGD with momentum: v <- beta * v + (1-beta) * g, then W <- W - eta * v
+# SGD with momentum conceptually accumulates a velocity from recent gradients
 optimizer = optim.SGD(
     model.parameters(),
     lr=0.01,
@@ -114,13 +103,11 @@ for X, y in dataloader:
     optimizer.zero_grad()
     loss = criterion(model(X), y)
     loss.backward()
-    optimizer.step()  # Internally smooths g into v and updates W
+    optimizer.step()  # Updates parameters using momentum-smoothed gradients
 ```
 
 ---
 
 ## 7. Summary
 
-* SGD can oscillate or move slowly in certain directions
-* Momentum introduces a velocity term $v$ that **accumulates past gradients**
-* Updates become **smoother and faster**, especially in long, narrow valleys
+Momentum changes the update direction from the raw mini-batch gradient $g_{\mathcal{B}}$ to a smoothed velocity $v$. This reduces zig-zagging and helps learning move faster in directions where gradients are consistent.

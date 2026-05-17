@@ -1,8 +1,7 @@
 ## Question: One-Hot Encoding for Categorical Input Features
 
-A regression dataset has three numerical input features and one categorical input feature called `State`. The possible states are `New York`, `California`, and `Florida`. A model needs numerical input vectors, so the categorical feature is one-hot encoded.
+A machine learning dataset contains three continuous numerical input features and one categorical input feature called `State`. The possible values for `State` are `New York`, `California`, and `Florida`. Because mathematical models require purely numeric input vectors, this categorical feature must be transformed using one-hot encoding.
 
-1. Write a one-hot encoding table for the three state values.
-2. If the original input has 3 numerical features, what is the input dimension after using all 3 one-hot state columns? For one sample from `California`, write the state part of the one-hot vector.
-3. Explain why using integer labels such as `0`, `1`, and `2` for the states can be misleading. In a linear model with a bias term, why might one of the three one-hot columns be dropped?
-4. Draw a schema showing numerical features and one-hot state features concatenated into one input row vector $x$.
+1. Construct a reference table showing the exact one-hot encoded vector representation for each of the three distinct state values.
+2. Given the 3 original numerical features, what is the total input dimension ($d_{\mathrm{in}}$) of the final processed feature matrix? For an input sample belonging to `California`, write out the full, combined input row vector $x$ using placeholders (e.g., $x_1, x_2, x_3$) for the numerical features followed by the explicit numeric values of the encoded state.
+3. Explain why mapping these categorical states to single integer labels (such as `New York = 0`, `California = 1`, and `Florida = 2`) introduces an inappropriate inductive bias for a linear model.

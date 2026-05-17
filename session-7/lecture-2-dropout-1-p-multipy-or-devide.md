@@ -1,4 +1,4 @@
-# Why Inverted Dropout
+# Why Inverted Dropout Divides by $1-p$
 
 ![](./img/whyinverteddropout.png)
 
@@ -7,89 +7,117 @@
 ## 1. Question
 
 In our neural-network-from-scratch implementation, as well as in PyTorch and TensorFlow-style APIs, why does dropout use
+
 ```python
 self.mask = np.random.binomial(1, 1 - self.p, size=input.shape) / (1 - self.p)
 ```
 
-Here $p$ is the drop probability, so the keep probability is $1-p$. We assume $0 \le p < 1$.
+?
+
+Here $p$ is the drop probability, so $1-p$ is the keep probability. We assume $0 \le p < 1$.
 
 ---
 
 ## 2. Answer: Keep the Expected Activation Magnitude Constant
 
-When we apply dropout during training, we randomly "drop" (zero out) each unit with probability $p$. If we only did
+Let $a$ be an activation before dropout. During training, dropout samples a binary keep mask
+
+$$
+m_i \sim \operatorname{Bernoulli}(1-p),
+$$
+
+so $m_i=1$ means activation $a_i$ is kept and $m_i=0$ means it is dropped.
+
+If we only did
 
 ```python
 mask = np.random.binomial(1, 1 - p, size=input.shape)
 output = input * mask
 ```
 
-then on average only a fraction $(1-p)$ of our units would be "alive," so the total activation magnitude would shrink by a factor of $(1-p)$.  To compensate, we can **scale up** the remaining units by $\tfrac{1}{1 - p}$ so that the expected sum of activations stays the same as it would have been without dropout.  That's why we do:
+then on average only a fraction $1-p$ of activations would be alive. The expected activation would shrink:
+
+$$
+\mathbb{E}[a_i m_i] = a_i\mathbb{E}[m_i] = a_i(1-p).
+$$
+
+To compensate, inverted dropout scales the kept activations by $1/(1-p)$ during training:
+
+$$
+\tilde a_i = a_i\frac{m_i}{1-p}.
+$$
+
+Then
+
+$$
+\mathbb{E}[\tilde a_i]
+= \mathbb{E}\left[a_i\frac{m_i}{1-p}\right]
+= a_i\frac{\mathbb{E}[m_i]}{1-p}
+= a_i\frac{1-p}{1-p}
+= a_i.
+$$
+
+That is why the implementation stores the scaled mask:
 
 ```python
 self.mask = np.random.binomial(1, 1 - self.p, size=input.shape) / (1 - self.p)
+output = input * self.mask
 ```
 
-1. **Sampling the mask**
-   `np.random.binomial(1, 1 - p, size=input.shape)` generates a matrix of 0s and 1s where each entry is 1 (unit kept) with probability $(1 - p)$, or 0 (unit dropped) with probability $p$.
+In math notation, the code variable `self.mask` is the scaled mask $m/(1-p)$, and the training-time output is
 
-2. **Scaling by \(1/(1-p)\)**
-   Dividing by $(1 - p)$ scales each kept unit up so that
-   $$
-     \mathbb{E}[\text{mask}_{ij}] = \frac{(1-p)}{1-p} = 1,
-   $$
-   and thus
-   $$
-     \mathbb{E}[\text{input}_{ij} \times \text{mask}_{ij}] = \text{input}_{ij}.
-   $$
-   In other words, the expected activation remains exactly the same as without dropout.
+$$
+\tilde a = a \odot \frac{m}{1-p}.
+$$
 
-3. **Why "inverted" dropout**
-   By scaling at *training* time, we don't need to do any special scaling at *inference* time—when we set `self.training = False`, our `forward` simply returns the raw inputs (no mask), and we've already preserved the correct activation magnitudes.
+---
 
-This approach—often called **inverted dropout**—is the standard way to implement dropout because it simplifies the forward pass at test time (no extra scaling needed) while ensuring that both training and inference use activations on the same scale.
+## 3. Compared to the Original Dropout Implementation
 
-## 3. Compared to the Initial Dropout Implementation
+With inverted dropout, scaling happens during training, so inference is a plain feed-forward pass with no masking and no scaling.
 
-With the "inverted" version we're using, we scale **during training** so that at test time we don't have to do anything special—our forward pass is just a plain feed-forward with no masking or scaling.
-
-By contrast, the "original" (or naïve) dropout implementation works like this:
+By contrast, the original or naïve dropout implementation works like this:
 
 1. **Training**
+
    ```python
    mask = np.random.binomial(1, 1 - p, size=input.shape)
    output = input * mask
    ```
-   – We drop units but **do not** rescale them.
+
+   We drop activations but do **not** rescale the surviving activations.
+
 2. **Inference**
+
    ```python
    output = input * (1 - p)
    ```
-   – We multiply every activation by the keep probability \((1-p)\) to match the expected magnitude during training.
 
+   We multiply every activation by the keep probability $1-p$ to match the expected magnitude during training.
 
 ### 3.1 Key Differences
 
 |                           | Original Dropout                         | Inverted Dropout                          |
 |:-------------------------:|:----------------------------------------:|:-----------------------------------------:|
-| **Train-time scaling**    | None                                     | Scale kept units by \(1/(1-p)\)          |
-| **Test-time scaling**     | Multiply activations by \((1-p)\)        | None (just pass activations through)     |
-| **Code simplicity at test** | Requires an extra scaling step         | Forward is identical in train vs. test   |
-| **Expected activation**   | Needs correction at test                 | Already corrected during training        |
-
+| **Train-time scaling**    | None                                     | Scale kept activations by $1/(1-p)$      |
+| **Test-time scaling**     | Multiply activations by $1-p$            | None: pass activations through           |
+| **Code simplicity at test** | Requires an extra scaling step         | Forward is a no-op in the dropout layer  |
+| **Expected activation**   | Corrected at test time                   | Corrected during training                |
 
 ### 3.2 Why Inverted Dropout is Preferred
 
-- **No special inference logic.** Once we've scaled by \(1/(1-p)\) during training, our network's layers don't need to know whether they're in train or test mode: we simply skip the mask in test mode.
-- **Consistent magnitudes.** Both training and inference see activations on the same scale, which can improve numerical stability.
-- **Cleaner code.** We only branch on `training` in the dropout layer; all other layers and the rest of our code remain oblivious.
+- **No special inference logic.** Once we scale by $1/(1-p)$ during training, we simply skip the mask in evaluation mode.
+- **Consistent expected magnitudes.** Training activations have the same expectation as inference activations.
+- **Cleaner code.** Only the dropout layer needs to branch on `training`; the rest of the model can remain unchanged.
 
-In short, inverted dropout trades a little extra work during training (the scaling) for a simpler, faster, and more robust inference pass.
+In short, inverted dropout trades a little extra work during training for a simpler, faster, and more robust inference pass.
 
 See the original article proposing Dropout:
 - [https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 
 ![](./img/dp.jpg)
+
+---
 
 ## 4. Notation Difference in the Original Dropout Paper
 
@@ -97,8 +125,8 @@ See the original article proposing Dropout:
 <summary>
 Details
 </summary>
+
 The important detail is that <b>p</b> in the original paper denotes the probability of a unit being <b>present</b>, while in our implementation, TensorFlow, and PyTorch, <b>p</b> denotes the probability of a unit being <b>dropped</b>.
 
 ![](./img/pd-1.jpg)
 </details>
-

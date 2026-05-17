@@ -1,35 +1,47 @@
+## Question: Dropout Fill-in-the-Blank
 
-## Question: Dropout 
+Fill in the `_____YOUR_TEXT_HERE_N_____` blanks in the following text.
 
-Fill in the blank in the following text:
+In our own NumPy neural-network implementation, dropout uses inverted dropout during training:
 
-In our Neural Network from scratch implementation (as well as for the underlying implementation of PyTorch and TensorFlow), for Dropout, we have 
 ```python
 self.mask = np.random.binomial(1, 1 - p, size=input.shape) / _____YOUR_TEXT_HERE_1_____
-``` 
+output = input * self.mask
+```
 
-This is called **Inverted Dropout**, with the purpose of keeping the expected activation magnitude constant. When we apply Dropout during training, we randomly "drop" (zero out) each unit with probability $p$. **If we only did**
+Let $p$ be the drop probability, so $1-p$ is the keep probability. Mathematically, for an activation coordinate $a_i$ and binary keep mask $m_i$,
+
+$$
+m_i \sim \operatorname{Bernoulli}(1-p),
+\qquad
+\tilde a_i = a_i\frac{m_i}{1-p}.
+$$
+
+If we only did
 
 ```python
 mask = np.random.binomial(1, 1 - p, size=input.shape)
 output = input * mask
 ```
 
-**then** on average only a fraction `_____YOUR_TEXT_HERE_2_____` of our units **would** be "alive," so the total activation magnitude **would** shrink by a factor of `_____YOUR_TEXT_HERE_3_____`.  **To compensate**, we can **scale up** the remaining units by `_____YOUR_TEXT_HERE_4_____` **so that** the expected sum of activations stays the same as it would have been without dropout. 
+then on average only a fraction `_____YOUR_TEXT_HERE_2_____` of activations would be alive, so the expected activation magnitude would shrink by a factor of `_____YOUR_TEXT_HERE_3_____`. To compensate, inverted dropout scales up the surviving activations by `_____YOUR_TEXT_HERE_4_____` during training.
 
-By scaling at *training* time, we don't need to do any special scaling at *inference* time—when we set `self.training = _____YOUR_TEXT_HERE_5_____`, our `forward` simply returns the raw inputs (no mask), and we've already preserved the correct activation magnitudes.
+Because the scaling is already done during training, we do not need special scaling during inference. When we set `self.training = _____YOUR_TEXT_HERE_5_____`, the dropout layer simply returns the raw input activations.
 
-By contrast, the "original" (or naïve) dropout implementation works like this:
+By contrast, the original or naïve dropout implementation would use no scaling during training and would use this inference-time correction:
 
-1. **Training**  
-   ```python
-   mask = np.random.binomial(1, 1 - p, size=input.shape)
-   output = input * mask
-   ```
-   – We drop units but **do not** rescale them.  
-2. **Inference**  
-   ```python
-   output = input * _____YOUR_TEXT_HERE_6_____
-   ```
-   – We multiply every activation by the keep probability `_____YOUR_TEXT_HERE_7_____` to match the expected magnitude during training.
+```python
+output = input * _____YOUR_TEXT_HERE_6_____
+```
 
+Here the correction factor is the keep probability, which equals `_____YOUR_TEXT_HERE_7_____`.
+
+Your answer goes here, after the `:`:
+
+- `_____YOUR_TEXT_HERE_1_____`:
+- `_____YOUR_TEXT_HERE_2_____`:
+- `_____YOUR_TEXT_HERE_3_____`:
+- `_____YOUR_TEXT_HERE_4_____`:
+- `_____YOUR_TEXT_HERE_5_____`:
+- `_____YOUR_TEXT_HERE_6_____`:
+- `_____YOUR_TEXT_HERE_7_____`:

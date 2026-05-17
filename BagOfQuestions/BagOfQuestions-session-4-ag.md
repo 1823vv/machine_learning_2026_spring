@@ -1,15 +1,26 @@
-## Question: ReLU Layer Code and Drawing
+## Question: ReLU Layer Fill-in-the-Blank
 
-In our own NumPy neural-network implementation, ReLU is implemented as a layer with a `forward` method and a `backward` method.
+In our own NumPy neural-network implementation, a ReLU activation layer has no trainable parameters. Its forward pass stores the incoming array in `self.input`, and its backward pass multiplies the upstream gradient by the local ReLU derivative.
 
-1. Write the mathematical formula for ReLU, draw the ReLU function, and compute its output for inputs `[-3, 0, 2]`.
-2. Write the Python code for `ReLU.forward` using `np.maximum`, and explain why `self.input` is stored.
-3. In `ReLU.backward`, explain what `relu_grad = self.input > 0` creates. For `self.input = np.array([-3, 0, 2])`, what is `relu_grad`?
-4. Explain why ReLU makes the neural network nonlinear.
+Fill in the `____YOUR_CODE_HERE__N_____` blanks.
 
-## Question: What If We Remove ReLU?
+```python
+class ReLU(Layer):
+    def forward(self, input):
+        self.input = ____YOUR_CODE_HERE__1_____
+        return np.maximum(____YOUR_CODE_HERE__2_____, input)
 
-A network has several dense layers but no activation functions between them.
+    def backward(self, grad_output):
+        relu_grad = ____YOUR_CODE_HERE__3_____ > 0
+        return ____YOUR_CODE_HERE__4_____ * relu_grad
+```
 
-1. What kind of function is the whole network equivalent to?
-2. Why is this a problem if we want to learn complex image-classification boundaries?
+Your answer goes here, after the `:`:
+
+- `____YOUR_CODE_HERE__1_____`:
+- `____YOUR_CODE_HERE__2_____`:
+- `____YOUR_CODE_HERE__3_____`:
+- `____YOUR_CODE_HERE__4_____`:
+
+1. Explain why `self.input` is needed in `backward` even though ReLU has no trainable parameters.
+2. For `self.input = [[-2, 0, 3]]` and `grad_output = [[5, 5, 5]]`, compute the returned gradient.

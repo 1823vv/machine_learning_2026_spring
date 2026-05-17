@@ -432,6 +432,18 @@ Your answer goes here, after the `:`:
 
 Use code questions mainly for the allowed areas listed below.
 
+### Mandatory Source Files for Coding Questions
+
+For coding questions in these three implementation areas, always inspect and source the code skeleton exactly from the current course files before writing or revising a question:
+
+- Linear regression from scratch: `session-1/code-my_linear_regression.py`
+- Logistic regression from scratch: `session-2/code-my_logistic_regression.py`
+- Neural network from scratch: `session-4/code-my_nn.py`
+
+Do not invent method names, class names, thresholds, helper names, or update syntax that differ from those files. In particular, the logistic-regression implementation uses `class MyOwnLogisticRegression` and an internal helper named `_sigmoid`; code questions must call `self._sigmoid(...)`, not `self.sigmoid(...)`. The current `predict` method uses `[1 if i > 0.5 else 0 for i in y_predicted]`.
+
+Student-facing prompts should still normally describe the implementation in words rather than exposing repository file paths, unless the instructor explicitly asks for file paths in the question text.
+
 ---
 
 ## Strong Restrictions: What Not to Ask
@@ -492,13 +504,14 @@ Code questions should be limited to:
 2. **Logistic Regression from scratch**
    - Especially `fit`
    - Maybe `predict`
-   - Sigmoid
-   - Binary probability threshold
+   - Use the exact course class and helper names: `MyOwnLogisticRegression` and `_sigmoid`
+   - Sigmoid implementation inside `_sigmoid`
+   - Binary probability threshold exactly as in the source code when writing code skeletons
    - Gradient form using `(y_predicted - y)`
 
 3. **Neural Network from scratch**
-   - Only based on the course's own NumPy neural-network implementation. Use the source file internally, but do not make the final-exam question depend on a file path.
-   - Fill in code around existing architecture, training loop, layers, ReLU, Dense, softmax-cross-entropy, or similar material already present in the course
+   - Only based on the course's own NumPy neural-network implementation. Use `session-4/code-my_nn.py` internally, but do not make the final-exam question depend on a file path.
+   - Fill in code around existing architecture, training loop, `Layer`, `ReLU`, `Dense`, `softmax_crossentropy_with_logits`, `softmax`, `forward`, `predict`, `train`, or similar material already present in the source file
    - Avoid creating totally new neural-network code that students have not seen
 
 ---
@@ -632,7 +645,7 @@ Fill in the `____YOUR_CODE_HERE__N_____` blanks.
 
 ```python
 linear_model = np.dot(____YOUR_CODE_HERE__1_____, ____YOUR_CODE_HERE__2_____) + self.bias
-y_predicted = self.sigmoid(____YOUR_CODE_HERE__3_____)
+y_predicted = self._sigmoid(____YOUR_CODE_HERE__3_____)
 
 dw = (1 / n_samples) * np.dot(____YOUR_CODE_HERE__4_____, (y_predicted - y))
 db = (1 / n_samples) * np.sum(____YOUR_CODE_HERE__5_____)
@@ -822,7 +835,7 @@ Use skeletons like:
 
 ```python
 class MyOwnLogisticRegression:
-    def sigmoid(self, z):
+    def _sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
 
     def fit(self, X, y):
@@ -832,7 +845,7 @@ class MyOwnLogisticRegression:
 
         for _ in range(self.n_iters):
             linear_model = np.dot(X, self.weights) + self.bias
-            y_predicted = self.sigmoid(linear_model)
+            y_predicted = self._sigmoid(linear_model)
 
             dw = (1 / n_samples) * np.dot(X.T, (y_predicted - y))
             db = (1 / n_samples) * np.sum(y_predicted - y)
@@ -918,7 +931,7 @@ Good question ideas:
 6. Explain why `np.max(logits, axis=1, keepdims=True)` is subtracted.
 7. Treat linear regression and binary logistic regression as one-layer neural networks and ask detailed backpropagation math using simple shapes and numbers.
 8. Ask students to derive or compute error signals such as $\delta=\partial \ell/\partial z$ for identity and sigmoid outputs.
-9. Write `Sigmoid` or `LeakyReLU` class only if consistent with source materials.
+9. Ask conceptual questions about sigmoid or Leaky ReLU if they are covered elsewhere, but do not write code questions for activation-layer classes that are absent from the source implementation.
 
 Avoid:
 

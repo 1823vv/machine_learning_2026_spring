@@ -16,13 +16,13 @@ Fill in the `____YOUR_CODE_HERE__N_____` blanks in the code skeleton below.
 
 ```python
 class MyOwnLogisticRegression:
-    def __init__(self, learning_rate=0.001, n_iters=10000):
+    def __init__(self, learning_rate=0.001, n_iters=1000):
         self.lr = learning_rate
         self.n_iters = n_iters
         self.weights = None
         self.bias = None
 
-    def sigmoid(self, z):
+    def _sigmoid(self, z):
         return ____YOUR_CODE_HERE__1_____
 
     def fit(self, X, y):
@@ -32,7 +32,7 @@ class MyOwnLogisticRegression:
 
         for _ in range(self.n_iters):
             linear_model = np.dot(____YOUR_CODE_HERE__4_____, ____YOUR_CODE_HERE__5_____) + self.bias
-            y_predicted = self.sigmoid(____YOUR_CODE_HERE__6_____)
+            y_predicted = self._sigmoid(____YOUR_CODE_HERE__6_____)
 
             dw = (1 / n_samples) * np.dot(____YOUR_CODE_HERE__7_____, (y_predicted - y))
             db = (1 / n_samples) * np.sum(____YOUR_CODE_HERE__8_____)
@@ -42,9 +42,9 @@ class MyOwnLogisticRegression:
 
     def predict(self, X):
         linear_model = np.dot(____YOUR_CODE_HERE__11_____, ____YOUR_CODE_HERE__12_____) + self.bias
-        y_probability = self.sigmoid(____YOUR_CODE_HERE__13_____)
-        y_predicted_class = [1 if p >= 0.5 else 0 for p in ____YOUR_CODE_HERE__14_____]
-        return np.array(y_predicted_class)
+        y_predicted = self._sigmoid(____YOUR_CODE_HERE__13_____)
+        y_predicted_cls = [1 if i > 0.5 else 0 for i in ____YOUR_CODE_HERE__14_____]
+        return np.array(y_predicted_cls)
 ```
 
 Your answer goes here, after the `:`:
@@ -66,6 +66,6 @@ Your answer goes here, after the `:`:
 
 Then answer the following short questions:
 
-1. Why does logistic regression need the sigmoid function after the linear score, and what does `y_probability` mean before it is converted into class labels?
+1. Why does logistic regression need the sigmoid function after the linear score, and what does `y_predicted` mean before it is converted into class labels?
 2. Why is the gradient coefficient `(1 / n_samples)` here instead of `(2 / n_samples)` as in the usual MSE formula for linear regression?
 3. What probability threshold is used in this `predict` function?

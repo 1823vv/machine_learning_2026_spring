@@ -1,26 +1,19 @@
-## Question: Dense Layer Shapes
+## Question: Activation Layer Variants
 
-In a NumPy neural-network implementation, a dense layer uses:
+In our own NumPy neural-network implementation, an activation layer stores its incoming array as `self.input` during `forward` so that `backward` can compute a local derivative. The existing ReLU layer uses the pattern:
 
 ```python
-return np.dot(input, self.weights) + self.biases
+class ReLU(Layer):
+    def forward(self, input):
+        self.input = input
+        return np.maximum(0, input)
+
+    def backward(self, grad_output):
+        relu_grad = self.input > 0
+        return grad_output * relu_grad
 ```
 
-Assume:
-
-```text
-input.shape = (128, 784)
-self.weights.shape = (784, 64)
-self.biases.shape = (64,)
-```
-
-1. What is the batch size?
-2. What is `input_units`? What is `output_units`?
-3. What is the output shape of this dense layer? Why does `np.dot(input, self.weights)` work here?
-4. Why can `self.biases` with shape `(64,)` be added to a matrix with shape `(128, 64)`? Draw this dense layer as a matrix multiplication diagram.
-
-## Question: The Meaning of `self.input`
-
-1. In `Dense.forward`, why does the layer store `self.input = input`?
-2. Is `self.input` a trainable parameter?
-3. Is `self.input` one sample or a batch in the training code?
+1. Write the mathematical formulas for sigmoid and Leaky ReLU with slope $\alpha=0.01$ on the negative side. Draw ReLU, sigmoid, and Leaky ReLU on the same axes and label where their gradients are small or zero.
+2. Write complete `Sigmoid(Layer)` and `LeakyReLU(Layer)` classes using the same `forward(self, input)` and `backward(self, grad_output)` interface. Your code should store `self.input`, not a differently named variable.
+3. Explain one possible advantage of Leaky ReLU compared with ReLU, and one possible disadvantage of sigmoid in deeper networks.
+4. If an activation layer has no trainable weights or biases, why does it still need a `backward` method during backpropagation?
