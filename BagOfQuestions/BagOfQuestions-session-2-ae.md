@@ -17,5 +17,4 @@ Use learning rate $\eta=0.1$ and assume $\sigma(-0.5)\approx 0.38$.
 1. Compute $z=xW+b$, $\hat{y}$, and the error signal $\hat{y}-y$.
 2. Compute the gradient with respect to $W$ for this one sample: $\frac{\partial \ell}{\partial W}=x^T(\hat{y}-y)$.
 3. Compute the gradient with respect to $b$.
-4. Update $W$ and $b$ using left-arrow notation.
-5. Explain why the first weight increases and the second weight becomes less negative after this update.
+4. Update $W$ and $b$.

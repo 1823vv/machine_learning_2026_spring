@@ -1,24 +1,27 @@
-## Question: Classification Metrics for an Imbalanced Dataset
+## Question: Classification Metrics for an Imbalanced Medical Screening Task
 
-Consider a binary classifier for a medical screening task. The positive class is rare. The confusion matrix counts are:
+Consider a binary classifier for a **medical screening task** where the positive class (disease present) is rare. The confusion matrix counts are:
 
-```text
-True Positive  (TP) = 40
-False Positive (FP) = 160
-False Negative (FN) = 10
-True Negative  (TN) = 790
-```
+| | Predicted Positive | Predicted Negative |
+|---|---|---|
+| **Actual Positive** | True Positive (TP) = 40 | False Negative (FN) = 10 |
+| **Actual Negative** | False Positive (FP) = 160 | True Negative (TN) = 790 |
 
-1. Compute accuracy.
-2. Compute precision. Compute recall.
-3. Compute the F1 score. Explain why accuracy alone can be misleading for imbalanced datasets.
-4. In this medical screening setting, why might recall be especially important?
+**Definitions for reference:**
+- **Accuracy**: $\frac{TP + TN}{TP + FP + FN + TN}$
+- **Precision**: $\frac{TP}{TP + FP}$ (of all predicted positive, how many are actually positive?)
+- **Recall**: $\frac{TP}{TP + FN}$ (of all actual positive, how many did we catch?)
+- **F1 Score**: $2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$
 
-## Question: Choosing the Right Metric
+1. Compute **accuracy** for this classifier. Show your calculation.
 
-Different machine-learning applications require different evaluation metrics. A metric should match the cost of different mistakes.
+2. Compute **precision**. Compute **recall**. Show your calculations.
 
-1. For spam detection, when might precision be more important than recall?
-2. For disease screening, when might recall be more important than precision? For a balanced classification problem, when might accuracy be acceptable?
-3. Explain why the “best” model can change when the evaluation metric changes.
-4. Draw a small decision diagram for selecting accuracy, precision, recall, or F1.
+3. Compute the **F1 score**. Explain why **accuracy alone can be misleading** for imbalanced datasets like this one, using the numbers above to illustrate your point.
+
+4. In this **medical screening setting**, why might **recall be especially important**? What is the real-world cost of the 10 false negatives?
+
+5. Now consider a **spam detection** task instead. In that setting, why might **precision be more important than recall**? What is the real-world cost of too many false positives (legitimate emails marked as spam)?
+
+
+6. Explain why the **"best" model can change** when the evaluation metric changes. Give a concrete example: describe a model that might maximize accuracy but have poor recall, and why you would reject it for disease screening.

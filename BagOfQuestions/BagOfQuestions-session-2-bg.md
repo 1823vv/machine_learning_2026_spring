@@ -45,8 +45,6 @@ Your answer goes here, after the `:`:
 - `____YOUR_CODE_HERE__10_____`:
 - `____YOUR_CODE_HERE__11_____`:
 
-Then answer the following short questions:
+Then answer the following question:
 
-1. Why does `dw` use `X.T` in the dot product?
-2. What shape should `dw` have if `X.shape == (n_samples, n_features)`?
-3. Explain why the gradient expression uses `(y_predicted - y)` for binary cross-entropy with sigmoid.
+12. Explain why the gradient expression uses `(y_predicted - y)` for binary cross-entropy with sigmoid.

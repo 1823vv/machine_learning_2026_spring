@@ -1,6 +1,6 @@
 ## Question: L1 and L2 Regularization — Formula, Geometry, and Intuition
 
-In linear regression, regularization helps prevent overfitting by adding penalty terms to the loss function. Let $\mathcal{L}_{data}(w)$ be the original data loss and $\lambda > 0$ be the regularization strength.
+In linear regression, regularization helps prevent overfitting by adding penalty terms to the loss function. Let $\mathcal{L}_{data}(W)$ be the original data loss and $\lambda > 0$ be the regularization strength.
 
 1. Write the complete objective function for linear regression with L1 regularization (Lasso).
 2. Write the complete objective function for linear regression with L2 regularization (Ridge).

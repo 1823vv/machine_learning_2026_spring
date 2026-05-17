@@ -11,4 +11,3 @@ For each case below, write the appropriate output dimension, the usual final act
 1. **One-output regression.** The target is one continuous number $y \in \mathbb{R}$. What output dimension and final activation should be used? Write the mean squared error loss for one example.
 2. **Binary classification.** The target is $y \in \{0,1\}$. If we use one logit, what output dimension and activation should be used? Write the sigmoid formula $\sigma(z)$ and the binary cross-entropy loss for one example.
 3. **Multiclass classification with 10 classes.** The target class is $c \in \{0,1,\ldots,9\}$. What output dimension and activation should be used? Write the softmax formula for class $k$ and the cross-entropy loss for one example.
-4. For handwritten digit classification, explain what each output neuron represents before softmax and what each output value represents after softmax.

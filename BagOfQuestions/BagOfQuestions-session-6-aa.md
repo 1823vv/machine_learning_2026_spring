@@ -1,16 +1,9 @@
-## Question: Generalization Is the Real Goal
+## Question: Generalization, Overfitting, and Data Splits
 
-A machine-learning model is useful only if it performs well on unseen data from the same problem, not merely on the training examples it has already seen.
+A machine learning model is useful only if it performs well on unseen data, rather than merely memorizing the training examples it has already encountered. Suppose a classifier achieves 99% accuracy on its training set but only 75% accuracy on a validation set sampled from the same data distribution.
 
-1. Explain the difference between training performance and generalization performance.
-2. Why can a model with very low training loss still be a bad model? Draw two curves over training epochs: training loss and validation loss for an overfitting model.
-3. Mark on your drawing the region where validation loss starts getting worse while training loss continues improving. Explain why validation data is useful for detecting this situation.
-4. Give two possible strategies to improve generalization.
-
-## Question: Seen Data versus Unseen Data
-
-Suppose a classifier obtains 99% accuracy on the training set but only 75% accuracy on a validation set sampled from the same distribution.
-
-1. What does this gap suggest?
-2. Why is memorizing training examples not the same as learning a useful pattern? What additional information would you want before deciding whether the model is acceptable?
-3. Explain why the validation set should not be used to update model parameters directly.
+1. Define the difference between training performance and generalization performance. Based on the scenario above, what does the 24% performance gap suggest about the model's current state?
+2. Explain why a model that achieves a very low training loss or near-perfect training accuracy can still be a poor model. Why is memorizing training examples fundamentally different from learning a useful underlying pattern?
+3. Sketch a single plot illustrating the behavior of an overfitting model over training epochs. Draw two distinct curves on this plot: one for **training loss** and one for **validation loss**.
+4. On your drawing, clearly mark the exact point or region where the model begins to overfit. Use your plot to explain why a validation dataset is essential for detecting this boundary, and why the validation data must *never* be used to update the model’s parameters directly during gradient descent.
+5. Provide two distinct regularization or data-driven strategies that can be implemented to narrow this generalization gap and improve performance on unseen data.
