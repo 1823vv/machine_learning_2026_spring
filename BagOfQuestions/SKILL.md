@@ -440,7 +440,7 @@ For coding questions in these three implementation areas, always inspect and sou
 - Logistic regression from scratch: `session-2/code-my_logistic_regression.py`
 - Neural network from scratch: `session-4/code-my_nn.py`
 
-Do not invent method names, class names, thresholds, helper names, or update syntax that differ from those files. In particular, the logistic-regression implementation uses `class MyOwnLogisticRegressionGD` and an internal helper named `_sigmoid`; code questions must call `self._sigmoid(...)`, not `self.sigmoid(...)`. The current `predict` method uses `[1 if i > 0.5 else 0 for i in y_predicted]`.
+Do not invent method names, class names, thresholds, helper names, or update syntax that differ from those files. In particular, the logistic-regression implementation uses `class MyOwnLogisticRegression` and an internal helper named `_sigmoid`; code questions must call `self._sigmoid(...)`, not `self.sigmoid(...)`. The current `predict` method uses `[1 if i > 0.5 else 0 for i in y_predicted]`.
 
 Student-facing prompts should still normally describe the implementation in words rather than exposing repository file paths, unless the instructor explicitly asks for file paths in the question text.
 
@@ -504,7 +504,7 @@ Code questions should be limited to:
 2. **Logistic Regression from scratch**
    - Especially `fit`
    - Maybe `predict`
-   - Use the exact course class and helper names: `MyOwnLogisticRegressionGD` and `_sigmoid`
+   - Use the exact course class and helper names: `MyOwnLogisticRegression` and `_sigmoid`
    - Sigmoid implementation inside `_sigmoid`
    - Binary probability threshold exactly as in the source code when writing code skeletons
    - Gradient form using `(y_predicted - y)`
@@ -639,7 +639,7 @@ Example:
 ```markdown
 ## Question: Logistic Regression from Scratch
 
-We are implementing binary logistic regression `class MyOwnLogisticRegressionGD` from scratch with NumPy.
+We are implementing binary logistic regression `class MyOwnLogisticRegression` from scratch with NumPy.
 
 Fill in the `____YOUR_CODE_HERE__N_____` blanks.
 
@@ -834,7 +834,7 @@ Avoid:
 Use skeletons like:
 
 ```python
-class MyOwnLogisticRegressionGD:
+class MyOwnLogisticRegression:
     def _sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
 
@@ -1079,7 +1079,7 @@ TODO: make it more like the fill-in-the-blank code style.
 Good fix:
 
 ```markdown
-We are implementing binary logistic regression `class MyOwnLogisticRegressionGD` from scratch with NumPy. Fill in the `____YOUR_CODE_HERE__N_____` blanks in the code skeleton below.
+We are implementing binary logistic regression `class MyOwnLogisticRegression` from scratch with NumPy. Fill in the `____YOUR_CODE_HERE__N_____` blanks in the code skeleton below.
 ```
 
 Then provide an actual skeleton and answer slots.

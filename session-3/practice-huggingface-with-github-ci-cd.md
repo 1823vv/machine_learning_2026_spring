@@ -1,34 +1,180 @@
-# Simple ML Project with GitHub CI/CD → Hugging Face
+# ML Project: GitHub CI/CD → Hugging Face
 
 > [!INFO]
-> Your delivery should look like this:
-> - https://github.com/EmporioSabo/california-housing-predictor
-> - https://huggingface.co/EmporioSabo/california-housing-predictor/tree/main
+> Your final delivery should resemble:
 >
-> After finishing the task, send the URLs in the WeChat Group.
+> * [https://github.com/EmporioSabo/california-housing-predictor](https://github.com/EmporioSabo/california-housing-predictor)
+> * [https://huggingface.co/EmporioSabo/california-housing-predictor/tree/main](https://huggingface.co/EmporioSabo/california-housing-predictor/tree/main)
+>
+> Once completed, post both URLs in the WeChat group.
 
-## Objective
+---
 
-1. Conceive a simple Machine Learning project (no need for complex models).
-2. Upload your code to GitHub.
-3. Use GitHub CI/CD to automatically train your model and upload it to Hugging Face Hub.
-4. Through the whole process, you don't, on your side, do anything with your huggingface model repo after creating the model repo. Things should be done automatically by GitHub CI/CD Actions.
+### Objective
 
+Build and deploy a complete Machine Learning project pipeline:
 
-## Inspiration
+1. Design a simple but meaningful ML project.
+2. Upload the full codebase to GitHub.
+3. Configure GitHub Actions CI/CD to automatically:
 
-* [Space Mining GitHub Repo](https://github.com/reveurmichael/space_mining/tree/main)
-* [Space Mining Hugging Face Hub](https://huggingface.co/LUNDECHEN/space-mining-ppo/tree/main)
-* [GitHub CI/CD Workflow Example](https://github.com/reveurmichael/space_mining/blob/main/.github/workflows/train-long-wandb-hf.yml)
+   * Train your model
+   * Save artifacts
+   * Upload everything to Hugging Face Hub
+4. After creating your Hugging Face model repository once, all future updates must happen automatically through GitHub Actions — no manual uploads.
 
-> For simplicity, your project can use a small ML model (like a simple scikit-learn regression or classification).
+---
 
+### Your Specific Task
 
-## Example GitHub CI/CD Workflow
+Follow the structure described in:
 
-You can use any YAML workflow template you like, as long as your GitHub repository is connected to Hugging Face and the CI/CD pipeline successfully uploads your model. The example might be a simple starting point that might work.
+`practice-huggingface-with-github-ci-cd.md`
 
-Save this as `.github/workflows/train-and-upload.yml` (JUST AN EXAMPLE HERE; DON'T USE IT DIRECTLY):
+But instead of a generic ML model, your project should focus on:
+
+#### Neural Network Sentiment Analysis Project
+
+Choose one of the following datasets:
+
+* `imdb_top_500.csv`
+* `imdb_balanced_10k.csv`
+
+#### Recommended Modeling Options
+
+##### Option A — Simpler (Recommended)
+
+**BoW / TF-IDF + Feedforward Neural Network**
+
+* Text preprocessing
+* Tokenization
+* TF-IDF or Bag-of-Words vectorization
+* Dense neural network classifier
+
+##### Option B — More Advanced
+
+**tiny_glove.json Embeddings + Embedding Layer / MLP**
+
+* Token embedding using tiny GloVe
+* Sequence or pooled representation
+* Neural network sentiment classifier
+
+---
+
+### Deliverables
+
+Your repository should include:
+
+#### GitHub Repository
+
+A clean, professional ML engineering project structure:
+
+```bash
+your-project/
+│
+├── data/
+├── model/
+├── train.py
+├── predict.py
+├── requirements.txt
+├── README.md
+└── .github/
+    └── workflows/
+        └── train-and-upload.yml
+```
+
+---
+
+### Required CI/CD Flow
+
+#### On Push to `main` or `master`:
+
+GitHub Actions should automatically:
+
+##### Step 1 — Setup
+
+* Checkout repository
+* Install Python
+* Install dependencies
+
+##### Step 2 — Train
+
+* Run `train.py`
+* Save:
+
+  * model weights (`model.pt`)
+  * tokenizer/vectorizer (`vectorizer.pkl`)
+  * config (`config.json`)
+  * metrics (`metrics.json`)
+
+##### Step 3 — Deploy
+
+* Authenticate using `HF_TOKEN`
+* Create Hugging Face repo if needed
+* Upload artifacts automatically
+
+---
+
+### Important Constraint
+
+#### You should NOT:
+
+* Manually upload model files to Hugging Face
+* Re-train locally just for deployment
+* Edit Hugging Face repo after initial creation
+
+#### You SHOULD:
+
+* Push code to GitHub
+* Let GitHub Actions handle everything
+
+---
+
+### Example Inspiration
+
+#### GitHub Repo Structure
+
+* Space Mining GitHub Repo:
+  [https://github.com/reveurmichael/space_mining/tree/main](https://github.com/reveurmichael/space_mining/tree/main)
+
+#### Hugging Face Hub Example
+
+* Space Mining HF Hub:
+  [https://huggingface.co/LUNDECHEN/space-mining-ppo/tree/main](https://huggingface.co/LUNDECHEN/space-mining-ppo/tree/main)
+
+#### CI/CD Workflow Reference
+
+* GitHub Actions Example:
+  [https://github.com/reveurmichael/space_mining/blob/main/.github/workflows/train-long-wandb-hf.yml](https://github.com/reveurmichael/space_mining/blob/main/.github/workflows/train-long-wandb-hf.yml)
+
+---
+
+### Suggested Project Ideas
+
+#### Example Repository Names
+
+* `imdb-sentiment-nn`
+* `imdb-review-classifier`
+* `sentiment-analysis-ci-cd`
+* `imdb-tfidf-neural-net`
+
+---
+
+### Hugging Face Secret Setup
+
+In your GitHub repository:
+
+#### Settings → Secrets and Variables → Actions
+
+Add:
+
+```bash
+HF_TOKEN = your_huggingface_access_token
+```
+
+---
+
+### Workflow Example (Customize It)
 
 ```yaml
 name: Train and Upload to Hugging Face
@@ -88,12 +234,13 @@ jobs:
 ```
 
 
-### Notes
+---
 
-* **HF_TOKEN**: Store your Hugging Face token as a secret in your GitHub repository.
-* **YOUR_HF_REPO**: Replace with your Hugging Face repo name.
-* **FILES_TO_UPLOAD_TO_HF**: List the model files you want to upload (e.g., `["model.pt", "config.json"]`).
-* Workflow triggers:
+### Final Submission
 
-  * `push` to `main` or  `master`
-  * Manual `workflow_dispatch` (can trigger from GitHub UI)
+After everything works:
+
+#### Send to WeChat Group:
+
+* GitHub Repository URL
+* Hugging Face Repository URL

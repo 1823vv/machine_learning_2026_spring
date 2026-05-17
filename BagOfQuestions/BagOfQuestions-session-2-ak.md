@@ -1,6 +1,6 @@
 ## Question: Logistic Regression Predict Method
 
-We are implementing binary logistic regression `class MyOwnLogisticRegressionGD` from scratch with NumPy. The model first computes a linear score, then calls its internal `_sigmoid` helper, and finally converts probabilities into class labels.
+We are implementing binary logistic regression `class MyOwnLogisticRegression` from scratch with NumPy. The model first computes a linear score, then calls its internal `_sigmoid` helper, and finally converts probabilities into class labels.
 
 Fill in the `____YOUR_CODE_HERE__N_____` blanks in the `predict` method below.
 

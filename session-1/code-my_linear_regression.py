@@ -34,7 +34,6 @@ class MyOwnLinearRegression:
         y_predicted = np.dot(X, self.weights) + self.bias
         return y_predicted
 
-
 if __name__ == "__main__":
 
     # =========================

@@ -1,6 +1,6 @@
 ## Question: Logistic Regression from Scratch
 
-We are implementing binary logistic regression `class MyOwnLogisticRegressionGD` from scratch with NumPy. The model receives a feature matrix `X` with shape `(n_samples, n_features)` and a binary target vector `y` with values in `{0, 1}`. First we compute the linear score
+We are implementing binary logistic regression `class MyOwnLogisticRegression` from scratch with NumPy. The model receives a feature matrix `X` with shape `(n_samples, n_features)` and a binary target vector `y` with values in `{0, 1}`. First we compute the linear score
 
 $$
 z=XW+\mathbf{1}b,
@@ -15,7 +15,7 @@ $$
 Fill in the `____YOUR_CODE_HERE__N_____` blanks in the code skeleton below.
 
 ```python
-class MyOwnLogisticRegressionGD:
+class MyOwnLogisticRegression:
     def __init__(self, learning_rate=0.001, n_iters=1000):
         self.lr = learning_rate
         self.n_iters = n_iters

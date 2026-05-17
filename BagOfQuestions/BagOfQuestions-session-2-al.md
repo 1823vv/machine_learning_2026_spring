@@ -1,11 +1,11 @@
 ## Question: Logistic Regression Fit Method and Internal Sigmoid
 
-We are implementing binary logistic regression `class MyOwnLogisticRegressionGD` from scratch with NumPy. The implementation initializes one weight per feature, computes a linear score, applies the internal `_sigmoid` helper, and updates parameters by gradient descent.
+We are implementing binary logistic regression `class MyOwnLogisticRegression` from scratch with NumPy. The implementation initializes one weight per feature, computes a linear score, applies the internal `_sigmoid` helper, and updates parameters by gradient descent.
 
 Fill in the `____YOUR_CODE_HERE__N_____` blanks in this code skeleton.
 
 ```python
-class MyOwnLogisticRegressionGD:
+class MyOwnLogisticRegression:
     def __init__(self, learning_rate=0.001, n_iters=1000):
         self.lr = learning_rate
         self.n_iters = n_iters
