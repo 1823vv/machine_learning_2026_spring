@@ -58,7 +58,7 @@ For large datasets, this becomes extremely expensive.
 
 # 2. Stochastic Gradient Descent (SGD)
 
-Instead of using the entire dataset, **Stochastic Gradient Descent (SGD)** estimates the gradient using a **small random batch**.
+Instead of using the entire dataset, **Mini-batch Stochastic Gradient Descent (SGD)** estimates the gradient using a **small random mini-batch**.
 
 $$
 W \leftarrow W - \eta g
@@ -370,9 +370,9 @@ Typical values are:
 | Parameter     | Value |
 | ------------- | ----- |
 | learning rate | 0.001 |
-| β₁            | 0.9   |
-| β₂            | 0.999 |
-| ε             | 1e-8  |
+| $\beta_1$    | 0.9   |
+| $\beta_2$    | 0.999 |
+| $\epsilon$   | $10^{-8}$ |
 
 These work well across many tasks.
 

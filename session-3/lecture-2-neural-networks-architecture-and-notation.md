@@ -124,7 +124,7 @@ A neural network is defined by:
 **Parameters**
 
 $$
-{ W^{(1)}, b^{(1)}, W^{(2)}, b^{(2)}, \dots, W^{(L)}, b^{(L)} }
+\{ W^{(1)}, b^{(1)}, W^{(2)}, b^{(2)}, \dots, W^{(L)}, b^{(L)} \}
 $$
 
 **Forward Computation**
