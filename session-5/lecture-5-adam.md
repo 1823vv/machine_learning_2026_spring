@@ -136,7 +136,7 @@ Analogy: A ship navigating in fog:
 | Learning rate $\eta$ | 0.001         |
 | $\beta_1$            | 0.9           |
 | $\beta_2$            | 0.999         |
-| $\epsilon$           | 1e-8          |
+| $\epsilon$           | $10^{-8}$     |
 
 * Works well for most deep learning tasks
 * Minimal tuning required

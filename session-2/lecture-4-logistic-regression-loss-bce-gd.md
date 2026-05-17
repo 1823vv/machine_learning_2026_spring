@@ -172,7 +172,7 @@ $$
 \ell^{(i)} = - \big( y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)})\log(1-\hat{y}^{(i)}) \big)
 $$
 
-Gradient w.r.t. $z^{(i)}$ (pre-activation):
+Gradient with respect to $z^{(i)}$ (pre-activation):
 
 $$
 \frac{\partial \ell^{(i)}}{\partial z^{(i)}} = \hat{y}^{(i)} - y^{(i)}
@@ -186,11 +186,11 @@ $$
 
 ---
 
-### 4.1 Gradient w.r.t. weights and bias
+### 4.1 Gradient with respect to weights and bias
 
 Since $z = x W + b$:
 
-* Gradient w.r.t. weights (per-example):
+* Gradient with respect to weights (per-example):
 
 $$
 \frac{\partial \ell^{(i)}}{\partial W} = x^{(i)\mathsf{T}} (\hat{y}^{(i)} - y^{(i)})
@@ -208,7 +208,7 @@ $$
 \boxed{\frac{\partial \mathcal{L}}{\partial W} = \frac{1}{n} X^{\mathsf{T}} (\hat{Y} - Y)}
 $$
 
-* Gradient w.r.t. bias (per-example):
+* Gradient with respect to bias (per-example):
 
 $$
 \frac{\partial \ell^{(i)}}{\partial b} = \hat{y}^{(i)} - y^{(i)}
@@ -288,7 +288,7 @@ $$
 \hat{y} = \sigma(-0.5) \approx 0.38
 $$
 
- 3. Compute gradient w.r.t. weights:
+ 3. Compute gradient with respect to weights:
 
  $$
  \frac{\partial \mathcal{L}}{\partial W} = x^{\mathsf{T}} (\hat{y}-y) = \begin{bmatrix} 1 \\ 2 \end{bmatrix} (0.38 - 1) = \begin{bmatrix} -0.62 \\ -1.24 \end{bmatrix}

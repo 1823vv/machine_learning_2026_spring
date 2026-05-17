@@ -16,16 +16,12 @@ A machine learning model contains two types of variables:
 
 Parameters are learned from data during training.
 
-Example:
+Example: the trainable weights and biases are $W$ and $b$.
+
+They are optimized by minimizing a training loss:
 
 $$
-\theta = \{W, b\}
-$$
-
-They are optimized by minimizing a loss function:
-
-$$
-\theta^* = \arg\min_\theta \mathcal{L}(\theta)
+W^*, b^* = \arg\min_{W,b} \mathcal{L}_{\text{train}}(W,b)
 $$
 
 ---
@@ -88,7 +84,7 @@ $$
 \mathcal{L}_{val}(\lambda)
 $$
 
-where $\lambda$ represents hyperparameters.
+where $\lambda$ represents the hyperparameters being selected (not only regularization strength in this section).
 
 Goal:
 
@@ -111,7 +107,7 @@ Grid search evaluates all combinations in a predefined set.
 Example:
 
 $$
-\eta \in {0.1, 0.01}, \quad \lambda \in {0.1, 0.01}
+\eta \in \{0.1, 0.01\}, \quad \lambda \in \{0.1, 0.01\}
 $$
 
 Total evaluations:
