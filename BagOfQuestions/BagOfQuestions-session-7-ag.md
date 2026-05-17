@@ -28,13 +28,6 @@ then on average only a fraction `_____YOUR_TEXT_HERE_2_____` of activations woul
 
 Because the scaling is already done during training, we do not need special scaling during inference. When we set `self.training = _____YOUR_TEXT_HERE_5_____`, the dropout layer simply returns the raw input activations.
 
-By contrast, the original or naïve dropout implementation would use no scaling during training and would use this inference-time correction:
-
-```python
-output = input * _____YOUR_TEXT_HERE_6_____
-```
-
-Here the correction factor is the keep probability, which equals `_____YOUR_TEXT_HERE_7_____`.
 
 Your answer goes here, after the `:`:
 
@@ -43,5 +36,3 @@ Your answer goes here, after the `:`:
 - `_____YOUR_TEXT_HERE_3_____`:
 - `_____YOUR_TEXT_HERE_4_____`:
 - `_____YOUR_TEXT_HERE_5_____`:
-- `_____YOUR_TEXT_HERE_6_____`:
-- `_____YOUR_TEXT_HERE_7_____`:
