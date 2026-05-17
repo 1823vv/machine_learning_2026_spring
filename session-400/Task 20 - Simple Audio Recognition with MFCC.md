@@ -5,6 +5,7 @@
 > **Task for students:**
 > - Here we are using Random Forest classifier model.
 > - You should explore other models (logistic regression, simple neural networks with different settings of depth/width/activation functions etc.)
+> - After finishing, send the GitHub URL to the WeChat group.
 
 **Environment Note**: This notebook requires the `librosa` library. Ensure your environment is prepared (e.g., `pip install librosa`) before running.
 
