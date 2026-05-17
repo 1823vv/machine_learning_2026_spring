@@ -13,5 +13,4 @@ Suppose a classifier obtains 99% accuracy on the training set but only 75% accur
 
 1. What does this gap suggest?
 2. Why is memorizing training examples not the same as learning a useful pattern? What additional information would you want before deciding whether the model is acceptable?
-3. Draw a simple schema showing training data, validation data, and future unseen data.
-4. Explain why the validation set should not be used to update model parameters directly.
+3. Explain why the validation set should not be used to update model parameters directly.

@@ -80,7 +80,7 @@ We are implementing linear regression `class MyOwnLinearRegression` from scratch
 ```markdown
 ## Question: One Gradient Descent Step by Hand in Logistic Regression
 
-Consider binary logistic regression with two features. For one training example, let `x = [2, -1]`, `y = 1`, weights `w = [0.1, -0.2]`, and bias `b = 0`.
+Consider binary logistic regression with two features. For one training example, let $x = [2, -1]$, $y = 1$, $w = [0.1, -0.2]$, and $b = 0$.
 ```
 
 ```markdown
@@ -522,6 +522,68 @@ Code questions should be limited to:
 
 Use English. The course README says English should be used for everything.
 
+### Mandatory Markdown, Math, and Emoji Rules
+
+These rules are mandatory for all generated or revised BagOfQuestions files.
+
+- Use `## Question: Descriptive Title` for every standalone question block.
+- Use `###` or `####` only for subsections inside a long question when they genuinely improve readability, and this should be done very rarely.
+
+
+#### Mathematical Formulas
+
+Write mathematical formulas using `$...$` or `$$...$$` pairs. Do not write formulas as informal plain text inside ordinary parentheses or brackets.
+
+Good inline math:
+
+```markdown
+The model predicts $\hat{y}$ and the target is $y$.
+```
+
+Good display math:
+
+```markdown
+$$
+\hat{y} = xW + b
+$$
+```
+
+
+More examples of preferred formatting:
+
+```markdown
+The feature vector is $x = [2, -1]$, the label is $y = 1$, the weights are $w = [0.1, -0.2]$, and the bias is $b = 0$.
+```
+
+Important distinctions:
+
+- Parentheses, brackets, and braces are fine inside LaTeX math, for example `$x \in \mathbb{R}^{1 \times d}$`, `$[x_1, x_2]$`, and `$\left(\hat{y}-y\right)^2$`.
+- Parentheses and brackets are fine inside Python code, NumPy shapes, file paths, and placeholder names.
+- The rule is not “never use parentheses or brackets.” The rule is: do not use ordinary prose parentheses or brackets as a replacement for math delimiters.
+- If a question includes code syntax such as `np.dot(X.T, (y_predicted - y))`, keep the code valid. Explain the corresponding mathematical expression separately with LaTeX when needed.
+
+#### Consistent Notation
+
+Use notation consistently inside each question and across related question files.
+
+Prefer these course conventions unless the specific prompt requires otherwise:
+
+- $n$: number of examples.
+- $d$: number of features.
+- $X \in \mathbb{R}^{n \times d}$: feature matrix.
+- $x^{(i)} \in \mathbb{R}^{1 \times d}$: one row-vector example.
+- $Y \in \mathbb{R}^{n \times 1}$: target column vector.
+- $\hat{Y} \in \mathbb{R}^{n \times 1}$: prediction column vector.
+- $W$: weights or parameter matrix.
+- $b$: bias.
+- $\mathcal{L}$: loss.
+
+When a code skeleton uses implementation shapes such as `y.shape == (n_samples,)`, state that this is the NumPy implementation shape and keep the mathematical convention separate.
+
+#### No Emojis
+
+Do not use emojis in exam questions, code skeletons, comments, answer slots, hints, or explanations unless the user explicitly requests them. Avoid check-mark emojis, warning emojis, numbered emojis, celebration emojis, and decorative icons. Use plain numbered lists and bullet lists instead.
+
 ### Tone
 
 Use a clear exam-question tone. Be direct but not overly terse. Students should understand what is being asked without needing to guess.
@@ -557,7 +619,7 @@ Use Markdown and LaTeX. Prefer display math for important formulas:
 
 ```markdown
 $$
-\sigma(z)=\frac{1}{1+e^{-z}}
+\boxed{\sigma(z)=\frac{1}{1+e^{-z}}}
 $$
 ```
 
@@ -566,6 +628,30 @@ Use inline math for short symbols:
 ```markdown
 The target is $y \in \{0,1\}$.
 ```
+
+Do not write mathematical formulas as plain prose in parentheses or brackets, for example `(y_hat - y)^2` or `[x1, x2] dot [w1, w2]`. Write the mathematical expression with `$...$` or `$$...$$` instead.
+
+Use `\boxed{...}` for formulas that are central to the question, especially when asking students to recall, interpret, or apply a key formula. Good examples include:
+
+```markdown
+$$
+\boxed{\hat{Y}=XW+b}
+$$
+```
+
+```markdown
+$$
+\boxed{\ell^{(i)}= -\left[y^{(i)}\log\left(\hat y^{(i)}\right)+\left(1-y^{(i)}\right)\log\left(1-\hat y^{(i)}\right)\right]}
+$$
+```
+
+```markdown
+$$
+\boxed{p_k=\frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}}
+$$
+```
+
+Use unboxed display math for supporting algebra or intermediate steps.
 
 ### Code Formatting
 
@@ -959,7 +1045,7 @@ Your answer goes here, after the `:`:
 
 ---
 
-## Session 5: Regularization, Dropout, and Optimization Concepts
+## Session 5, 6, 7: Optimization, Model Selection, Regularization, Dropout
 
 The exact scope depends on course files. Inspect existing session 5 materials before generating.
 
@@ -987,10 +1073,6 @@ Avoid:
 - Coding Adam or momentum.
 - Coding model selection.
 - Heavy backpropagation math.
-
----
-
-## Session 6 and Session 7: Model Selection
 
 Topics to emphasize:
 
@@ -1112,6 +1194,10 @@ Before finalizing edits, verify:
 - [ ] No `draft marker`, `placeholder marker`, or `fix marker` remains in the requested scope.
 - [ ] Code blocks are fenced correctly.
 - [ ] LaTeX formulas use correct Markdown syntax.
+- [ ] Mathematical formulas use `$...$` or `$$...$$`, not informal plain-text formulas in ordinary parentheses or brackets.
+- [ ] Central formulas use `\boxed{...}` when appropriate.
+- [ ] The file uses consistent math notation.
+- [ ] No emojis appear in questions, code skeletons, comments, hints, or answer slots unless explicitly requested.
 - [ ] Placeholder names are consistent and numbered in order.
 - [ ] Every placeholder in code has a corresponding answer slot.
 - [ ] Every answer slot corresponds to a placeholder in code.
