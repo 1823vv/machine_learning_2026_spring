@@ -273,7 +273,7 @@ Use unknown tokens or embeddings.
 
 ---
 
-## 10. Embeddings (Preview, Optional)
+## 10. Embeddings in LLMs (Preview, Optional)
 
 For very large $K$, one-hot vectors become inefficient.
 

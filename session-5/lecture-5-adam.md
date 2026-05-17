@@ -43,7 +43,7 @@ For readability, write $g = g_{\mathcal{B}}$ in the formulas below. Adam tracks 
 ### 3.1 First Moment — Mean of Gradients
 
 $$
-m^{(t)} \leftarrow \beta_1 m^{(t-1)} + (1-\beta_1) g
+\boxed{m^{(t)} \leftarrow \beta_1 m^{(t-1)} + (1-\beta_1) g}
 $$
 
 * Similar to momentum's $v$: both smooth the raw gradient $g$
@@ -59,7 +59,7 @@ $$
 ### 3.2 Second Moment — Mean of Squared Gradients
 
 $$
-v^{(t)} \leftarrow \beta_2 v^{(t-1)} + (1-\beta_2) g^2
+\boxed{v^{(t)} \leftarrow \beta_2 v^{(t-1)} + (1-\beta_2) g^2}
 $$
 
 * Measures **gradient magnitude** using element-wise squares
@@ -76,11 +76,11 @@ Moving averages ($m^{(t)}, v^{(t)}$) are initialized at **0**. Since $\beta_1$ a
 To fix this, we compute **bias-corrected** moments:
 
 $$
-\hat{m}^{(t)} = \frac{m^{(t)}}{1-(\beta_1)^t}
+\boxed{\hat{m}^{(t)} = \frac{m^{(t)}}{1-(\beta_1)^t}}
 $$
 
 $$
-\hat{v}^{(t)} = \frac{v^{(t)}}{1-(\beta_2)^t}
+\boxed{\hat{v}^{(t)} = \frac{v^{(t)}}{1-(\beta_2)^t}}
 $$
 
 > [!INFO]
@@ -99,7 +99,7 @@ Why this matters:
 Parameter update, applied element-wise to each parameter:
 
 $$
-W \leftarrow W - \eta \frac{\hat{m}}{\sqrt{\hat{v}} + \epsilon}
+\boxed{W \leftarrow W - \eta \frac{\hat{m}}{\sqrt{\hat{v}} + \epsilon}}
 $$
 
 Where:

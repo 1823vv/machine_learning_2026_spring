@@ -66,9 +66,7 @@ The gradient points uphill: it points toward increasing loss.
 
 To reduce the loss, we move in the opposite direction:
 
-$$
-- g
-$$
+$$ - g $$
 
 So the update is:
 

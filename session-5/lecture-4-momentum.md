@@ -39,7 +39,7 @@ We want:
 Momentum introduces a **velocity term** $v$ that smooths the mini-batch gradient over time. For readability, write $g = g_{\mathcal{B}}$ inside the update:
 
 $$
-v \leftarrow \beta v + (1 - \beta) g, \quad W \leftarrow W - \eta v
+\boxed{v \leftarrow \beta v + (1 - \beta) g, \quad W \leftarrow W - \eta v}
 $$
 
 The forward-pass notation is unchanged; for example, a row-vector linear layer is still $z = x W + b$. Momentum only changes the optimizer update.

@@ -150,11 +150,7 @@ Forward:
 Backward:
 
 $$
-\frac{\partial \mathcal{L}}{\partial x}
-= \frac{\partial \mathcal{L}}{\partial u} \, \frac{\partial u}{\partial x}
-+ \frac{\partial \mathcal{L}}{\partial v} \, \frac{\partial v}{\partial x}
-= 1 \cdot y + 1 \cdot z = y + z
-$$
+\frac{\partial \mathcal{L}}{\partial x} = \frac{\partial \mathcal{L}}{\partial u} \, \frac{\partial u}{\partial x} + \frac{\partial \mathcal{L}}{\partial v} \, \frac{\partial v}{\partial x} = 1 \cdot y + 1 \cdot z = y + z $$
 
 **Observation:** Gradient contributions **accumulate** along all paths.
 
