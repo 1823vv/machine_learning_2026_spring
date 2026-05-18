@@ -1,5 +1,9 @@
 # Why Quantization?
 
+> [!INFO]
+> Motivation:
+> - Check out https://ollama.com/library/gemma3  
+
 Quantization is the practice of representing model computations with fewer bits. The goal is simple: make models cheaper to store, move, and run while preserving as much quality as possible.
 
 ---

@@ -1,5 +1,10 @@
 # Why Quantization?
 
+> [!INFO]
+> Motivation:
+> - Check out https://ollama.com/library/gemma3  
+
+
 ## 1 — Motivation: Why We Do Quantization
 
 ### 1.1 Reduce Model Memory Footprint

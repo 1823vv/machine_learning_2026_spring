@@ -32,7 +32,7 @@ So quantization needs a mapping between real numbers and integers.
 
 ## 2. Affine Quantization
 
-The most common teaching formula is affine quantization:
+The most common formula is affine quantization:
 
 $$
 \boxed{x \approx s(q - z)}

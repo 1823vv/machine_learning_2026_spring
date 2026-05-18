@@ -1,0 +1,7 @@
+{
+    "fp32_accuracy": 0.878,
+    "fp16_accuracy": 0.878,
+    "int8_accuracy": 0.895,
+    "int8_onnx_exported": true,
+    "note": "Accuracies are computed from exported ONNX files when available."
+}

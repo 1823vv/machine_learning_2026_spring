@@ -24,4 +24,3 @@ Consider a binary classifier for a **medical screening task** where the positive
 5. Now consider a **spam detection** task instead. In that setting, why might **precision be more important than recall**? What is the real-world cost of too many false positives (legitimate emails marked as spam)?
 
 
-6. Explain why the **"best" model can change** when the evaluation metric changes. Give a concrete example: describe a model that might maximize accuracy but have poor recall, and why you would reject it for disease screening.
