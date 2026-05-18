@@ -1,6 +1,6 @@
 ## Question: Generalization, Overfitting, and Data Splits
 
-A machine learning model is useful only if it performs well on unseen data, rather than merely memorizing the training examples it has already encountered. Suppose a classifier achieves 99% accuracy on its training set but only 75% accuracy on a validation set sampled from the same data distribution.
+A machine learning model is useful only if it performs well on unseen data, rather than merely memorizing the training examples it has already encountered. Suppose a classifier achieves 99% accuracy on its training set but only 60% accuracy on a validation set sampled from the same data distribution.
 
 1. Define the difference between training performance and generalization performance. Based on the scenario above, what does the 24% performance gap suggest about the model's current state?
 2. Explain why a model that achieves a very low training loss or near-perfect training accuracy can still be a poor model. Why is memorizing training examples fundamentally different from learning a useful underlying pattern?

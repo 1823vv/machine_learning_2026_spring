@@ -108,34 +108,7 @@ Decreasing model complexity:
 
 ---
 
-## 6. Learning Curves
-
-![](img/ZahidHasan.png)
-
-
-Learning curves plot:
-
-* training error
-* validation error
-* vs dataset size
-
-
-
-### High Bias
-
-* both errors high
-* curves close together
-
-
-### High Variance
-
-* training error low
-* validation error high
-* large gap
-
----
-
-## 7. How to choose a good model
+## 6. How to choose a good model
 
 ![](img/steps.png)
 

@@ -1,12 +1,5 @@
 # Linear Regression from Scratch using TDD & PyTest
 
-In this session, you will:
-
-- Implement your own **Linear Regression** using only NumPy (no `sklearn`).
-- Follow **Test‑Driven Development** (Red → Green → Refactor).
-- Write **PyTest tests** that use randomly generated data.
-- Run tests locally and set up **GitHub Actions** for CI/CD.
-
 ---
 
 ## Step 1: Project Setup
