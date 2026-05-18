@@ -1,5 +1,8 @@
 # L1/L2 Regularization — Optimization View
 
+![](./img/l1l2formulation.png)
+
+
 ---
 
 ## 1. Goal

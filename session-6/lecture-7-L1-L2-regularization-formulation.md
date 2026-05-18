@@ -1,6 +1,5 @@
 # L1/L2 Regularization — Formulation
 
-![](./img/l1l2formulation.png)
 
 ---
 
