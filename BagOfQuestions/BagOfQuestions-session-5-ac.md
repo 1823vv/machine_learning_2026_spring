@@ -17,12 +17,3 @@ $$
 1. Explain the meaning of $B$ and $\mathcal{B}$. What is the batch size for full-batch gradient descent?
 2. Draw two optimization paths: a smooth full-batch path and a noisier mini-batch path. Why can full-batch gradient descent be expensive for very large datasets?
 3. Why can mini-batch SGD be faster in practice? Why can mini-batch noise sometimes help optimization?
-
-## Question: Batch Size Trade-Off
-
-In mini-batch training, the batch size $B$ affects computation time, gradient noise, memory use, and sometimes generalization.
-
-1. What usually happens when the batch size is very small?
-2. What usually happens when the batch size is very large? Why does batch size interact with learning rate?
-3. Give one reason a practitioner might choose a medium-sized mini-batch instead of using the entire dataset.
-4. Draw a simple comparison of noisy small-batch updates and smoother large-batch updates.
