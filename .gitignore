@@ -79,3 +79,7 @@ remove_id_of_text_or_python_code_blocks_recursive.py
 中文*.md
 **/中文*.md
 */中文*.md
+*/中文*.md
+*中文*.md
+**/*中文*.md
+*/*中文*.md
