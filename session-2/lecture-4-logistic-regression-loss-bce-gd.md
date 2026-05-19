@@ -169,13 +169,13 @@ Notice how **BCE penalizes wrong confident predictions sharply**, giving strong 
 For a single sample, the per-example BCE loss is:
 
 $$
-\ell^{(i)} = - \big( y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)})\log(1-\hat{y}^{(i)}) \big)
+\boxed{\ell^{(i)} = - \big( y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)})\log(1-\hat{y}^{(i)}) \big)}
 $$
 
 Gradient with respect to $z^{(i)}$ (pre-activation):
 
 $$
-\frac{\partial \ell^{(i)}}{\partial z^{(i)}} = \hat{y}^{(i)} - y^{(i)}
+\boxed{\frac{\partial \ell^{(i)}}{\partial z^{(i)}} = \hat{y}^{(i)} - y^{(i)}}
 $$
 
 **Remark:** This is extremely elegant:

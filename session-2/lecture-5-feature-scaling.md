@@ -101,7 +101,7 @@ Gradient descent:
 
 ## 5. Two common methods
 
-### Normalization
+#### Normalization
 
 Rescale features to a fixed range, usually $[0, 1]$:
 
@@ -114,21 +114,20 @@ Properties:
 * Preserves relative ordering
 * Bounded output
 
----
 
-### Standardization
+#### Standardization (Z-score Scaling)
 
-Center and scale using mean and variance:
+Standardization transforms a variable by centering it at zero and rescaling it to unit variance. This is commonly referred to as **Z-score normalization**.
 
 $$
 x' = \frac{x - \mu}{\sigma}
 $$
 
-Properties:
+where:
 
-* Mean becomes 0
-* Standard deviation becomes 1
-* Handles different distributions better
+* $\mu$ is the mean of the dataset
+* $\sigma$ is the standard deviation
+* $x'$ is the standardized value
 
 ---
 
