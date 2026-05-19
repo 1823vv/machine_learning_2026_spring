@@ -7,7 +7,8 @@
 
 # 1. What is Linear Regression
 
-- https://observablehq.com/@yizhe-ang/interactive-visualization-of-linear-regression
+> [!INFO]
+> - https://observablehq.com/@yizhe-ang/interactive-visualization-of-linear-regression
 
 Linear regression is a method to **predict a target variable using input features**.
 

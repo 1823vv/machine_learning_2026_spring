@@ -1,5 +1,7 @@
 # Batch Normalization
 
+![](./img/bngreen.png)
+
 ---
 
 ## 1. Motivation: Internal Covariate Shift
@@ -86,6 +88,10 @@ Effectively:
 ---
 
 ## 5. Placement in Neural Networks
+
+
+![](./img/bn1.jpg)
+
 
 A standard structure is:
 

@@ -1,6 +1,6 @@
-# Positional Encoding: What Is a Good Position Representation?
+#  What Is a Good Position Representation?
 
-![](./img/p1.jpg)
+![](./img/ppppp2.jpg)
 
 ---
 ## 1. Goal

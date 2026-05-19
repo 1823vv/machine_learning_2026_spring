@@ -106,9 +106,17 @@ Decreasing model complexity:
 
 > There is a **sweet spot** between underfitting and overfitting.
 
+
 ---
 
-## 6. How to choose a good model
+## 6. Epochs
+
+
+![](./img/epochs.png)
+
+---
+
+## 7. How to choose a good model
 
 ![](img/steps.png)
 

@@ -1,9 +1,14 @@
 # Positional Encoding: Why Order Matters
 
 ![](./img/figure1.jpg)
-- https://huggingface.co/blog/designing-positional-encoding
+
+
 
 ---
+
+> [!INFO]
+> - https://huggingface.co/blog/designing-positional-encoding
+
 
 ## 1. The Missing Ingredient in Self-Attention
 

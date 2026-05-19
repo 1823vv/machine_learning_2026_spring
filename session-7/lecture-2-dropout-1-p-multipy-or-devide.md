@@ -115,11 +115,13 @@ In short, inverted dropout trades a little extra work during training for a simp
 See the original article proposing Dropout:
 - [https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 
-![](./img/dp.jpg)
 
 ---
 
-## 4. Notation Difference in the Original Dropout Paper
+## 4. Something wrong?
+
+![](./img/dp.jpg)
+
 
 <details>
 <summary>

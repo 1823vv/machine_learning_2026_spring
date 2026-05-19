@@ -10,6 +10,9 @@ A single sinusoid is periodic, so it repeats and creates ambiguity over long ran
 ---
 ## 2. Multi-Frequency Vector
 
+![](./img/SteppedPositionalEncodingPlot.gif)
+
+
 Use many sine-cosine components:
 
 $$
@@ -34,6 +37,9 @@ $$
 
 - high frequency captures fine local differences
 - low frequency captures broader structure
+
+![](./img/multifrequency.jpg)
+
 
 ---
 ## 4. Why This Improves Distinguishability

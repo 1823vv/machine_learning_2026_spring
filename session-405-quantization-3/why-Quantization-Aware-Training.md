@@ -118,7 +118,7 @@ Important for battery-powered hardware.
 
 For a network like:
 
-$784 \rightarrow Hidden \rightarrow Hidden \rightarrow 10$
+$784 \rightarrow \text{Hidden} \rightarrow \text{Hidden} \rightarrow 10$
 
 ### Without QAT
 

@@ -1,6 +1,6 @@
 # Inspecting ONNX Models with Netron
 
-ONNX models can be **inspected visually** using [Netron](https://netron.app/), a powerful tool to explore:
+ONNX  (Open Neural Network Exchange) models can be **inspected visually** using [Netron](https://netron.app/), a powerful tool to explore:
 
 * Layer structure
 * Input/output shapes

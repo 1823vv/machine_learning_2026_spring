@@ -19,7 +19,7 @@ For a 7-billion-parameter model:
 | Format | Approximate Weight Memory |
 |---|---:|
 | FP32 | 28 GB |
-| FP16/BF16 | 14 GB |
+| FP16/BF16（Brain Floating Point） | 14 GB |
 | INT8 | 7 GB |
 | INT4 | 3.5 GB |
 

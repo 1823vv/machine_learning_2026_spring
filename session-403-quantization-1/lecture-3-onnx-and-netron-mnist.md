@@ -1,10 +1,13 @@
 # ONNX and Netron with an MNIST Model
 
-Previously, we defined the scale and zero-point mechanism. Now we make the topic concrete by inspecting a real model artifact.
+
+> [!INFO]
+> - https://netron.app/
+ 
 
 ---
 
-## 1. Why Use ONNX?
+## 1. Why Use ONNX (Open Neural Network Exchange) ?
 
 ONNX is a portable model representation. It stores a model as a computation graph:
 
@@ -113,12 +116,10 @@ Depending on the quantization format, you may see operators such as:
 - scale tensors;
 - zero-point tensors.
 
-The important conceptual shift is:
 
-```text
-FP32 graph: values are directly consumed as floating point
-quantized graph: values may be quantized, computed, and dequantized around operators
-```
+> [!INFO]
+> - FP32 graph: values are directly consumed as floating point
+> - quantized graph: values may be quantized, computed, and dequantized around operators
 
 ---
 
@@ -132,12 +133,3 @@ When comparing the two models, answer:
 4. Are all operators quantized, or only some?
 5. Does the output accuracy change?
 6. Is the graph easier or harder to read?
-
----
-
-## 7. Key Takeaways
-
-- ONNX represents the model as a graph.
-- Netron lets us inspect that graph visually.
-- Quantization changes not only numbers but also graph structure.
-- The same simple MNIST model can teach deployment concepts used in much larger systems.

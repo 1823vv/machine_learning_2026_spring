@@ -1,0 +1,3 @@
+https://deeplearningwithpython.io/chapters/chapter06_universal-workflow-of-ml/
+
+![](./img/deploy.jpg)

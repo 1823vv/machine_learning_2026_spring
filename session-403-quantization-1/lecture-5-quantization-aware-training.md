@@ -1,11 +1,5 @@
 # Quantization-Aware Training
 
-Previously, we saw that post-training quantization modifies a trained model. Now we ask:
-
-> What if the model learns while aware that it will be quantized later?
-
-This is the idea behind quantization-aware training.
-
 ---
 
 ## 1. The Problem with Naive Quantization
