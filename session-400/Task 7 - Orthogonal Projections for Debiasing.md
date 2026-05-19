@@ -3,6 +3,19 @@
 **Goal**: Use geometric methods to remove gender bias from word vectors.
 
 
+> [!INFO]
+> **Task for students**
+> - **Task 1**. Go to 
+> - https://nlp.stanford.edu/projects/glove/
+> - for downloading more glove embeddings
+> - and then use the same code and see how things change or not change.
+> - **Task 2**. Then go for word2vec embedding as well : 
+> - https://www.kaggle.com/datasets/sugataghosh/google-word2vec
+> - Or, https://huggingface.co/NeuML/word2vec
+> - Or, maybe explore other token embeddings on huggingface, 
+> - e.g. https://huggingface.co/BAAI/llm-embedder
+> - **Task 3**. Then run this experiment again.
+
 ```python
 from pathlib import Path
 import json
