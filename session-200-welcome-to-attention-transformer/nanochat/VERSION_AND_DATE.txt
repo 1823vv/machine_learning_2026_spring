@@ -1,0 +1,3 @@
+
+在 nanochat 文件夹里面，是 nanochat 的源代码 (hosted in https://github.com/karpathy/nanochat , as of 2026 March 22)
+
