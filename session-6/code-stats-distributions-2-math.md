@@ -145,9 +145,7 @@ $$
 > [!INFO]
 > Variance is largest when
 >
-> $$
-> p=0.5
-> $$
+> $$ p=0.5 $$
 >
 > because uncertainty is maximal when both outcomes are equally likely.
 
@@ -409,15 +407,11 @@ grows.
 > [!INFO]
 > A common rule is that the approximation works well when
 >
-> $$
-> np \ge 5
-> $$
+> $$ np \ge 5 $$
 >
 > and
 >
-> $$
-> n(1-p)\ge 5
-> $$
+> $$ n(1-p)\ge 5 $$
 
 ---
 
@@ -751,72 +745,3 @@ E[a]=p
 $$
 
 Thus the policy probability directly controls long-term action frequency.
-
----
-
-# Summary
-
-## Bernoulli Distribution
-
-Models a single binary event:
-
-$$
-X \sim \text{Bernoulli}(p)
-$$
-
-with
-
-$$
-E[X]=p
-$$
-
-and
-
-$$
-Var(X)=p(1-p)
-$$
-
----
-
-## Binomial Distribution
-
-Counts successes across multiple Bernoulli trials:
-
-$$
-X \sim \text{Binomial}(n,p)
-$$
-
-with
-
-$$
-E[X]=np
-$$
-
-and
-
-$$
-Var(X)=np(1-p)
-$$
-
----
-
-## Central Limit Theorem
-
-Averages of many independent variables approach a Gaussian distribution.
-
-This explains:
-
-* normal approximation of binomial distributions
-* stability of mini-batch gradients
-* statistical behavior of stochastic optimization
-
----
-
-## Deep Learning Connections
-
-These probabilistic ideas appear throughout machine learning:
-
-* dropout uses Bernoulli sampling
-* mini-batch SGD relies on CLT
-* stochastic policies use Bernoulli action sampling
-* gradient estimates become Gaussian through averaging
