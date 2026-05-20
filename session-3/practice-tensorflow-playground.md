@@ -153,7 +153,6 @@ Add:
 
 * 1 hidden layer
 * 6–8 neurons
-* tanh activation
 
 Each hidden neuron computes:
 
