@@ -9,14 +9,14 @@ def train(network, X, y):
     activations = ____YOUR_CODE_HERE__1_____(network, X)
     logits = activations[____YOUR_CODE_HERE__2_____]
 
-    loss, grad_logits = ____YOUR_CODE_HERE__3_____(logits, y)
+    loss, grad_logits = softmax_crossentropy_with_logits(logits, ____YOUR_CODE_HERE__3_____)
 
     grad_output = ____YOUR_CODE_HERE__4_____
     for i in range(len(network))[____YOUR_CODE_HERE__5_____]:
         layer = network[i]
-        grad_output = layer.____YOUR_CODE_HERE__6_____(grad_output)
+        grad_output = layer.____YOUR_CODE_HERE__6_____(____YOUR_CODE_HERE__7_____)
 
-    return ____YOUR_CODE_HERE__7_____
+    return loss
 ```
 
 Your answer goes here, after the `:`:
