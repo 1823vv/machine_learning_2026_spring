@@ -1,26 +1,20 @@
-## Question: Classification Metrics for an Imbalanced Medical Screening Task
+## Question: Metrics Under Class Imbalance and Task-Dependent Trade-offs
 
-Consider a binary classifier for a **medical screening task** where the positive class (disease present) is rare. The confusion matrix counts are:
+A binary medical screening classifier produces the confusion matrix below:
 
 | | Predicted Positive | Predicted Negative |
 |---|---|---|
-| **Actual Positive** | True Positive (TP) = 40 | False Negative (FN) = 10 |
-| **Actual Negative** | False Positive (FP) = 160 | True Negative (TN) = 790 |
+| **Actual Positive** | TP = 40 | FN = 10 |
+| **Actual Negative** | FP = 160 | TN = 790 |
 
-**Definitions for reference:**
-- **Accuracy**: $\frac{TP + TN}{TP + FP + FN + TN}$
-- **Precision**: $\frac{TP}{TP + FP}$ (of all predicted positive, how many are actually positive?)
-- **Recall**: $\frac{TP}{TP + FN}$ (of all actual positive, how many did we catch?)
-- **F1 Score**: $2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$
+Use:
+- Accuracy $= \frac{TP+TN}{TP+FP+FN+TN}$
+- Precision $= \frac{TP}{TP+FP}$
+- Recall $= \frac{TP}{TP+FN}$
+- F1 $= 2\cdot\frac{\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}$
 
-1. Compute **accuracy** for this classifier. Show your calculation.
-
-2. Compute **precision**. Compute **recall**. Show your calculations.
-
-3. Compute the **F1 score**. Explain why **accuracy alone can be misleading** for imbalanced datasets like this one, using the numbers above to illustrate your point.
-
-4. In this **medical screening setting**, why might **recall be especially important**? What is the real-world cost of the 10 false negatives?
-
-5. Now consider a **spam detection** task instead. In that setting, why might **precision be more important than recall**? What is the real-world cost of too many false positives (legitimate emails marked as spam)?
-
-
+1. Compute accuracy, precision, recall, and F1. Show each calculation and final numeric value.
+2. Using your results, explain concretely why accuracy alone can be misleading on imbalanced data in this medical setting.
+3. In this screening context, argue why recall is often prioritized. Interpret the real-world consequence of the 10 false negatives.
+4. Switch to a spam-filter scenario and explain why precision may become the primary objective. Interpret the real-world cost of many false positives.
+5. Propose one practical threshold-tuning strategy (or evaluation workflow) to rebalance precision vs recall for each of the two domains above.
