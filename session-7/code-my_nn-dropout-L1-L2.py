@@ -193,7 +193,7 @@ class Adam(Optimizer):
 
 
 # =============================================================================
-# SESSION 6 CODE (Extension - Regularization)
+# SESSION 7 CODE (Extension - Regularization)
 # =============================================================================
 
 
