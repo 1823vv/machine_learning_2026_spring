@@ -5,7 +5,7 @@
 A Bernoulli random variable models a single experiment with exactly two possible outcomes:
 
 $$
-X \in {0,1}
+X \in \{0,1\}
 $$
 
 where
@@ -37,7 +37,7 @@ $$
 The Bernoulli distribution is written as
 
 $$
-X \sim \text{Bernoulli}(p)
+X \sim \operatorname{Bernoulli}(p)
 $$
 
 ---
@@ -53,7 +53,7 @@ $$
 for
 
 $$
-x \in {0,1}
+x \in \{0,1\}
 $$
 
 This compact formula correctly produces both probabilities:
@@ -93,13 +93,13 @@ $$
 The expected value is
 
 $$
-E[X]=1\cdot p + 0\cdot (1-p)
+\mathbb{E}[X]=1\cdot p + 0\cdot (1-p)
 $$
 
 Therefore,
 
 $$
-E[X]=p
+\mathbb{E}[X]=p
 $$
 
 This means the average outcome approaches the success probability.
@@ -113,7 +113,7 @@ The variance measures uncertainty.
 Using
 
 $$
-Var(X)=E[X^2]-E[X]^2
+\mathrm{Var}(X)=\mathbb{E}[X^2]-\mathbb{E}[X]^2
 $$
 
 and noting that
@@ -127,19 +127,19 @@ for binary variables,
 we obtain
 
 $$
-E[X^2]=E[X]=p
+\mathbb{E}[X^2]=\mathbb{E}[X]=p
 $$
 
 Thus,
 
 $$
-Var(X)=p-p^2
+\mathrm{Var}(X)=p-p^2
 $$
 
 which simplifies to
 
 $$
-Var(X)=p(1-p)
+\mathrm{Var}(X)=p(1-p)
 $$
 
 > [!INFO]
@@ -174,7 +174,7 @@ Suppose:
 Then
 
 $$
-X \sim \text{Binomial}(n,p)
+X \sim \operatorname{Binomial}(n,p)
 $$
 
 ---
@@ -190,7 +190,7 @@ $$
 be independent Bernoulli random variables:
 
 $$
-X_i \sim \text{Bernoulli}(p)
+X_i \sim \operatorname{Bernoulli}(p)
 $$
 
 The total number of successes is
@@ -238,7 +238,7 @@ $$
 we use linearity of expectation:
 
 $$
-E[X]=\sum_{i=1}^{n}E[X_i]
+\mathbb{E}[X]=\sum_{i=1}^{n}\mathbb{E}[X_i]
 $$
 
 Because each Bernoulli variable has mean
@@ -250,7 +250,7 @@ $$
 we obtain
 
 $$
-E[X]=np
+\mathbb{E}[X]=np
 $$
 
 ---
@@ -260,7 +260,7 @@ $$
 For independent random variables,
 
 $$
-Var(X)=\sum_{i=1}^{n}Var(X_i)
+\mathrm{Var}(X)=\sum_{i=1}^{n}\mathrm{Var}(X_i)
 $$
 
 Each Bernoulli variable has variance
@@ -272,7 +272,7 @@ $$
 Thus,
 
 $$
-Var(X)=np(1-p)
+\mathrm{Var}(X)=np(1-p)
 $$
 
 and the standard deviation becomes
@@ -368,7 +368,7 @@ $$
 the binomial distribution can be approximated by a normal distribution:
 
 $$
-X \approx \mathcal{N}\big(np,np(1-p)\big)
+X \approx \mathcal{N}\big(np,\,np(1-p)\big)
 $$
 
 with
@@ -491,7 +491,7 @@ $$
 increases, the variance of the sample mean decreases:
 
 $$
-Var(\bar{X})=\frac{\sigma^2}{n}
+\mathrm{Var}(\bar{X})=\frac{\sigma^2}{n}
 $$
 
 Therefore larger samples produce more stable estimates.
@@ -595,7 +595,7 @@ $$
 gives
 
 $$
-Var(\hat{\nabla L})=
+\mathrm{Var}(\hat{\nabla L})=
 \frac{\sigma^2}{B}
 $$
 
@@ -629,21 +629,21 @@ Small batches:
 In dropout, each neuron is independently kept with probability
 
 $$
-1-r
+1-p
 $$
 
 where
 
 $$
-r
+p
 $$
 
-is the dropout rate.
+is the drop probability.
 
 Each neuron mask variable is
 
 $$
-M_i \sim \text{Bernoulli}(1-r)
+m_i \sim \operatorname{Bernoulli}(1-p)
 $$
 
 ---
@@ -653,13 +653,13 @@ $$
 If neuron activation is
 
 $$
-h_i
+a_i
 $$
 
 the dropout output becomes
 
 $$
-\tilde{h}_i=M_i h_i
+\tilde a_i = a_i\frac{m_i}{1-p}
 $$
 
 Thus:
@@ -667,7 +667,7 @@ Thus:
 * when
 
   $$
-  M_i=1
+  m_i=1
   $$
 
   the neuron remains active
@@ -675,7 +675,7 @@ Thus:
 * when
 
   $$
-  M_i=0
+  m_i=0
   $$
 
   the neuron is removed
@@ -693,13 +693,13 @@ $$
 neurons, the number of active neurons follows
 
 $$
-X \sim \text{Binomial}(n,1-r)
+X \sim \operatorname{Binomial}(n,1-p)
 $$
 
 The expected number of active neurons is
 
 $$
-E[X]=n(1-r)
+\mathbb{E}[X]=n(1-p)
 $$
 
 ---
@@ -729,7 +729,7 @@ $$
 The chosen action is sampled from a Bernoulli distribution:
 
 $$
-a \sim \text{Bernoulli}(p)
+a \sim \operatorname{Bernoulli}(p)
 $$
 
 This introduces stochastic exploration into the learning process.
@@ -741,7 +741,7 @@ This introduces stochastic exploration into the learning process.
 The expected value of the action is
 
 $$
-E[a]=p
+\mathbb{E}[a]=p
 $$
 
 Thus the policy probability directly controls long-term action frequency.

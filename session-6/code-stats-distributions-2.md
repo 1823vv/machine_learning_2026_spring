@@ -112,7 +112,7 @@ If we perform:
 then
 
 $$
-X \sim Binomial(n,p)
+X \sim \operatorname{Binomial}(n,p)
 $$
 
 ---
@@ -164,11 +164,11 @@ samples = np.random.binomial(n,p,num_samples)
 The binomial distribution has:
 
 $$
-E[X]=np
+\mathbb{E}[X]=np
 $$
 
 $$
-Var(X)=np(1-p)
+\mathrm{Var}(X)=np(1-p)
 $$
 
 Verify this experimentally.

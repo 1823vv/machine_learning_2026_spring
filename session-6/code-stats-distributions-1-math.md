@@ -152,7 +152,7 @@ A joint Gaussian random vector:
 $$
 \mathbf{X} =
 \begin{bmatrix}
-X \
+X \\
 Y
 \end{bmatrix}
 \sim \mathcal{N}(\boldsymbol{\mu}, \Sigma)
@@ -163,7 +163,7 @@ with:
 $$
 \boldsymbol{\mu} =
 \begin{bmatrix}
-\mu_X \
+\mu_X \\
 \mu_Y
 \end{bmatrix}
 $$
@@ -244,11 +244,11 @@ Effects of correlation:
 From joint distribution:
 
 $$
-p(x) = \int p(x,y),dy
+p(x) = \int p(x,y)\,dy
 $$
 
 $$
-p(y) = \int p(x,y),dx
+p(y) = \int p(x,y)\,dx
 $$
 
 This is the operation of projecting a joint system onto a single axis.
