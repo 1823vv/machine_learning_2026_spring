@@ -111,7 +111,7 @@ $$
 = \mathbb{E}\left[a_i\frac{m_i}{1-p}\right]
 = a_i\frac{\mathbb{E}[m_i]}{1-p}
 = a_i\frac{1-p}{1-p}
-= a_i.
+= a_i
 $$
 
 During inference, inverted dropout does nothing:
