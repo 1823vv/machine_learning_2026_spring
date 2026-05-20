@@ -228,6 +228,28 @@ This avoids ambiguity with:
 
 ---
 
+### Greek Letters in Code
+
+**Exception for Python plotting code:** In Python code for plotting (e.g., matplotlib titles, labels, legends), you may use Greek alphabet Unicode characters directly (μ, σ, ρ, etc.) instead of LaTeX notation ($\mu$, $\sigma$, $\rho$).
+
+This exception applies because:
+- Matplotlib requires special handling (e.g., `usetex=True` or raw strings) to render LaTeX
+- Unicode Greek letters work reliably in Python strings without additional configuration
+- This is a practical compromise for code readability and execution
+
+**Example:**
+```python
+# In Python plotting code (acceptable)
+plt.title('Normal Distribution (μ=0, σ=1)')
+plt.xlabel('x')
+plt.ylabel('Probability Density')
+
+# In Markdown text or math blocks (use LaTeX)
+# The normal distribution has mean $\mu$ and standard deviation $\sigma$
+```
+
+---
+
 ## 5. Dimension Check Quick Reference
 
 For any matrix multiplication $C = AB$:
