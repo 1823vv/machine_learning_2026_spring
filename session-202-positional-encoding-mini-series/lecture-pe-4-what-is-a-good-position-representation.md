@@ -38,7 +38,7 @@ A good positional representation should satisfy:
 1. Dimensional compatibility
 
 $$
-p_i\in\mathbb{R}^{d_{\text{model}}}
+p_i\in\mathbb{R}^{1\times d_{\text{model}}}
 $$
 
 2. Smoothness with respect to $i$

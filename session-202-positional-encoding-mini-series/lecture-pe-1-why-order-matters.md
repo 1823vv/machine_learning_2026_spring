@@ -15,7 +15,20 @@
 Let a sequence of $n$ tokens be represented as
 
 $$
-X \in \mathbb{R}^{n \times d_{\text{model}}}, \quad X=[x_0; x_1; \dots; x_{n-1}], \quad x_i \in \mathbb{R}^{d_{\text{model}}}
+x_i \in \mathbb{R}^{1 \times d_{\text{model}}}
+$$
+
+Stacked row-wise:
+
+$$
+X =
+\begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_{n-1}
+\end{bmatrix}
+\in \mathbb{R}^{n \times d_{\text{model}}}
 $$
 
 Self-attention directly uses token vectors, but there is no explicit position signal in this representation.
@@ -80,7 +93,7 @@ $$
 Equivalently,
 
 $$
-\tilde{X}=X+P
+\tilde{X}=X+PE
 $$
 
 Now each token carries both content and location.

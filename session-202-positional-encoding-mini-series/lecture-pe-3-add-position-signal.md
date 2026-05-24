@@ -14,13 +14,13 @@ $$
 with
 
 $$
-x_i,p_i\in\mathbb{R}^{d_{\text{model}}}, \quad i=0,1,\dots,n-1
+x_i,p_i\in\mathbb{R}^{1\times d_{\text{model}}}, \quad i=0,1,\dots,n-1
 $$
 
 Stacked form:
 
 $$
-\tilde{X}=X+P, \quad \tilde{X},X,P\in\mathbb{R}^{n\times d_{\text{model}}}
+\tilde{X}=X+PE, \quad \tilde{X},X,PE\in\mathbb{R}^{n\times d_{\text{model}}}
 $$
 
 ---

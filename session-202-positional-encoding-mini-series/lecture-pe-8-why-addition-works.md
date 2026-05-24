@@ -8,7 +8,7 @@
 Transformer uses
 
 $$
-\tilde{X}=X+P
+\tilde{X}=X+PE
 $$
 
 instead of concatenation or separate pipelines.
@@ -24,7 +24,7 @@ Concatenation increases dimensionality and delays content-position interaction u
 With
 
 $$
-Q=(X+P)W_Q, \quad K=(X+P)W_K
+Q=(X+PE)W_Q, \quad K=(X+PE)W_K
 $$
 
 we obtain
@@ -32,9 +32,9 @@ we obtain
 $$
 QK^\top=
 XW_Q(XW_K)^\top+
-XW_Q(PW_K)^\top+
-PW_Q(XW_K)^\top+
-PW_Q(PW_K)^\top
+XW_Q(PEW_K)^\top+
+PEW_Q(XW_K)^\top+
+PEW_Q(PEW_K)^\top
 $$
 
 ---
@@ -49,19 +49,19 @@ $$
 ### Content-position interaction
 
 $$
-XW_Q(PW_K)^\top
+XW_Q(PEW_K)^\top
 $$
 
 ### Position-content interaction
 
 $$
-PW_Q(XW_K)^\top
+PEW_Q(XW_K)^\top
 $$
 
 ### Position-position interaction
 
 $$
-PW_Q(PW_K)^\top
+PEW_Q(PEW_K)^\top
 $$
 
 > [!INFO]

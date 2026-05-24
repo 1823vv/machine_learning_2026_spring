@@ -11,13 +11,22 @@ This document fixes the notation used across all lectures and exercises in the `
 | $n$ | sequence length (number of tokens) | integer |
 | $d_{\text{model}}$ | model embedding dimension | integer |
 | $X$ | input token embedding matrix | $\mathbb{R}^{n \times d_{\text{model}}}$ |
-| $x_i$ | embedding vector of the token at position $i$ | $\mathbb{R}^{d_{\text{model}}}$ |
+| $x_i$ | embedding vector (row) of the token at position $i$ | $\mathbb{R}^{1 \times d_{\text{model}}}$ |
 
-The matrix $X$ is stacked row-wise:
+The matrix $X$ is constructed by stacking token embeddings row-wise:
 
 $$
-X = [x_0;\, x_1;\, \dots;\, x_{n-1}]
+X =
+\begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_{n-1}
+\end{bmatrix}
+\in \mathbb{R}^{n \times d_{\text{model}}}
 $$
+
+Each row corresponds to one token position.
 
 ---
 
@@ -26,7 +35,7 @@ $$
 | Symbol | Meaning | Domain / Shape |
 |---|---|---|
 | $i$ | **token position index** (0-based) | $i \in \{0,1,\dots,n-1\}$ |
-| $p_i$ | positional encoding vector for position $i$ | $\mathbb{R}^{d_{\text{model}}}$ |
+| $p_i$ | positional encoding vector (row) for position $i$ | $\mathbb{R}^{1 \times d_{\text{model}}}$ |
 | $PE$ | full positional encoding matrix | $\mathbb{R}^{n \times d_{\text{model}}}$ |
 | $k$ | **channel-pair index** | $k \in \{0,1,\dots,\frac{d_{\text{model}}}{2}-1\}$ |
 | $\omega_k$ | angular frequency of the $k$-th pair | scalar |
@@ -44,7 +53,7 @@ $$
 In matrix form:
 
 $$
-\tilde{X} = X + P, \qquad P \in \mathbb{R}^{n \times d_{\text{model}}}
+\tilde{X} = X + PE, \qquad PE \in \mathbb{R}^{n \times d_{\text{model}}}
 $$
 
 ---
@@ -67,7 +76,33 @@ $$
 
 ---
 
-## 5. Attention Pipeline (for Reference)
+## 5. Why Token = Row Is Natural in Transformer
+
+Because attention computation is
+
+$$
+Q = XW_Q
+$$
+
+with
+
+$$
+X \in \mathbb{R}^{n \times d_{\text{model}}}, \quad W_Q \in \mathbb{R}^{d_{\text{model}} \times d_k}
+$$
+
+we obtain
+
+$$
+Q \in \mathbb{R}^{n \times d_k}
+$$
+
+Thus every row is one token’s query, and the token–token similarity matrix $QK^{\top}$ is naturally row-oriented. The Transformer community almost universally adopts the convention:
+
+> **token = row**
+
+---
+
+## 6. Attention Pipeline (for Reference)
 
 Projections use combined representations:
 
@@ -83,10 +118,13 @@ $$
 
 ---
 
-## 6. What Not to Do
+## 7. What Not to Do
 
 | Avoid | Reason |
 |---|---|
 | Using $pos$ instead of $i$ for position | breaks consistency with earlier lectures |
 | Using $i$ for channel-pair index | collides with the standard use of $i$ for position |
 | Parenthesized subscripts like $PE_{(pos,2i)}$ | the comma subscript $PE_{i,2k}$ is the convention here |
+| Writing $x_i \in \mathbb{R}^{d_{\text{model}}}$ without specifying row vs. column | $\mathbb{R}^{1 \times d_{\text{model}}}$ removes ambiguity |
+| Using $P$ for the positional encoding matrix | $P$ is easily confused with permutation / probability / projection matrices |
+
