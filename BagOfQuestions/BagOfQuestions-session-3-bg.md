@@ -1,11 +1,10 @@
-## Question: DeepSeek Mini Mixture-of-Experts
+## Question: DeepSeek-Style Model Size Comparison
 
-A simplified DeepSeek-inspired model uses a tiny mixture-of-experts layer. The model stores several small expert networks, but for one token it may use only some of them.
+A team describes two tiny DeepSeek-style language-model demos. Both models use a vocabulary of $1000$ tokens and output one score for each possible next token.
 
-There are $4$ experts. Each expert is a small two-layer network: first a dense layer from $10$ inputs to $100$ hidden units, then a dense layer from $100$ hidden units back to $10$ outputs. Each dense layer has one bias per output unit. A router chooses experts using a dense layer from $10$ inputs to $4$ expert scores, also with one bias per output score.
+Model A uses hidden width $10$. It has one dense layer from $10$ inputs to $20$ hidden units, followed by an output dense layer from $20$ hidden units to $1000$ vocabulary scores. Model B doubles these internal sizes: one dense layer from $20$ inputs to $40$ hidden units, followed by an output dense layer from $40$ hidden units to $1000$ vocabulary scores. Every dense layer has one bias per output unit.
 
-1. Count the parameters in the first dense layer of one expert.
-2. Count the parameters in the second dense layer of one expert, then compute the total parameters in one expert.
-3. Count the parameters in all $4$ experts together.
-4. Count the parameters in the router and then compute the total stored trainable parameters in this mixture-of-experts layer.
-5. If only $2$ of the $4$ experts are used for one token, explain why the model still stores parameters for all $4$ experts.
+1. For Model A, count the parameters in the first dense layer and in the output layer.
+2. For Model B, count the parameters in the first dense layer and in the output layer.
+3. Compute the total counted parameters for Model A and for Model B.
+4. Which part is larger in each model: the small internal dense layer or the output vocabulary layer? Explain using the numbers.
