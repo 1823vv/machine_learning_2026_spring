@@ -1,6 +1,6 @@
 ## Question: Sinusoidal Positional Encoding and the Attention Pipeline
 
-In the transformer architecture of *attention is all you need*, self-attention is permutation-invariant with respect to token positions: it computes the same similarity scores regardless of where tokens appear in the sequence. To preserve order information, a positional encoding vector is added to each token embedding before the first attention layer.
+In the transformer architecture of *Attention is All You Need*, self-attention is permutation-invariant with respect to token positions: it computes the same similarity scores regardless of where tokens appear in the sequence. To preserve order information, a positional encoding vector is added to each token embedding before the first attention layer.
 
 Let $d_{\text{model}}$ denote the embedding dimension. For a token at position $i$ (0-indexed), the standard sinusoidal positional encoding $PE_{i} \in \mathbb{R}^{d_{\text{model}}}$ is defined as follows, where $k$ indexes the sine/cosine pairs:
 
