@@ -96,7 +96,7 @@ $$
 Q \in \mathbb{R}^{n \times d_k}
 $$
 
-Thus every row is one token’s query, and the token–token similarity matrix $QK^{\top}$ is naturally row-oriented. The Transformer community almost universally adopts the convention:
+Thus every row is one token’s query, and the token–token similarity matrix $QK^{T}$ is naturally row-oriented. The Transformer community almost universally adopts the convention:
 
 > **token = row**
 
@@ -113,7 +113,7 @@ $$
 Scaled dot-product attention:
 
 $$
-\operatorname{Attn}(\tilde{X}) = \operatorname{softmax}\!\left(\frac{QK^{\top}}{\sqrt{d_k}}\right)V
+\operatorname{Attn}(\tilde{X}) = \operatorname{softmax}\!\left(\frac{QK^{T}}{\sqrt{d_k}}\right)V
 $$
 
 ---
@@ -128,3 +128,41 @@ $$
 | Writing $x_i \in \mathbb{R}^{d_{\text{model}}}$ without specifying row vs. column | $\mathbb{R}^{1 \times d_{\text{model}}}$ removes ambiguity |
 | Using $P$ for the positional encoding matrix | $P$ is easily confused with permutation / probability / projection matrices |
 
+
+
+---
+
+## 8. Unified 20X Rule Alignment
+
+- Keep $i$ as token position index across all mini-series.
+- Keep plain $k$ for PE channel-pair index only.
+- Keep $d_k$ as attention feature dimension symbol in QKV/masking contexts.
+- Use $c$ for vocabulary class index in loss formulas.
+
+
+## 9. Tolerated Differences (Explicitly OK)
+
+- Using plain $k$ as PE channel-pair index is **OK** and canonical in this series.
+- Reusing attention symbols (e.g., $Q,K,d_k$) in reference sections is **OK** as contextual reminders; they do not redefine PE index semantics.
+
+
+---
+
+### Scoped Local-Symbol Flexibility (Important)
+
+Short-lived local symbols used inside a clearly scoped derivation are **allowed** even if they overlap with global symbol letters, provided all of the following hold:
+
+1. The scope is explicit (only within a small local derivation/block).
+2. The local meaning is stated immediately (e.g., "for any constant $c$").
+3. The symbol is not reused to redefine the mini-series canonical role outside that local block.
+4. Reader understanding is not impacted (no ambiguity about global notation contract).
+
+Examples that are acceptable:
+- using $c$ as an additive constant in a one-off log-sum-exp derivation,
+- using temporary $i,j$ as summation counters in a short standalone algebra step when their scope is obvious.
+
+
+### Transpose notation policy
+
+- Use only `^T` for matrix transpose in this series (e.g., `QK^T`, `q_i k_j^T`).
+- Never use `^\top` in lecture content, equations, or examples.
