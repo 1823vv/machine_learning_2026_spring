@@ -36,7 +36,7 @@ $$
 At the element level:
 
 $$
-S_{ij} = q_i \cdot k_j = \sum_{l=1}^{d_k} q_{il} k_{jl}
+s_{ij} = q_i \cdot k_j = \sum_{f=0}^{d_k-1} q_{if} k_{jf}
 $$
 
 This is a sum over $d_k$ terms.
@@ -44,7 +44,7 @@ This is a sum over $d_k$ terms.
 As $d_k$ increases:
 
 * More terms are added
-* The magnitude of $S_{ij}$ tends to grow
+* The magnitude of $s_{ij}$ tends to grow
 
 ---
 
@@ -85,7 +85,7 @@ $$
 
 If $S$ contains large values:
 
-* $\exp(S_{ij})$ becomes extremely large for the maximum entry
+* $\exp(s_{ij})$ becomes extremely large for the maximum entry
 * Other entries become negligible
 
 This leads to:
@@ -120,10 +120,10 @@ $$
 S = \frac{Q K^T}{\sqrt{d_k}}
 $$
 
-Element-wise:
+Element-wise (scaled score):
 
 $$
-S_{ij} = \frac{q_i \cdot k_j}{\sqrt{d_k}}
+\frac{s_{ij}}{\sqrt{d_k}} = \frac{q_i \cdot k_j}{\sqrt{d_k}}
 $$
 
 ---
@@ -182,8 +182,10 @@ Meaning:
 With scaling, attention weights between position $i$ and position $j$:
 
 $$
-\boxed{\alpha_{ij} = \text{softmax}_j\left(\frac{q_i \cdot k_j}{\sqrt{d_k}}\right) = \frac{\exp(e_{ij} / \sqrt{d_k})}{\sum_{l=1}^n \exp(e_{il} / \sqrt{d_k})}}
+\boxed{\alpha_{ij} = \text{softmax}_j\left(\frac{s_{ij}}{\sqrt{d_k}}\right) = \frac{\exp(s_{ij}/\sqrt{d_k})}{\sum_{j'=0}^{n-1} \exp(s_{ij'}/\sqrt{d_k})}}
 $$
+
+where $s_{ij} = q_i \cdot k_j$ is the raw dot-product score.
 
 
 Attention is then formulated as:

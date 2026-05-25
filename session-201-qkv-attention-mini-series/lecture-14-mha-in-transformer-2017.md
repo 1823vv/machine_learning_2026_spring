@@ -30,7 +30,7 @@ $$
 Each head has its own projection matrices:
 
 $$
-W_Q^{(i)}, W_K^{(i)}, W_V^{(i)} \in \mathbb{R}^{d_{model} \times d_{head}} = \mathbb{R}^{512 \times 64}
+W_Q^{(i)}, W_K^{(i)}, W_V^{(i)} \in \mathbb{R}^{d_{\text{model}} \times d_{\text{head}}} = \mathbb{R}^{512 \times 64}
 $$
 
 So for one head:
@@ -54,7 +54,7 @@ Across all heads:
 For each head:
 
 $$
-Q^{(i)} (K^{(i)})^T \in \mathbb{R}^{n \times n}
+Q^{(i)} K^{(i)T} \in \mathbb{R}^{n \times n}
 $$
 
 Scaling factor:
@@ -95,7 +95,7 @@ So concatenation restores the original model dimension exactly.
 Final projection:
 
 $$
-W_O \in \mathbb{R}^{(h \cdot d_v) \times d_{model}} = \mathbb{R}^{512 \times 512}
+W_O \in \mathbb{R}^{(h \cdot d_v) \times d_{\text{model}}} = \mathbb{R}^{512 \times 512}
 $$
 
 Thus:
@@ -147,7 +147,7 @@ $$
 ### (a) Constant Model Width
 
 $$
-h \cdot d_{head} = 8 \times 64 = 512 = d_{model}
+h \cdot d_{\text{head}} = 8 \times 64 = 512 = d_{\text{model}}
 $$
 
 * splitting into heads does not change total dimensionality

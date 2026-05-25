@@ -30,7 +30,7 @@ The next question is:
 We start with an input sequence:
 
 $$
-X \in \mathbb{R}^{n \times d_{model}}
+X \in \mathbb{R}^{n \times d_{\text{model}}}
 $$
 
 Each row $x_i$ is a token representation.
@@ -73,7 +73,7 @@ $$
 Where:
 
 $$
-W_Q, W_K, W_V \in \mathbb{R}^{d_{model} \times d_k}
+W_Q, W_K \in \mathbb{R}^{d_{\text{model}} \times d_k}, \quad W_V \in \mathbb{R}^{d_{\text{model}} \times d_v}
 $$
 
 ---

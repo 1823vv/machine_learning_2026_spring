@@ -8,12 +8,12 @@ This document fixes notation for all lectures in `session-203-masking-mini-serie
 
 | Symbol | Meaning | Shape |
 |---|---|---|
-| $n$ | sequence length | integer |
+| $T$ | sequence length | integer |
 | $d_{\text{model}}$ | embedding width | integer |
 | $X$ | token embedding matrix (token=row) | $\mathbb{R}^{n\times d_{\text{model}}}$ |
 | $x_i$ | token row at position $i$ | $\mathbb{R}^{1\times d_{\text{model}}}$ |
 | $Q,K,V$ | projected query/key/value matrices | $Q,K\in\mathbb{R}^{n\times d_k},\ V\in\mathbb{R}^{n\times d_v}$ |
-| $S$ | raw attention score matrix | $\mathbb{R}^{n\times n}$ |
+| $S$ | scaled attention score matrix $QK^T / \sqrt{d_k}$ | $\mathbb{R}^{n\times n}$ |
 | $A$ | normalized attention weight matrix | $\mathbb{R}^{n\times n}$ |
 | $Z$ | attention output | $\mathbb{R}^{n\times d_v}$ |
 
@@ -24,6 +24,13 @@ S=\frac{QK^T}{\sqrt{d_k}},\qquad A=\operatorname{softmax}(S),\qquad Z=AV
 $$
 
 Softmax is row-wise (fixed query row $i$, across key index $j$).
+
+
+Notice:
+
+for this mini series, T is used instead of n for sequence length.
+
+
 
 ---
 
@@ -50,7 +57,7 @@ Conventions for $m_{ij}$:
 Equivalent set form:
 
 $$
-a_{ij}=0\quad\text{if }j\notin\mathcal{A}_i
+\alpha_{ij}=0\quad\text{if }j\notin\mathcal{A}_i
 $$
 
 ---

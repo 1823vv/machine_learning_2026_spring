@@ -7,10 +7,18 @@
 
 ## 1. Why Do We Use the Dot Product?
 
-In attention, the core operation is:
+In attention, the core operation is the dot product:
 
 $$
-e_{ij} = q_i \cdot k_j
+q_i \cdot k_j
+$$
+
+which gives the raw compatibility score before scaling.
+
+After scaling by $\sqrt{d_k}$, the score is:
+
+$$
+s_{ij} = \frac{q_i \cdot k_j}{\sqrt{d_k}}
 $$
 
 This defines how much query $q_i$ matches key $k_j$.
@@ -26,7 +34,7 @@ The question is:
 The dot product is defined as:
 
 $$
-q \cdot k = \sum_{l=1}^{d_k} q_l k_l
+q \cdot k = \sum_{f=0}^{d_k-1} q_f k_f
 $$
 
 It measures the **alignment** between two vectors.

@@ -9,7 +9,7 @@
 We want to model a mapping between two sequences:
 
 $$
-X = (x_1, x_2, \dots, x_n) \rightarrow Y = (y_1, y_2, \dots, y_m)
+X = (x_0, x_1, \dots, x_{n-1}) \rightarrow Y = (y_0, y_1, \dots, y_{m-1})
 $$
 
 But this is not a simple input-output mapping.
@@ -55,7 +55,7 @@ The encoder processes the entire input sequence at once.
 ### Input
 
 $$
-X = (x_1, x_2, \dots, x_n)
+X = (x_0, x_1, \dots, x_{n-1})
 $$
 
 Each token is mapped into a vector and passed through stacked layers.
@@ -63,7 +63,7 @@ Each token is mapped into a vector and passed through stacked layers.
 ### Output
 
 $$
-H = (h_1, h_2, \dots, h_n)
+H = (h_0, h_1, \dots, h_{n-1})
 $$
 
 Each $h_i$ is not independent.
@@ -118,7 +118,7 @@ The decoder cannot access future tokens.
 So generation is:
 
 $$
-y_1 \rightarrow y_2 \rightarrow y_3 \rightarrow \dots
+y_0 \rightarrow y_1 \rightarrow y_2 \rightarrow \dots
 $$
 
 Each step depends on all previous steps.

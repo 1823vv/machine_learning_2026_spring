@@ -186,15 +186,15 @@ Multi-head attention preserves model width:
 
 | Stage         | Shape              |
 | ------------- | ------------------ |
-| Input         | $(n, d_{model})$   |
+| Input         | $(n, d_{\text{model}})$   |
 | Per head      | $(n, d_v)$         |
 | Concatenation | $(n, h \cdot d_v)$ |
-| Output        | $(n, d_{model})$   |
+| Output        | $(n, d_{\text{model}})$   |
 
 With:
 
 $$
-h \cdot d_v = d_{model}
+h \cdot d_v = d_{\text{model}}
 $$
 
 So multi-head attention is:
@@ -208,18 +208,18 @@ So multi-head attention is:
 ## 9. Matrix Dimensions: The Computational Flow
 
 **Step 1: Linear Projections (Creating Q, K, V)**
-The input $X$ is projected into three different spaces. Note how $d_{model}$ is transformed into the head dimension.
+The input $X$ is projected into three different spaces. Note how $d_{\text{model}}$ is transformed into the head dimension.
 
 $$
-Q = \underbrace{X}_{(n, d_{model})} \cdot \underbrace{W_Q}_{(d_{model}, d_k)} \rightarrow (n, d_k)
-$$
-
-$$
-K = \underbrace{X}_{(n, d_{model})} \cdot \underbrace{W_K}_{(d_{model}, d_k)} \rightarrow (n, d_k)
+Q = \underbrace{X}_{(n, d_{\text{model}})} \cdot \underbrace{W_Q}_{(d_{\text{model}}, d_k)} \rightarrow (n, d_k)
 $$
 
 $$
-V = \underbrace{X}_{(n, d_{model})} \cdot \underbrace{W_V}_{(d_{model}, d_v)} \rightarrow (n, d_v)
+K = \underbrace{X}_{(n, d_{\text{model}})} \cdot \underbrace{W_K}_{(d_{\text{model}}, d_k)} \rightarrow (n, d_k)
+$$
+
+$$
+V = \underbrace{X}_{(n, d_{\text{model}})} \cdot \underbrace{W_V}_{(d_{\text{model}}, d_v)} \rightarrow (n, d_v)
 $$
 
 **Step 2: Scored Dot-Product (Interaction)**
@@ -249,5 +249,5 @@ $$
 In a Multi-Head setting, we concatenate $h$ heads and project back to the model dimension.
 
 $$
-\text{MultiHead}(Q,K,V) = \underbrace{\text{Concat}(\text{head}_1, ..., \text{head}_h)}_{(n, h \cdot d_v)} \cdot \underbrace{W_O}_{(h \cdot d_v, d_{model})} \rightarrow (n, d_{model})
+\text{MultiHead}(Q,K,V) = \underbrace{\text{Concat}(\text{head}^{(1)}, ..., \text{head}^{(h)})}_{(n, h \cdot d_v)} \cdot \underbrace{W_O}_{(h \cdot d_v, d_{\text{model}})} \rightarrow (n, d_{\text{model}})
 $$

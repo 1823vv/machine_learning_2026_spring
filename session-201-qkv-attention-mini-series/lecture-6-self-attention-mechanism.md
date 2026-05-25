@@ -52,7 +52,7 @@ This defines **self-attention**.
 For a single token $x_i$, the output is:
 
 $$
-y_i = \sum_{j=1}^{n} \alpha_{ij} \cdot v_j
+z_i = \sum_{j=0}^{n-1} \alpha_{ij} v_j
 $$
 
 where:
@@ -60,7 +60,7 @@ where:
 $$
 \boxed{\alpha_{ij}=
 \frac{\exp\left(\frac{q_i \cdot k_j}{\sqrt{d_k}}\right)}
-{\sum_{l=1}^{n} \exp\left(\frac{q_i \cdot k_l}{\sqrt{d_k}}\right)}}
+{\sum_{l=0}^{n-1} \exp\left(\frac{q_i \cdot k_l}{\sqrt{d_k}}\right)}}
 $$
 
 Interpretation:
@@ -111,7 +111,7 @@ Thus, the representation of "it" becomes context-aware.
 $$
 \begin{array}{|c|}
 \hline
-\textbf{INPUT: Token embeddings } x_1, x_2, \dots, x_n \\
+\textbf{INPUT: Token embeddings } x_0, x_1, \dots, x_{n-1} \\
 \hline
 \downarrow \\
 \hline
@@ -123,13 +123,13 @@ v_i = x_i W_V \quad \text{(value)} \\
 \downarrow \\
 \hline
 \textbf{STAGE 2: Compatibility scores} \\
-S_{ij} = \frac{q_i \cdot k_j}{\sqrt{d_k}} \\
-\alpha_{ij} = \text{softmax}_j(S_{ij}) \\
+s_{ij} = q_i \cdot k_j \quad \text{(raw)} \\
+\alpha_{ij} = \text{softmax}_j\left(\frac{s_{ij}}{\sqrt{d_k}}\right) \quad \text{(scaled)} \\
 \hline
 \downarrow \\
 \hline
 \textbf{STAGE 3: Weighted aggregation} \\
-y_i = \sum_{j=1}^{n} \alpha_{ij} v_j \\
+z_i = \sum_{j=0}^{n-1} \alpha_{ij} v_j \\
 \hline
 \downarrow \\
 \hline

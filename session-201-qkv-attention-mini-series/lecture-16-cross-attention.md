@@ -33,7 +33,7 @@ But in encoder-decoder systems, something fundamentally changes:
 
 In sequence-to-sequence models:
 
-* Encoder produces a memory $H_{enc}$
+* Encoder produces a memory $H_{\text{enc}}$
 * Decoder generates output step by step
 
 So the question becomes:
@@ -92,7 +92,7 @@ $$
 
 ## 5. Step-by-Step Mechanism
 
-At decoding step $t$:
+At decoder position $i$:
 
 ### Step 1: Query from decoder
 
@@ -102,7 +102,7 @@ The decoder state represents:
 * what information is needed next
 
 $$
-Q^{(t)} = H^{(t)}_{\text{dec}} W_Q
+q_i = h_{\text{dec},i} W_Q
 $$
 
 
@@ -111,20 +111,21 @@ $$
 Each encoder token becomes a key:
 
 $$
-K_i = h_{\text{enc},i} W_K
+k_j = h_{\text{enc},j} W_K
 $$
 
 Similarity is computed:
 
 $$
-\text{score}_{t,i} = Q^{(t)} \cdot k_i
+s_{ij} = q_i \cdot k_j
 $$
 
+where $q_i$ is the query from decoder position $i$ and $k_j$ is the key from encoder position $j$.
 
 ### Step 3: Soft alignment
 
 $$
-\alpha_{t,i} = \text{softmax}(Q^{(t)} \cdot k_i)
+\alpha_{ij} = \frac{\exp(s_{ij}/\sqrt{d_k})}{\sum_{j'=0}^{n_{\text{enc}}-1} \exp(s_{ij'}/\sqrt{d_k})}
 $$
 
 This creates:
@@ -135,7 +136,7 @@ This creates:
 ### Step 4: Retrieval
 
 $$
-\text{context}_t = \sum_i \alpha_{t,i} v_i
+\text{context}_i = \sum_{j=0}^{n_{\text{enc}}-1} \alpha_{ij} v_j
 $$
 
 So the decoder retrieves:

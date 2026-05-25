@@ -36,7 +36,7 @@ acts like a phase coordinate.
 ## 3. Minimal Construction
 
 $$
-p_i=\sin(\omega i), \cos(\omega i)
+p_i = \begin{bmatrix} \sin(\omega i) & \cos(\omega i) \end{bmatrix}
 $$
 
 ---

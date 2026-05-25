@@ -10,12 +10,12 @@ Cross-attention combines **two different sources of representations**:
 
 * Decoder state:
   $$
-  H_{\text{dec}}^{(l)} \in \mathbb{R}^{n_{\text{dec}} \times d_{model}}
+  H_{\text{dec}}^{(l)} \in \mathbb{R}^{n_{\text{dec}} \times d_{\text{model}}}
   $$
 
 * Encoder output (memory):
   $$
-  H_{\text{enc}} \in \mathbb{R}^{n_{\text{enc}} \times d_{model}}
+  H_{\text{enc}} \in \mathbb{R}^{n_{\text{enc}} \times d_{\text{model}}}
   $$
 
 The attention computation is:

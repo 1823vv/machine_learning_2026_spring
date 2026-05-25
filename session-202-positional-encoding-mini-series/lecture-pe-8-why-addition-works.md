@@ -30,11 +30,11 @@ $$
 we obtain
 
 $$
-QK^\top=
-XW_Q(XW_K)^\top+
-XW_Q(PEW_K)^\top+
-PEW_Q(XW_K)^\top+
-PEW_Q(PEW_K)^\top
+QK^T=
+XW_Q(XW_K)^T+
+XW_Q(PEW_K)^T+
+PEW_Q(XW_K)^T+
+PEW_Q(PEW_K)^T
 $$
 
 ---
@@ -43,25 +43,25 @@ $$
 ### Content-content interaction
 
 $$
-XW_Q(XW_K)^\top
+XW_Q(XW_K)^T
 $$
 
 ### Content-position interaction
 
 $$
-XW_Q(PEW_K)^\top
+XW_Q(PEW_K)^T
 $$
 
 ### Position-content interaction
 
 $$
-PEW_Q(XW_K)^\top
+PEW_Q(XW_K)^T
 $$
 
 ### Position-position interaction
 
 $$
-PEW_Q(PEW_K)^\top
+PEW_Q(PEW_K)^T
 $$
 
 > [!INFO]

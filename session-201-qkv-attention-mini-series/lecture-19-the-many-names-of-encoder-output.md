@@ -7,7 +7,7 @@
 In a Transformer, the final output of the Encoder is a single tensor:
 
 $$
-\boxed{H_{\text{enc}} \in \mathbb{R}^{n \times d}}
+\boxed{H_{\text{enc}} \in \mathbb{R}^{n \times d_{\text{model}}}}
 $$
 
 This tensor is passed to the Decoder and reused throughout generation.
@@ -25,19 +25,19 @@ Each input token is transformed from a static embedding into a context-dependent
 Given input:
 
 $$
-X = (x_1, x_2, \dots, x_n)
+X = (x_0, x_1, \dots, x_{n-1})
 $$
 
 the Encoder produces:
 
 $$
-H_{\text{enc}} = (h_1, h_2, \dots, h_n)
+H_{\text{enc}} = (h_0, h_1, \dots, h_{n-1})
 $$
 
 Each $h_i$ depends on the entire sequence:
 
 $$
-h_i = f(x_1, x_2, \dots, x_n)
+h_i = f(x_0, x_1, \dots, x_{n-1})
 $$
 
 This contrasts with static embeddings, where each word has a fixed vector.

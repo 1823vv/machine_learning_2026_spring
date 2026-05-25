@@ -136,10 +136,10 @@ Each token attends to every other token.
 
 ### Cross-attention
 
-If decoder length is $m$ and encoder length is $n$:
+If decoder length is $n_{\text{dec}}$ and encoder length is $n_{\text{enc}}$:
 
 $$
-\text{scores} \in \mathbb{R}^{m \times n}
+\text{scores} \in \mathbb{R}^{n_{\text{dec}} \times n_{\text{enc}}}
 $$
 
 So:

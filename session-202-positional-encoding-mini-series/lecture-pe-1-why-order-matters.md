@@ -60,7 +60,7 @@ $$
 and
 
 $$
-\operatorname{Attn}(X)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+\operatorname{Attn}(X)=\operatorname{softmax}\!\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 $$
 
 No term explicitly injects index $i$.

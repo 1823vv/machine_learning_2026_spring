@@ -11,7 +11,7 @@ We have already seen the matrix form of attention in earlier lectures when intro
 In our previous lecture, we described attention at the **token level**:
 
 $$
-y_i = \sum_{j=1}^{n} \alpha_{ij} \cdot v_j
+z_i = \sum_{j=0}^{n-1} \alpha_{ij} v_j
 $$
 
 with:
@@ -19,7 +19,7 @@ with:
 $$
 \alpha_{ij}=
 \frac{\exp\left(\frac{q_i \cdot k_j}{\sqrt{d_k}}\right)}
-{\sum_{l=1}^{n} \exp\left(\frac{q_i \cdot k_l}{\sqrt{d_k}}\right)}
+{\sum_{l=0}^{n-1} \exp\left(\frac{q_i \cdot k_l}{\sqrt{d_k}}\right)}
 $$
 
 This makes the computation of a single token explicit: one query interacts with all keys to produce one output.
@@ -65,7 +65,7 @@ $$
 where:
 
 $$
-S \in \mathbb{R}^{n \times n}, \quad S_{ij} = q_i \cdot k_j
+S \in \mathbb{R}^{n \times n}, \quad s_{ij} = q_i \cdot k_j
 $$
 
 Each row $i$ contains the compatibility between query $q_i$ and all keys.
@@ -74,20 +74,20 @@ Each row $i$ contains the compatibility between query $q_i$ and all keys.
 
 $$
 \begin{array}{c|ccccc}
-& k_1 & k_2 & k_3 & \dots & k_n \\
+& k_0 & k_1 & k_2 & \dots & k_{n-1} \\
 \hline
-q_1 & S_{11} & S_{12} & S_{13} & \dots & S_{1n} \\
-q_2 & S_{21} & S_{22} & S_{23} & \dots & S_{2n} \\
-q_3 & S_{31} & S_{32} & S_{33} & \dots & S_{3n} \\
+q_0 & s_{00} & s_{01} & s_{02} & \dots & s_{0,n-1} \\
+q_1 & s_{10} & s_{11} & s_{12} & \dots & s_{1,n-1} \\
+q_2 & s_{20} & s_{21} & s_{22} & \dots & s_{2,n-1} \\
 \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
-q_n & S_{n1} & S_{n2} & S_{n3} & \dots & S_{nn}
+q_{n-1} & s_{n-1,0} & s_{n-1,1} & s_{n-1,2} & \dots & s_{n-1,n-1}
 \end{array}
 $$
 
 
-* $S_{ij} > 0$: strong compatibility
-* $S_{ij} < 0$: weak or opposing compatibility
-* $S_{ij} = 0$: neutral relation
+* $s_{ij} > 0$: strong compatibility
+* $s_{ij} < 0$: weak or opposing compatibility
+* $s_{ij} = 0$: neutral relation
 
 ---
 
@@ -102,18 +102,18 @@ $$
 so that:
 
 $$
-A_{ij} = \alpha_{ij}, \quad \sum_{j=1}^{n} A_{ij} = 1
+A_{ij} = \alpha_{ij}, \quad \sum_{j=0}^{n-1} A_{ij} = 1
 $$
 
 
 $$
 \begin{array}{c|ccccc}
-& 1 & 2 & 3 & \dots & n \\
+& 0 & 1 & 2 & \dots & n-1 \\
 \hline
-1 & \alpha_{11} & \alpha_{12} & \alpha_{13} & \dots & \alpha_{1n} \\
-2 & \alpha_{21} & \alpha_{22} & \alpha_{23} & \dots & \alpha_{2n} \\
+0 & \alpha_{00} & \alpha_{01} & \alpha_{02} & \dots & \alpha_{0,n-1} \\
+1 & \alpha_{10} & \alpha_{11} & \alpha_{12} & \dots & \alpha_{1,n-1} \\
 \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
-n & \alpha_{n1} & \alpha_{n2} & \alpha_{n3} & \dots & \alpha_{nn}
+n-1 & \alpha_{n-1,0} & \alpha_{n-1,1} & \alpha_{n-1,2} & \dots & \alpha_{n-1,n-1}
 \end{array}
 $$
 
@@ -127,19 +127,19 @@ Each row defines a probability distribution over all tokens.
 We compute the output as:
 
 $$
-Y = A V
+Z = A V
 $$
 
 where:
 
 $$
-Y \in \mathbb{R}^{n \times d_v}
+Z \in \mathbb{R}^{n \times d_v}
 $$
 
 Each output row is:
 
 $$
-y_i = \sum_{j=1}^{n} A_{ij} v_j
+z_i = \sum_{j=0}^{n-1} A_{ij} v_j
 $$
 
 So each token becomes a mixture of all value vectors.

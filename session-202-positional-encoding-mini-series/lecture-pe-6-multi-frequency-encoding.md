@@ -16,14 +16,17 @@ A single sinusoid is periodic, so it repeats and creates ambiguity over long ran
 Use many sine-cosine components:
 
 $$
-p_i=
-\sin(\omega_0 i),
-\cos(\omega_0 i),
-\sin(\omega_1 i),
-\cos(\omega_1 i),
-\ldots,
-\sin(\omega_{m-1} i),
+p_i =
+\begin{bmatrix}
+\sin(\omega_0 i) &
+\cos(\omega_0 i) &
+\sin(\omega_1 i) &
+\cos(\omega_1 i) &
+\cdots &
+\sin(\omega_{m-1} i) &
 \cos(\omega_{m-1} i)
+\end{bmatrix}
+\in \mathbb{R}^{1 \times d_{\text{model}}}
 $$
 
 with

@@ -22,13 +22,13 @@ Input sequence:
 After embedding:
 
 $$
-X = (x_1, x_2, x_3, x_4)
+X = (x_0, x_1, x_2, x_3)
 $$
 
 The encoder produces contextual representations:
 
 $$
-H_{\text{enc}} = (h_1, h_2, h_3, h_4)
+H_{\text{enc}} = (h_0, h_1, h_2, h_3)
 $$
 
 These are used as:
@@ -51,13 +51,13 @@ This memory is fixed for the entire decoding process.
 The decoder produces the output sequence incrementally:
 
 $$
-y_1, y_2, y_3, \dots
+y_0, y_1, y_2, \dots
 $$
 
 At step $t$, it has already generated:
 
 $$
-(y_1, \dots, y_{t-1})
+(y_0, \dots, y_{t-1})
 $$
 
 These tokens are embedded and transformed into:
@@ -111,7 +111,7 @@ $$
 Output:
 
 $$
-y_1 = \text{“J’”}
+y_0 = \text{“J’”}
 $$
 
 Interpretation:
@@ -144,7 +144,7 @@ $$
 Output:
 
 $$
-y_2 = \text{“ai”}
+y_1 = \text{“ai”}
 $$
 
 Interpretation:
@@ -177,7 +177,7 @@ $$
 Output:
 
 $$
-y_3 = \text{“visité”}
+y_2 = \text{“visité”}
 $$
 
 Interpretation:
@@ -210,7 +210,7 @@ $$
 Output:
 
 $$
-y_4 = \text{“Shanghai”}
+y_3 = \text{“Shanghai”}
 $$
 
 Interpretation:
@@ -243,7 +243,7 @@ $$
 Output:
 
 $$
-y_5 = \text{“aujourd’hui”}
+y_4 = \text{“aujourd’hui”}
 $$
 
 Interpretation:

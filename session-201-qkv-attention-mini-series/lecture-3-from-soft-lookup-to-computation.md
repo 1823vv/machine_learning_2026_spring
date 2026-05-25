@@ -35,7 +35,7 @@ This produces one-hot selection, which is too rigid.
 Instead, we define a **continuous scoring function**:
 
 $$
-e_i = \text{score}(\text{query}, \text{key}_i)
+s_i = \text{score}(\text{query}, \text{key}_i)
 $$
 
 Now each key receives a real-valued relevance score.
@@ -47,13 +47,13 @@ Now each key receives a real-valued relevance score.
 We represent both queries and keys as vectors:
 
 $$
-q, k_i \in \mathbb{R}^{1 \times d_{model}}
+q, k_i \in \mathbb{R}^{1 \times d_{\text{model}}}
 $$
 
 A simple and effective scoring function is the dot product:
 
 $$
-e_i = q \cdot k_i
+s_i = q \cdot k_i
 $$
 
 This measures similarity in the embedding space.
@@ -62,12 +62,12 @@ This measures similarity in the embedding space.
 
 ## 4. From Scores to Weights
 
-The scores $e_i$ *(without scaling for now)* are unbounded and not normalized.
+The scores $s_i$ *(without scaling for now)* are unbounded and not normalized.
 
 We convert them into a probability distribution:
 
 $$
-\alpha_i = \frac{\exp(e_i)}{\sum_j \exp(e_j)}
+\alpha_i = \frac{\exp(s_i)}{\sum_j \exp(s_j)}
 $$
 
 This ensures:

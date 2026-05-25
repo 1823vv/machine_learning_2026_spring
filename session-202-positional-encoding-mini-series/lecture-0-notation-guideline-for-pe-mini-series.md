@@ -40,6 +40,25 @@ Each row corresponds to one token position.
 | $k$ | **channel-pair index** | $k \in \{0,1,\dots,\frac{d_{\text{model}}}{2}-1\}$ |
 | $\omega_k$ | angular frequency of the $k$-th pair | scalar |
 
+The full positional encoding matrix $PE$ is constructed by stacking $p_i$ row-wise, exactly like $X$:
+
+$$
+PE =
+\begin{bmatrix}
+p_0 \\
+p_1 \\
+\vdots \\
+p_{n-1}
+\end{bmatrix}
+\in \mathbb{R}^{n \times d_{\text{model}}}
+$$
+
+Each $p_i$ is a **row vector**:
+
+$$
+p_i \in \mathbb{R}^{1 \times d_{\text{model}}}
+$$
+
 ---
 
 ## 3. Combined Representation
@@ -73,6 +92,22 @@ $$
 > **Rule of thumb:**
 > - $i$ always refers to a **position in the sequence**.
 > - $k$ always refers to a **frequency channel pair**.
+
+Explicit row-vector form of $p_i$ (using $m = d_{\text{model}}/2$ channel pairs):
+
+$$
+p_i =
+\begin{bmatrix}
+\sin(\omega_0 i) &
+\cos(\omega_0 i) &
+\sin(\omega_1 i) &
+\cos(\omega_1 i) &
+\cdots &
+\sin(\omega_{m-1} i) &
+\cos(\omega_{m-1} i)
+\end{bmatrix}
+\in \mathbb{R}^{1 \times d_{\text{model}}}
+$$
 
 ---
 
@@ -126,6 +161,7 @@ $$
 | Using $i$ for channel-pair index | collides with the standard use of $i$ for position |
 | Parenthesized subscripts like $PE_{(pos,2i)}$ | the comma subscript $PE_{i,2k}$ is the convention here |
 | Writing $x_i \in \mathbb{R}^{d_{\text{model}}}$ without specifying row vs. column | $\mathbb{R}^{1 \times d_{\text{model}}}$ removes ambiguity |
+| Writing $p_i$ as a comma-separated list without row-vector brackets | use $\begin{bmatrix}\dots\end{bmatrix}$ to make the row shape explicit |
 | Using $P$ for the positional encoding matrix | $P$ is easily confused with permutation / probability / projection matrices |
 
 

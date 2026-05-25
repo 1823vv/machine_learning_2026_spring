@@ -48,7 +48,7 @@ One of the defining properties of modern foundation models is:
 After tokenization, all inputs become:
 
 $$
-X \in \mathbb{R}^{n \times d_{model}}
+X \in \mathbb{R}^{n \times d_{\text{model}}}
 $$
 
 This allows the same architecture to operate across domains.
@@ -108,7 +108,7 @@ $$
 with supervision applied row-wise:
 
 $$
-\mathcal{L} = \sum_{t=1}^{n} \ell(Z_t, Y_t)
+\mathcal{L} = \sum_{t=0}^{n-1} \ell(Z_t, Y_t)
 $$
 
 ---

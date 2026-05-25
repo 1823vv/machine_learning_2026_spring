@@ -12,9 +12,9 @@ It is intentionally exhaustive so every symbol has a single, stable meaning.
 1. **Token = row** in all sequence matrices.
 2. **Batch dimension is omitted by default** in this mini-series unless explicitly introduced.
 3. **Index roles are fixed**:
-   - $i$: query-token position (row index)
+   - $i$: query-token position (row index); also head index in MHA superscripts $(i)$
    - $j$: key/value-token position (column index in score/weight matrices)
-   - $h$: attention-head index
+   - $h$: number of attention heads
    - $f$: generic feature-channel index when needed
 4. **Row-wise softmax** is the default in attention: normalize over $j$ for fixed $i$.
 
@@ -28,14 +28,16 @@ It is intentionally exhaustive so every symbol has a single, stable meaning.
 | $d_{\text{model}}$ | embedding/model width | integer |
 | $d_k$ | query/key per-token feature width | integer |
 | $d_v$ | value per-token feature width | integer |
-| $H$ | number of heads (MHA) | integer |
-| $d_h$ | per-head width in MHA (often $d_{\text{model}}/H$) | integer |
+| $h$ | number of heads (MHA) | integer |
+| $d_{\text{head}}$ | per-head width in MHA (often $d_{\text{model}}/h$) | integer |
 
 Index domains (single sequence):
 
 $$
 i,j\in\{0,1,\dots,n-1\}
 $$
+
+In multi-head attention, the head index is also denoted by $i$ (or by explicit numerals $1,\dots,h$) in superscript form $(i)$; it never appears in the same formula as the token-position $i$, so no ambiguity arises.
 
 ---
 
@@ -107,12 +109,36 @@ with $q_i,k_i\in\mathbb{R}^{1\times d_k}$ and $v_i\in\mathbb{R}^{1\times d_v}$.
 
 | Symbol | Meaning | Shape |
 |---|---|---|
-| $s_{ij}$ | scalar compatibility score | scalar |
-| $S$ | full score matrix | $\mathbb{R}^{n\times n}$ |
+| $s_{ij}$ | dot-product score (raw, or unscaled) | scalar |
+| $S$ | full score matrix (raw, or scaled) | $\mathbb{R}^{n\times n}$ |
+
+Raw dot product:
 
 $$
-S=\frac{QK^T}{\sqrt{d_k}},\qquad s_{ij}=\frac{q_ik_j^T}{\sqrt{d_k}}
+s_{ij}=q_i\cdot k_j
 $$
+
+Scaled dot product:
+
+$$
+s_{ij}=\frac{q_i\cdot k_j}{\sqrt{d_k}}
+$$
+
+
+Raw score matrix:
+
+$$
+S=QK^T
+$$
+
+
+Scaled score matrix:
+
+$$
+S=\frac{QK^T}{\sqrt{d_k}}
+$$
+
+The softmax operates on the scaled scores.
 
 ### 5.2 Why scaling appears
 
@@ -124,24 +150,32 @@ $$
 
 | Symbol | Meaning | Shape |
 |---|---|---|
-| $a_{ij}$ | attention weight from query $i$ to key $j$ | scalar |
+| $\alpha_{ij}$ | attention weight from query $i$ to key $j$ | scalar |
 | $A$ | attention weight matrix | $\mathbb{R}^{n\times n}$ |
 
 $$
 A=\operatorname{softmax}(S)\quad\text{(row-wise)}
 $$
 
-Equivalent element form:
+or 
 
 $$
-a_{ij}=\frac{\exp(s_{ij})}{\sum_{j'=0}^{n-1}\exp(s_{ij'})}
+A=\operatorname{softmax}(S/\sqrt{d_k})\quad\text{(row-wise)}
+$$
+
+Equivalent element form (softmax on scaled scores):
+
+$$
+\alpha_{ij}=\frac{\exp(s_{ij}/\sqrt{d_k})}{\sum_{j'=0}^{n-1}\exp(s_{ij'}/\sqrt{d_k})}
 $$
 
 Row normalization property:
 
 $$
-\sum_{j=0}^{n-1}a_{ij}=1\quad\text{for each fixed }i
+\sum_{j=0}^{n-1}\alpha_{ij}=1\quad\text{for each fixed }i
 $$
+
+**Policy:** Scalar attention weights are always written as $\alpha_{ij}$; the full attention weight matrix is $A$, with entries $A_{ij}=\alpha_{ij}$. Never use $a_{ij}$ for attention weights in this series.
 
 ---
 
@@ -161,7 +195,7 @@ $$
 Token form:
 
 $$
-z_i=\sum_{j=0}^{n-1}a_{ij}v_j
+z_i=\sum_{j=0}^{n-1}\alpha_{ij}v_j
 $$
 
 ---
@@ -178,55 +212,55 @@ $$
 
 ### 7.2 Cross-attention
 
-Separate query-side and memory-side inputs:
+Separate query-side (decoder) and memory-side (encoder) inputs:
 
-- Query-side states: $X^{(q)}\in\mathbb{R}^{n_q\times d_{\text{model}}}$
-- Memory-side states: $X^{(m)}\in\mathbb{R}^{n_m\times d_{\text{model}}}$
+- Decoder states: $H_{\text{dec}}\in\mathbb{R}^{n_{\text{dec}}\times d_{\text{model}}}$
+- Encoder memory: $H_{\text{enc}}\in\mathbb{R}^{n_{\text{enc}}\times d_{\text{model}}}$
 
 Then:
 
 $$
-Q=X^{(q)}W_Q\in\mathbb{R}^{n_q\times d_k}
+Q=H_{\text{dec}}W_Q\in\mathbb{R}^{n_{\text{dec}}\times d_k}
 $$
 $$
-K=X^{(m)}W_K\in\mathbb{R}^{n_m\times d_k}
+K=H_{\text{enc}}W_K\in\mathbb{R}^{n_{\text{enc}}\times d_k}
 $$
 $$
-V=X^{(m)}W_V\in\mathbb{R}^{n_m\times d_v}
+V=H_{\text{enc}}W_V\in\mathbb{R}^{n_{\text{enc}}\times d_v}
 $$
 
 Scores/weights/output:
 
 $$
-S\in\mathbb{R}^{n_q\times n_m},\quad A\in\mathbb{R}^{n_q\times n_m},\quad Z\in\mathbb{R}^{n_q\times d_v}
+S\in\mathbb{R}^{n_{\text{dec}}\times n_{\text{enc}}},\quad A\in\mathbb{R}^{n_{\text{dec}}\times n_{\text{enc}}},\quad Z\in\mathbb{R}^{n_{\text{dec}}\times d_v}
 $$
 
 ---
 
 ## 8) Multi-Head Attention (MHA) Notation
 
-Per head $h\in\{1,\dots,H\}$:
+Per head $i\in\{1,\dots,h\}$:
 
 $$
-Q^{(h)}=XW_Q^{(h)},\quad K^{(h)}=XW_K^{(h)},\quad V^{(h)}=XW_V^{(h)}
+Q^{(i)}=XW_Q^{(i)},\quad K^{(i)}=XW_K^{(i)},\quad V^{(i)}=XW_V^{(i)}
 $$
 
 Head output:
 
 $$
-Z^{(h)}=\operatorname{softmax}\!\left(\frac{Q^{(h)}K^{(h)T}}{\sqrt{d_h}}\right)V^{(h)}
+Z^{(i)}=\operatorname{softmax}\!\left(\frac{Q^{(i)}K^{(i)T}}{\sqrt{d_{\text{head}}}}\right)V^{(i)}
 $$
 
 Concatenate and project:
 
 $$
-Z_{\text{MHA}}=\operatorname{Concat}(Z^{(1)},\dots,Z^{(H)})W_O
+Z_{\text{MHA}}=\operatorname{Concat}(Z^{(1)},\dots,Z^{(h)})W_O
 $$
 
 with
 
 $$
-W_O\in\mathbb{R}^{(H\cdot d_h)\times d_{\text{model}}}
+W_O\in\mathbb{R}^{(h\cdot d_{\text{head}})\times d_{\text{model}}}
 $$
 
 ---
@@ -260,11 +294,17 @@ Softmax remains over key axis for each batch/query row.
 
 ## 11) Canonical Symbol Contract for This Series
 
-- $i$: query-token position index.
+- $i$: query-token position index (or head index in MHA superscripts $(i)$; the two uses never collide in the same formula).
 - $j$: key/value-token position index.
 - $f$: generic feature-channel index when required.
 - plain $k$: **not** used as token index in this series; kept free to stay compatible with PE channel indexing convention.
+- $s_{ij}$: raw (unscaled) dot-product score $q_i \cdot k_j$.
+- $S$: scaled score matrix $QK^T / \sqrt{d_k}$.
+- $\alpha_{ij}$: scalar attention weight from query $i$ to key $j$.
+- $A$: attention weight matrix (row-wise softmax of $S$).
 - $d_k$: query/key feature width symbol.
+- $h$: number of attention heads.
+- $d_{\text{head}}$: per-head feature width in MHA.
 
 ---
 
@@ -296,7 +336,7 @@ Shared global rules retained:
 | Reusing $j$ for vocabulary class in attention chapters | collides with key-position meaning |
 | Omitting $1/\sqrt{d_k}$ in scaled dot-product attention | changes logit scale behavior |
 | Applying softmax over the wrong axis | breaks attention normalization semantics |
-| Mixing self-attention and cross-attention shapes without $n_q,n_m$ distinction | creates silent shape ambiguity |
+| Mixing self-attention and cross-attention shapes without $n_{\text{dec}},n_{\text{enc}}$ distinction | creates silent shape ambiguity |
 | Reusing a local symbol like $c$ for a one-off constant inside a short derivation | **Allowed** if scope is explicit and it does not redefine the global class-index role in loss notation |
 
 

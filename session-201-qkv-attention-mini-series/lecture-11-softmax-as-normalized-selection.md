@@ -10,7 +10,7 @@
 In attention, we compute scores:
 
 $$
-e_i = q \cdot k_i
+s_i = q \cdot k_i
 $$
 
 These scores are unbounded and not normalized.
@@ -29,10 +29,10 @@ This is the role of **softmax**.
 
 ![](./img-5/smprobability.jpg)
 
-Given a vector of scores $e$:
+Given a vector of scores $s$:
 
 $$
-\boxed{\alpha_i = \frac{\exp(e_i)}{\sum_j \exp(e_j)}}
+\boxed{\alpha_i = \frac{\exp(s_i)}{\sum_j \exp(s_j)}}
 $$
 
 This produces a probability distribution over all positions.
@@ -43,19 +43,19 @@ This produces a probability distribution over all positions.
 
 ![](./img-5/sigmoid3b1b.jpg)
 
-For two elements $e_1, e_2$:
+For two elements $s_1, s_2$:
 
 $$
-\alpha_1 = \frac{\exp(e_1)}{\exp(e_1) + \exp(e_2)}
+\alpha_1 = \frac{\exp(s_1)}{\exp(s_1) + \exp(s_2)}
 $$
 
 Rewriting:
 
 $$
-\alpha_1 = \frac{1}{1 + \exp(-(e_1 - e_2))}
+\alpha_1 = \frac{1}{1 + \exp(-(s_1 - s_2))}
 $$
 
-This is exactly a **sigmoid** applied to $(e_1 - e_2)$.
+This is exactly a **sigmoid** applied to $(s_1 - s_2)$.
 
 ---
 
@@ -74,7 +74,7 @@ Both map real values to probabilities.
 
 Softmax introduces **competition**:
 
-* Increasing one $e_i$ decreases others’ probabilities
+* Increasing one $s_i$ decreases others' probabilities
 * The distribution depends on **relative differences**, not absolute values
 
 This is crucial for attention:
@@ -142,12 +142,12 @@ Normally we would write:
 
 $$
 \begin{array}{c|ccccc}
-& 1 & 2 & 3 & \dots & n \\
+:& 0 & 1 & 2 & \dots & n-1 \\
 \hline
-1 & \alpha_{11} & \alpha_{12} & \alpha_{13} & \dots & \alpha_{1n} \\
-2 & \alpha_{21} & \alpha_{22} & \alpha_{23} & \dots & \alpha_{2n} \\
+0 & \alpha_{00} & \alpha_{01} & \alpha_{02} & \dots & \alpha_{0,n-1} \\
+1 & \alpha_{10} & \alpha_{11} & \alpha_{12} & \dots & \alpha_{1,n-1} \\
 \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
-n & \alpha_{n1} & \alpha_{n2} & \alpha_{n3} & \dots & \alpha_{nn}
+n-1 & \alpha_{n-1,0} & \alpha_{n-1,1} & \alpha_{n-1,2} & \dots & \alpha_{n-1,n-1}
 \end{array}
 $$
 
@@ -167,15 +167,15 @@ See [lecture-7-matrix-form-of-attention.md](./lecture-7-matrix-form-of-attention
 After the decoder produces a hidden vector $h$, we compute:
 
 $$
-z = W h + b
+o = W h + b
 $$
 
-These $z_i$ are **scores over the vocabulary** (logits), just like attention scores $e_i$.
+These $o_i$ are **scores over the vocabulary** (logits), just like attention scores $e_i$.
 
 Applying softmax:
 
 $$
-P(w_i \mid \text{context}) = \frac{\exp(z_i)}{\sum_j \exp(z_j)}
+P(w_i \mid \text{context}) = \frac{\exp(o_i)}{\sum_j \exp(o_j)}
 $$
 
 

@@ -55,7 +55,7 @@ class TransformerBlock(nn.Module):
 A block maps:
 
 $$
-X \in \mathbb{R}^{n \times d} \rightarrow \mathbb{R}^{n \times d}
+X \in \mathbb{R}^{n \times d_{\text{model}}} \rightarrow \mathbb{R}^{n \times d_{\text{model}}}
 $$
 
 The shape is preserved:
@@ -175,7 +175,7 @@ Attention itself is decomposed:
 
 $$
 \text{head}^{(i)} =
-\text{softmax}\left(\frac{Q^{(i)} (K^{(i)})^T}{\sqrt{d_k}}\right) V^{(i)}
+\text{softmax}\left(\frac{Q^{(i)} K^{(i)T}}{\sqrt{d_k}}\right) V^{(i)}
 $$
 
 Then:
