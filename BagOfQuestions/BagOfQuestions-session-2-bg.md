@@ -45,6 +45,3 @@ Your answer goes here, after the `:`:
 - `____YOUR_CODE_HERE__10_____`:
 - `____YOUR_CODE_HERE__11_____`:
 
-Then answer the following question:
-
-12. Explain why the gradient expression uses `(y_predicted - y)` for binary cross-entropy with sigmoid.

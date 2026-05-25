@@ -64,8 +64,3 @@ Your answer goes here, after the `:`:
 - `____YOUR_CODE_HERE__13_____`:
 - `____YOUR_CODE_HERE__14_____`:
 
-Then answer the following short questions:
-
-1. Why does logistic regression need the sigmoid function after the linear score, and what does `y_predicted` mean before it is converted into class labels?
-2. Why is the gradient coefficient `(1 / n_samples)` here instead of `(2 / n_samples)` as in the usual MSE formula for linear regression?
-3. What probability threshold is used in this `predict` function?
