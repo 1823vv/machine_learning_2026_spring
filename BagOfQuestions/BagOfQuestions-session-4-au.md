@@ -15,5 +15,3 @@ class ReLU(Layer):
 
 1. Write the mathematical formulas for sigmoid and Leaky ReLU with slope $\alpha=0.01$ on the negative side. Draw ReLU, sigmoid, and Leaky ReLU on the same axes.
 2. Write complete `Sigmoid(Layer)` and `LeakyReLU(Layer)` classes using the same `forward(self, input)` and `backward(self, grad_output)` interface. Your code should store `self.input`, not a differently named variable.
-3. Explain one possible advantage of Leaky ReLU compared with ReLU, and one possible disadvantage of sigmoid in deeper networks.
-4. If an activation layer has no trainable weights or biases, why does it still need a `backward` method during backpropagation?
