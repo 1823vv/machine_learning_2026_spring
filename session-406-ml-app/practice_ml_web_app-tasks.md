@@ -40,7 +40,7 @@ Each task is time-boxed to approximately 1 hour. Apply the video workflows to **
 
 Master the core architecture and get both applications running seamlessly on your local machine.
 
-* **Video 1:** Get Inspired! (Project Demo)
+* **Video 1:** Get Inspired!
 * **Video 2:** Training models using Jupyter Notebooks
 * **Video 3:** Interacting with trained models via Streamlit
 * **Video 4:** Local Deployment: System Architecture Overview
