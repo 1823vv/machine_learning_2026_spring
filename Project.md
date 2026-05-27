@@ -204,3 +204,5 @@ You are strongly encouraged to use:
 * Modern development and experimentation workflows
 
 These tools can help accelerate research, implementation, debugging, and experimentation.
+
+However, you should go beyond simple programming or straightforward API usage. I would like to see deeper insights that push beyond current AI understanding — including aspects that may still be unknown or poorly understood. Your experiments should aim to uncover compelling stories, subtle behaviors, unexpected limitations, nuanced patterns, meaningful engineering trade-offs, or insightful observations about how these systems actually behave in real-world settings. The goal is not merely to build something functional, but to explore, analyze, and reveal deeper understanding through thoughtful experimentation and rigorous engineering.
