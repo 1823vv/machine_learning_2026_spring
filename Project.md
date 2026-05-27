@@ -68,3 +68,139 @@ This project is for each of the students. So no need to team up.
 
 Again, the idea is to DO EVERYTHING WITH AI, even for forking, even for giving a star.
 
+# Step 2:
+
+
+# Project Topics for Students
+
+## 1. Speaker Diarization, Cross-Speech, and LLM + ASR Synergy
+
+One important direction I would like you to explore is:
+
+* Speaker diarization
+* Multi-speaker overlapping speech (cross-speech)
+* The synergy between Large Language Models (LLMs) and Automatic Speech Recognition (ASR)
+
+Please read the `xutong_paper.pdf` file located in the `./project/` folder. Based on the existing work presented in that paper, I encourage you to:
+
+* Explore related research topics
+* Identify limitations or missing components
+* Propose new ideas or improvements
+* Design and test more advanced or innovative approaches
+
+You are not limited to reproducing existing work. The goal is to think critically and explore what could be done next.
+
+---
+
+## 2. Deploying ASR Models on Mobile Devices
+
+The second direction is focused on deploying ASR models on local mobile devices such as:
+
+* iPhones
+* Android phones
+
+Possible exploration topics include:
+
+* Benchmarking different ASR models
+* Comparing latency, memory usage, and inference speed
+* Evaluating recognition quality across multiple languages, especially:
+
+  * English
+  * French
+  * Chinese
+* Studying on-device inference constraints
+* Investigating quantization, compression, or lightweight architectures
+
+You may also explore research-oriented improvements, such as:
+
+* Fine-tuning existing ASR models for mobile deployment
+* Optimizing models for edge devices
+* Publishing improved models on Hugging Face if you obtain strong results
+
+---
+
+## 3. Local Audio Preprocessing for Better ASR Performance
+
+Another very interesting topic is local audio preprocessing on smartphones or PCs before the ASR stage.
+
+Examples include:
+
+* Noise reduction / denoising
+* Signal enhancement
+* Audio clustering
+* Voice activity detection
+* Signal processing techniques
+* Echo cancellation
+* Beamforming or microphone optimization
+
+The objective is to improve downstream ASR performance from an engineering perspective.
+
+You should investigate whether preprocessing pipelines can significantly improve:
+
+* Recognition accuracy
+* Robustness in noisy environments
+* Real-time performance
+* Multi-speaker recognition quality
+
+---
+
+## 4. Fun and Experimental Topic — “Pet Translation Device”
+
+Another fun and creative direction is something similar to the following concept:
+
+“Pet Translation Device”
+
+The idea is that a small device attached to a pet collar could capture sounds made by cats or dogs and “translate” them into text, while also synchronizing generated voice/chat records on a smartphone.
+
+Related references:
+
+* 新浪新闻报道：
+  [https://finance.sina.cn/tech/2026-05-17/detail-inhyerim1837213.d.html](https://finance.sina.cn/tech/2026-05-17/detail-inhyerim1837213.d.html)
+
+* YouTube Short:
+  [https://www.youtube.com/shorts/L88QMSnlLjM](https://www.youtube.com/shorts/L88QMSnlLjM)
+
+This topic is intentionally exploratory and creative. You may combine:
+
+* Audio analysis
+* Classification models
+* Behavioral interpretation
+* LLM-based interaction systems
+* Edge AI
+* Mobile applications
+
+---
+
+# Additional Notes
+
+Inside the `./project/` folder, you will find the following files:
+
+* `AdamMaytoussi.pdf`
+* `AdamMaytoussi.pptx`
+* `AdamMaytoussi.url`
+
+These files are **not directly related** to your project topic. However, they demonstrate the expected quality standard for project organization, presentation, and technical work.
+
+Please note:
+
+* Adam Maytoussi’s project group only had **two students**
+* Your group contains **six students**
+
+Therefore, your project is expected to:
+
+* Cover more material
+* Demonstrate deeper technical exploration
+* Reach a significantly higher standard in both engineering and research quality
+
+---
+
+# Development Tools
+
+You are strongly encouraged to use:
+
+* AI-assisted IDEs
+* AI coding assistants
+* AI agents
+* Modern development and experimentation workflows
+
+These tools can help accelerate research, implementation, debugging, and experimentation.
