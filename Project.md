@@ -88,6 +88,8 @@ Please read the `xutong_paper.pdf` file located in the `./project/` folder. Base
 * Propose new ideas or improvements
 * Design and test more advanced or innovative approaches
 
+Maybe you can integrate RAG (Retrieval-augmented generation) into the pipeline/loop as well.
+
 You are not limited to reproducing existing work. The goal is to think critically and explore what could be done next.
 
 ---
@@ -116,6 +118,8 @@ You may also explore research-oriented improvements, such as:
 * Fine-tuning existing ASR models for mobile deployment
 * Optimizing models for edge devices
 * Publishing improved models on Hugging Face if you obtain strong results
+
+Maybe you can integrate RAG (Retrieval-augmented generation) into the pipeline/loop as well.
 
 ---
 
